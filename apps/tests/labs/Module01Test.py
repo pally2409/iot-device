@@ -1,4 +1,7 @@
 import unittest
+from labs.module01	import SystemMemUtilTask
+from labs.module01	import SystemCpuUtilTask
+
 
 
 """
@@ -21,21 +24,32 @@ class Module01Test(unittest.TestCase):
 	instances of complex objects, initialize any requisite connections, etc.
 	"""
 	def setUp(self):
-		pass
+		self.systemCpuUtilTask = SystemCpuUtilTask.SystemCpuUtilTask()
+		self.systemMemUtilTask = SystemMemUtilTask.SystemMemUtilTask()
+		
 
 	"""
 	Use this to tear down any allocated resources after your tests are complete. This
 	is where you may want to release connections, zero out any long-term data, etc.
 	"""
 	def tearDown(self):
-		pass
+		self.systemCpuUtilTask = None
+		self.systemMemUtilTask = None
 	
 	"""
 	Place your comments describing the test here.
 	"""
-	def testSomething(self):
-		pass
-
+	def testSystemCpuUtilTask(self):
+		cpuUtil = self.systemCpuUtilTask.getSensorData()
+		self.assertLess(0.0, cpuUtil, 'CPU Utilization less than 0.0')
+		self.assertGreater(100.0, cpuUtil, 'CPU Utilization greater than 100.0')
+			
+	def testSystemMemUtilTaskTest(self):
+		memUtil = self.systemMemUtilTask.getSensorData()
+		self.assertLess(0.0, memUtil, 'Memory Utilization less than 0.0')
+		self.assertGreater(100.0, memUtil, 'Memory Utilization greater than 100.0')
+		
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()
+	

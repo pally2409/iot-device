@@ -22,5 +22,5 @@ class SystemCpuUtilTask(object):
     
     #method to return the CPU utilization    
     def getSensorData(self):
-        return psutil.cpu_percent()
+        return psutil.cpu_percent(interval = 1)
         

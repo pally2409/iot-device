@@ -14,6 +14,9 @@ import logging
 logging.getLogger("performance logger")
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
+#log the initial message
+logging.info('Starting System Performance Adaptor Thread')
+
 class SystemPerformanceAdaptor(object):
     '''
     classdocs
@@ -36,12 +39,13 @@ class SystemPerformanceAdaptor(object):
     #method for gathering readings from the CPU util task and Mem Util task 
     def run(self):
         
-        #log the initial message
-        logging.info('Starting System Performance Adaptor Thread')
-        
         #instantiate the tasks
         systemCpuUtilTask = SystemCpuUtilTask.SystemCpuUtilTask()
         systemMemUtilTask = SystemMemUtilTask.SystemMemUtilTask()
+        
+        #adaptor doesn't run if 0 readings set
+        if self.numReadings == 0:
+            return False
         
         #run the loop as indicated in the numReadings variable
         while self.numReadings > 0:
@@ -67,5 +71,12 @@ class SystemPerformanceAdaptor(object):
                 #sleep for time indicated in rateInSec
                 sleep(self.rateInSec)
                 
+            else:
+                
+                #adaptor is disabled
+                return False
+        
+        #the adaptor is done running
+        return True        
                 
         

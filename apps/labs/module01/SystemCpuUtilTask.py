@@ -3,7 +3,8 @@ Created on Jan 14, 2020
 
 @author: pallaksingh
 '''
-'''Library for system monitoring'''
+
+#import libraries
 import psutil
 
 class SystemCpuUtilTask(object):
@@ -11,15 +12,15 @@ class SystemCpuUtilTask(object):
     classdocs
     '''
 
-
+    #empty constructor as no extra params needed 
     def __init__(self):
         '''
         Constructor
         '''
-        
+        pass
+    
+    
+    #method to return the CPU utilization    
     def getSensorData(self):
-        '''
-        Function for getting CPU utilization
-        '''
-        return psutil.cpu_percent(interval = 1)
+        return psutil.cpu_percent()
         

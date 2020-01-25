@@ -19,35 +19,49 @@ Please note: While some example test cases may be provided, you must write your 
 class Module01Test(unittest.TestCase):
 
 	"""
-	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
-	instances of complex objects, initialize any requisite connections, etc.
+		Setting up variables required for the tests
 	"""
 	def setUp(self):
+		
+		#instantiate the tasks
 		self.systemCpuUtilTask = SystemCpuUtilTask.SystemCpuUtilTask()
 		self.systemMemUtilTask = SystemMemUtilTask.SystemMemUtilTask()
 		
 
 	"""
-	Use this to tear down any allocated resources after your tests are complete. This
-	is where you may want to release connections, zero out any long-term data, etc.
+		Tearing down any allocated resources after the tests are complete
 	"""
 	def tearDown(self):
+		
+		#set the reference to the tasks as none to release the resources they're holding
 		self.systemCpuUtilTask = None
 		self.systemMemUtilTask = None
-	
-	"""
-	Place your comments describing the test here.
-	"""
+		
+	'''
+		This test tests whether the CPU utilization percent returned by the corresponding task method
+		is greater than 0.0 and less than or equal to 100.0
+	'''
 	def testSystemCpuUtilTask(self):
+		
 		cpuUtil = self.systemCpuUtilTask.getSensorData()
-		self.assertLess(0.0, cpuUtil, 'CPU Utilization less than 0.0')
-		self.assertGreater(100.0, cpuUtil, 'CPU Utilization greater than 100.0')
+		
+		#check if its true whether the cpu utilization is > 0.0 and <= 100.0
+		self.assertTrue(0.0 < cpuUtil, 'CPU Utilization less than 0.0')
+		self.assertTrue(100.0 >= cpuUtil, 'CPU Utilization greater than 100.0')
+	
 			
+	'''
+		This test tests whether the Memory utilization percent returned by the corresponding task method
+		is greater than 0.0 and less than or equal to 100.0
+	'''
 	def testSystemMemUtilTaskTest(self):
+		
 		memUtil = self.systemMemUtilTask.getSensorData()
-		self.assertLess(0.0, memUtil, 'Memory Utilization less than 0.0')
-		self.assertGreater(100.0, memUtil, 'Memory Utilization greater than 100.0')
+		
+		#check if its true whether the memory utilization is > 0.0 and <= 100.0
+		self.assertTrue(0.0 < memUtil, 'Memory Utilization less than 0.0')
+		self.assertTrue(100.0 >= memUtil, 'Memory Utilization greater than 100.0')
+
 		
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']

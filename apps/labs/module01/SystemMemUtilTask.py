@@ -11,16 +11,13 @@ class SystemMemUtilTask(object):
     '''
     classdocs
     '''
-
+    #empty constructor as no extra params needed
     def __init__(self):
         '''
         Constructor
         '''
-        
+    
+    #method to return virtual memory utilization    
     def getSensorData(self):
-        '''
-        Function for getting memory utilization
-        '''
-        
-        '''index 2 corresponds to utilization percent'''
+        #index 2 corresponds to utilization percent'''
         return psutil.virtual_memory()[2] 

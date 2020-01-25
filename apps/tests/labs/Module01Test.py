@@ -66,6 +66,10 @@ class Module01Test(unittest.TestCase):
 		self.assertTrue(0.0 < memUtil, 'Memory Utilization less than 0.0')
 		self.assertTrue(100.0 >= memUtil, 'Memory Utilization greater than 100.0')
 
+	'''
+		This test tests whether the system performance adaptor returns the accurate success value according to 
+		 whether or not it performed the task of getting and logging the values from the CPU and Memory tasks
+	'''
 	
 	def testSystemPerformanceAdaptor(self):
 		

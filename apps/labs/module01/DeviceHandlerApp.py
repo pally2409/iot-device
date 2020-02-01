@@ -23,7 +23,7 @@ if __name__ == '__main__':
     systemPerformanceAdaptor.daemon = True
     
     #set the system performance adaptor to true
-    systemPerformanceAdaptor.enableAdaptor = True
+    systemPerformanceAdaptor.enableAdaptor = False
     
     #create the thread that runs the run method of system performance adaptor
     threadSystemPerformanceAdaptor = threading.Thread(target = systemPerformanceAdaptor.run)

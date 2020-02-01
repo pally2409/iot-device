@@ -75,12 +75,12 @@ class Module02Test(unittest.TestCase):
 			self.assertEqual(success, True, "Message was sent successfully, test case showing false")
 			
 		
-		#load the sample config file where the fromAddr and toAddr, authToken are not valid
-		self.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
-		
-		#test false on success of mail
-		success = self.smtpClientConnector.publishMessage("Testing Message", "This is a test")
-		self.assertEqual(success, False, "Message was not sent successfully, test case showing true")
+			#load the sample config file where the fromAddr and toAddr, authToken are not valid
+			self.smtpClientConnector.config.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
+			#test false on success of mail
+			success = self.smtpClientConnector.publishMessage("Testing Message", "This is a test")
+			self.assertEqual(success, False, "Message was not sent successfully, test case showing true")
 	
 	"""
 	This method tests the generateRandomTemperature() method of the TempSensorEmulatorTask module. It checks whether the 

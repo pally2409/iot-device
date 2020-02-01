@@ -157,6 +157,7 @@ class ConfigUtil(object):
             
             #return true as config file has been loaded
             return True
+        
         else:
             
             #set the config file loaded to false

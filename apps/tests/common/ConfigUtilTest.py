@@ -37,7 +37,7 @@ class ConfigUtilTest(unittest.TestCase):
 		if self.configUtil.configFileLoaded == False:
 			
 			#load the sample config directory
-			self.configUtil.__init__('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			self.configUtil.__init__('sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
 		pass
 	
@@ -58,12 +58,6 @@ class ConfigUtilTest(unittest.TestCase):
 		# TODO: implement this
 		
 		logging.info('Testing getBooleanValue()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-			
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 		
 		#check boolean value for ubidots.cloud section's useWebAccess key which is correctly stored as a boolean property
 		self.assertEqual(True, self.configUtil.getBooleanValue('ubidots.cloud', 'useWebAccess'))
@@ -87,12 +81,6 @@ class ConfigUtilTest(unittest.TestCase):
 		# TODO: implement this
 		
 		logging.info('Running testGetIntegerProperty()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-			
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
 		#check integer value for smtp.cloud section's port key which is correctly stored as an integer property
 		self.assertEqual(465, self.configUtil.getIntegerValue('smtp.cloud', 'port'))
@@ -116,13 +104,7 @@ class ConfigUtilTest(unittest.TestCase):
 		# TODO: implement this
 		
 		logging.info('Running testGetProperty()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-		
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
-			
+	
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
@@ -142,16 +124,9 @@ class ConfigUtilTest(unittest.TestCase):
 		# TODO: implement this
 		
 		logging.info('Running testHasProperty()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-		
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
-			
 			
 		#check value for ubidots.cloud section's 'hostess' key and should return a false because hostess key doesn't exist
 		self.assertEqual(False, self.configUtil.getValue('ubidots.cloud', 'hostess'))
@@ -165,12 +140,6 @@ class ConfigUtilTest(unittest.TestCase):
 		# TODO: implement this
 		
 		logging.info('Running testHasSection()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-		
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
@@ -186,13 +155,6 @@ class ConfigUtilTest(unittest.TestCase):
 	def testIsConfigDataLoaded(self):
 		
 		logging.info('Running testIsConfigDataLoaded()')
-		
-		#if the default config file is not loaded: while testing the pipeline on the cloud
-		if self.configUtil.configFileLoaded == False:
-		
-			#load the sample config directory
-			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
-		
 		
 		#when config file is correctly loaded 
 		self.assertEqual(True, self.configUtil.configFileLoaded)

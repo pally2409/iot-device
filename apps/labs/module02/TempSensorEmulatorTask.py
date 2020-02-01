@@ -14,6 +14,9 @@ import logging
 logging.getLogger("temperature emulator logger")
 logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
+#print the initial message
+logging.info("Starting Temperature Sensor Emulator Thread")
+
 class TempSensorEmulatorTask(object):
     '''
     classdocs
@@ -33,7 +36,7 @@ class TempSensorEmulatorTask(object):
     how often it should generate temp and the threshold for difference between 
     average and current temp
     '''
-    def __init__(self, minTemp = 0.0, maxTemp = 30.0, rateInSec = 10, threshold = 5.0):
+    def __init__(self, minTemp = 0.0, maxTemp = 30.0, rateInSec = 10, threshold = 5.0, numReadings = 10):
         '''
         Constructor
         '''
@@ -43,19 +46,21 @@ class TempSensorEmulatorTask(object):
         self.minTemp = minTemp
         self.maxTemp = maxTemp
         self.threshold = float(threshold)
+        self.numReadings = numReadings
     
     #method to generate a random temperature between the lower and upper bound
     def generateRandomTemperature(self):
         
-        #run the loop as indicated in the numReadings variable
-        while True:
+        #generator doesn't run if 0 readings set:
+        if self.numReadings == 0:
+            return False
+        
+        #run the loop as many times as indicated in the numReadings variable
+        while self.numReadings > 0:
             
-            #if the adaptor is enabled
+            #if the emulator is enabled
             if self.enableEmulator:
-                
-                #print the initial message
-                logging.info("Starting Temperature Sensor Emulator Thread")
-                
+
                 #generate a random temperature 
                 self.sensorData.addValue(random.uniform(float(self.minTemp), float(self.maxTemp)))
                 
@@ -76,10 +81,23 @@ class TempSensorEmulatorTask(object):
                     
                     #send notfication if so
                     self.sendNotification(data)
+                
+                #decrement as the number of readings by 1 to keep count of how many readings left
+                self.numReadings -= 1
                     
                 #sleep for time indicated in rateInSec
                 sleep(self.rateInSec)
             
+            #if emulator is not enabled
+            else:
+                
+                #generator didn't run
+                return False
+            
+        #the generator is done running
+        return True
+                
+                
             
     #method that returns the reference to the sensorData
     def getSensorData(self) -> SensorData.SensorData:   
@@ -98,11 +116,16 @@ class TempSensorEmulatorTask(object):
             self.smtpConnector.publishMessage("Excessive Temperature", data)
         
         #if current value is less than the average by more than the threshold
-        else: 
+        elif self.getSensorData().getCurrentValue() < self.getSensorData().getAverageValue(): 
             
             #log the difference
             logging.info('\n Average temperature exceeds current value by >' + str(self.threshold) + '. Triggering alert ')
             
             #send email with topic indicating excessive temperature
             self.smtpConnector.publishMessage("Too low temperature", data)
+        
+        return True
+
+            
+            
         

@@ -47,7 +47,7 @@ class SystemPerformanceAdaptor(object):
         if self.numReadings == 0:
             return False
         
-        #run the loop as indicated in the numReadings variable
+        #run the loop as many times as indicated in the numReadings variable
         while self.numReadings > 0:
             
             #if the adaptor is enabled

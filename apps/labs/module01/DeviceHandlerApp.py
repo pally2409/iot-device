@@ -40,7 +40,7 @@ if __name__ == '__main__':
     tempEmulatorAdaptor = TempEmulatorAdaptor()
     
     #set the emulator adaptor to true
-    tempEmulatorAdaptor.tempSensorEmulator.enableEmulator = False
+    tempEmulatorAdaptor.tempSensorEmulator.enableEmulator = True
     
     #run the adaptor
     tempEmulatorAdaptor.run()

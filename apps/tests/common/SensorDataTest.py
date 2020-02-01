@@ -1,3 +1,4 @@
+#import libraries and modules
 import unittest
 import logging
 from labs.common.SensorData import SensorData
@@ -30,6 +31,7 @@ class SensorDataTest(unittest.TestCase):
 	"""
 	def setUp(self):
 		
+		#instantiate sensorData
 		self.sensorData = SensorData()
 		
 		pass
@@ -39,7 +41,9 @@ class SensorDataTest(unittest.TestCase):
 	is where you may want to release connections, zero out any long-term data, etc.
 	"""
 	def tearDown(self):
-		pass
+		
+		#set the reference to the variables to none to release any resources
+		self.sensorData = None
 	
 	"""
 	 This test tests the addValue() method of SensorData module. It checks whether the
@@ -77,16 +81,12 @@ class SensorDataTest(unittest.TestCase):
 	accurately calculated by the method
 	
 	"""
-	
 	def testGetAverageValue(self):
-		
-		logging.info('Running testAverageValue()')
 		
 		#add some valid values
 		self.sensorData.addValue(60)
 		self.sensorData.addValue(90)
 		self.sensorData.addValue(180)
-		
 		
 		#get the average
 		average = self.sensorData.getAverageValue()
@@ -105,8 +105,6 @@ class SensorDataTest(unittest.TestCase):
 	 incremented properly
 	"""	
 	def testGetCount(self):
-		
-		logging.info('Running testGetCount()')
 		
 		#add some valid values
 		self.sensorData.addValue(30)
@@ -128,8 +126,6 @@ class SensorDataTest(unittest.TestCase):
 	"""		
 	
 	def testGetCurrentValue(self):
-		
-		logging.info('Running testGetCurrentValue()')
 		
 		#add some valid value
 		self.sensorData.addValue(30)
@@ -156,8 +152,6 @@ class SensorDataTest(unittest.TestCase):
 	
 	def getMaxValue(self):
 		
-		logging.info('Running testMaxValue()')
-		
 		#when there are no values it should return none
 		self.assertEqual(None, self.sensorData.getMaxValue())
 		
@@ -178,8 +172,6 @@ class SensorDataTest(unittest.TestCase):
 	 updated properly
 	"""
 	def getMinValue(self):
-		
-		logging.info('Running testMinValue()')
 		
 		#when there are no values it should return none
 		self.assertEqual(None, self.sensorData.getMinValue())
@@ -202,8 +194,6 @@ class SensorDataTest(unittest.TestCase):
 	"""
 	def testGetName(self):
 		
-		logging.info('Running testGetName()')
-		
 		#when name is not set, it has been initialized to 'Not Set', check if 'Not Set'
 		self.assertEqual('Not Set', self.sensorData.getName())
 		
@@ -224,8 +214,6 @@ class SensorDataTest(unittest.TestCase):
 	 the name is being updated properly
 	"""
 	def testSetName(self):
-		
-		logging.info('Running testSetName()')
 		
 		#change name
 		self.sensorData.setName("Temperature Sensor")

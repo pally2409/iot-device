@@ -98,7 +98,7 @@ class SensorData(object):
         else:
             
             #return the minValue if readings exist
-            return self.maxValue
+            return self.minValue
     
     #get the name of the sensor
     def getName(self) -> str:

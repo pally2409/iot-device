@@ -3,7 +3,7 @@ Created on Jan 22, 2020
 
 @author: pallaksingh
 '''
-#import required libraries
+#import required libraries and modules
 from labs.common            import ConfigUtil
 from email.mime.multipart   import MIMEMultipart
 from email.mime.text        import MIMEText
@@ -63,6 +63,7 @@ class SmtpClientConnector(object):
         '''
             Sending e-mail Notification
         '''
+        #try connecting to smtp server and sending the mail
         try: 
             #instantiating SMTP connection
             smtpServer = smtplib.SMTP_SSL(host,port)

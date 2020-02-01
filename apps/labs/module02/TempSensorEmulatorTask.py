@@ -3,7 +3,7 @@ Created on Jan 22, 2020
 
 @author: pallaksingh
 '''
-#import libraries
+#import libraries and modules
 from labs.common    import SensorData
 from labs.module02  import SmtpClientConnector
 from time           import sleep
@@ -33,7 +33,7 @@ class TempSensorEmulatorTask(object):
 
     '''
     constructor takes in the lower and upper bound on temperature generator, 
-    how often it should generate temp and the threshold for difference between 
+    how often it should generate temp and the threshold for max difference between 
     average and current temp
     '''
     def __init__(self, minTemp = 0.0, maxTemp = 30.0, rateInSec = 10, threshold = 5.0, numReadings = 10):
@@ -65,12 +65,12 @@ class TempSensorEmulatorTask(object):
                 self.sensorData.addValue(random.uniform(float(self.minTemp), float(self.maxTemp)))
                 
                 #store the updated values from sensorData object
-                time = '                                Time: ' + self.sensorData.timeStamp
-                current = '                                Current: ' + str(self.sensorData.getCurrentValue())
-                average = '                                Average: ' + str(self.sensorData.getAverageValue())
-                samples = '                                Samples: ' + str(self.sensorData.getCount())
-                min_temp = '                                Min: ' + str(self.sensorData.getMinValue())
-                max_temp = '                                Max: ' + str(self.sensorData.getMaxValue())
+                time = '                    Time: ' + self.sensorData.timeStamp
+                current = '                    Current: ' + str(self.sensorData.getCurrentValue())
+                average = '                    Average: ' + str(self.sensorData.getAverageValue())
+                samples = '                    Samples: ' + str(self.sensorData.getCount())
+                min_temp = '                    Min: ' + str(self.sensorData.getMinValue())
+                max_temp = '                    Max: ' + str(self.sensorData.getMaxValue())
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #log the current sensorData values 
@@ -124,6 +124,7 @@ class TempSensorEmulatorTask(object):
             #send email with topic indicating excessive temperature
             self.smtpConnector.publishMessage("Too low temperature", data)
         
+        #return true for running successfully
         return True
 
             

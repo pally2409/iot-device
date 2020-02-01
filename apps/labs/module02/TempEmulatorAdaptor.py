@@ -4,9 +4,8 @@ Created on Jan 22, 2020
 @author: pallaksingh
 '''
 
-#import libraries
+#import libraries and modules
 from labs.module02.TempSensorEmulatorTask import TempSensorEmulatorTask
-import threading
 
 class TempEmulatorAdaptor(object):
     '''
@@ -16,22 +15,21 @@ class TempEmulatorAdaptor(object):
     #instantiate the emulator task
     tempSensorEmulator = TempSensorEmulatorTask()
     
+    #empty constructor because no extra params need to be passed during instantiation
     def __init__(self):
         '''
         Constructor
         '''
         pass
     
+    #method for creating and running the emulator thread
     def run(self):
         
-        #create the thread that runs the generaterandomTemperature() method of the tempSensorEmulatorTask
-        threadTempSensorEmulator = threading.Thread(target = self.tempSensorEmulator.generateRandomTemperature())
+        #enable the emulator 
+        self.tempSensorEmulator.enableEmulator = True
         
-        #set the system performance adaptor daemon to true (enable main thread to exit when done)
-        self.tempSensorEmulator.daemon = True
-        
-        #start the thread
-        threadTempSensorEmulator.start()
+        #call the generateRandomTemperature
+        self.tempSensorEmulator.generateRandomTemperature()
         
         #return true for running successfully
         return True    

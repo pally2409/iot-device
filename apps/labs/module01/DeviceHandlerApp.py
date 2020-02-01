@@ -4,10 +4,10 @@ Created on Jan 14, 2020
 @author: pallaksingh
 '''
 
-#import the libraries
-from labs.module01  import SystemPerformanceAdaptor
+#import the libraries and modules
+from labs.module01                          import SystemPerformanceAdaptor
+from labs.module02.TempEmulatorAdaptor      import TempEmulatorAdaptor
 import threading
-from labs.module02.TempEmulatorAdaptor import TempEmulatorAdaptor
 
 
 if __name__ == '__main__':
@@ -39,9 +39,16 @@ if __name__ == '__main__':
     #instantiate adaptor for temperature emulator
     tempEmulatorAdaptor = TempEmulatorAdaptor()
     
-    #set the emulator adaptor to true
-    tempEmulatorAdaptor.tempSensorEmulator.enableEmulator = True
+    #create the thread that runs the generaterandomTemperature() method of the tempSensorEmulatorTask
+    threadTempEmulatorAdaptor = threading.Thread(target = tempEmulatorAdaptor.run())
+        
+    #set the emulator adaptor daemon to true (enable main thread to exit when done)
+    tempEmulatorAdaptor.daemon = True
+        
+    #start the thread
+    threadTempEmulatorAdaptor.start()
     
-    #run the adaptor
-    tempEmulatorAdaptor.run()
+    while True:
+        pass
+
     

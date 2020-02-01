@@ -30,6 +30,8 @@ class ConfigUtil(object):
         '''
         Constructor
         '''
+        
+        #load the config file
         self.loadConfig(configFileName)
         
     #this method returns the string value for the given section and the key    
@@ -47,7 +49,7 @@ class ConfigUtil(object):
             #if it throws an exception: section or key don't exist    
             except Exception as e:
                 
-                #log the exception and return
+                #log the exception and return a non string val
                 logging.error(e)
                 return False
             
@@ -57,7 +59,7 @@ class ConfigUtil(object):
         #if config file is not loaded        
         else:
             
-            #log the error and return
+            #log the error and return a non string val
             logging.info('Config file not loaded')
             return False    
     
@@ -75,7 +77,7 @@ class ConfigUtil(object):
                 
             except Exception as e:
                 
-                #log the exception and return
+                #log the exception and return a non integer val
                 logging.error(e)
                 return False
             
@@ -84,7 +86,7 @@ class ConfigUtil(object):
                 
         else:
             
-            #log the error and return
+            #log the error and return a non integer val
             logging.info('Config file not loaded')
             return False      
             
@@ -103,7 +105,7 @@ class ConfigUtil(object):
                 
             except Exception as e:
                 
-                #log the exception and return
+                #log the exception and return a non boolean val
                 logging.error(e)
                 return 0
             
@@ -112,7 +114,7 @@ class ConfigUtil(object):
                 
         else:
             
-            #log the error and return
+            #log the error and return a non boolean val
             logging.info('Config file not loaded')
             return 0      
     
@@ -146,15 +148,14 @@ class ConfigUtil(object):
     #this method loads the configuration file from the fileName
     def loadConfig(self, fileName)->bool:
         
-        relative_path = os.path.abspath(fileName)
+        #get absolute path
+        abs_path = os.path.abspath(fileName)
         
         #check if the fileName is valid and exists
-        if os.path.exists(relative_path):
-            
-            print(fileName + "exists yay!!")
+        if os.path.exists(abs_path):
             
             #read the configuration file
-            self.config.read(relative_path)
+            self.config.read(abs_path)
             
             #set the config file loaded to true
             self.configFileLoaded = True
@@ -162,8 +163,8 @@ class ConfigUtil(object):
             #return true as config file has been loaded
             return True
         
+        #if fileName does not exist
         else:
-            print(relative_path + "does not exist")
             
             #set the config file loaded to false
             self.configFileLoaded = False

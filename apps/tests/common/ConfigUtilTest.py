@@ -1,3 +1,4 @@
+#import libraries and modules
 import unittest
 import logging
 from labs.common import ConfigUtil
@@ -48,7 +49,9 @@ class ConfigUtilTest(unittest.TestCase):
 	is where you may want to release connections, zero out any long-term data, etc.
 	"""
 	def tearDown(self):
-		pass
+		
+		#set the reference to the variables to none to release any resources
+		self.configUtil = None
 	
 	"""
 	This method checks the getBooleanValue() function of ConfigUtil class. It checks for valid boolean values, checks
@@ -56,8 +59,6 @@ class ConfigUtilTest(unittest.TestCase):
 	"""
 	def testGetBooleanProperty(self):
 		# TODO: implement this
-		
-		logging.info('Testing getBooleanValue()')
 		
 		#check boolean value for ubidots.cloud section's useWebAccess key which is correctly stored as a boolean property
 		self.assertEqual(True, self.configUtil.getBooleanValue('ubidots.cloud', 'useWebAccess'))
@@ -79,8 +80,6 @@ class ConfigUtilTest(unittest.TestCase):
 	"""
 	def testGetIntegerProperty(self):
 		# TODO: implement this
-		
-		logging.info('Running testGetIntegerProperty()')
 			
 		#check integer value for smtp.cloud section's port key which is correctly stored as an integer property
 		self.assertEqual(465, self.configUtil.getIntegerValue('smtp.cloud', 'port'))
@@ -102,9 +101,6 @@ class ConfigUtilTest(unittest.TestCase):
 	"""
 	def testGetProperty(self):
 		# TODO: implement this
-		
-		logging.info('Running testGetProperty()')
-	
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
@@ -122,8 +118,6 @@ class ConfigUtilTest(unittest.TestCase):
 	"""
 	def testHasProperty(self):
 		# TODO: implement this
-		
-		logging.info('Running testHasProperty()')
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
@@ -138,8 +132,6 @@ class ConfigUtilTest(unittest.TestCase):
 	"""
 	def testHasSection(self):
 		# TODO: implement this
-		
-		logging.info('Running testHasSection()')
 			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
@@ -153,8 +145,6 @@ class ConfigUtilTest(unittest.TestCase):
 	Tests if the configuration is loaded.
 	"""
 	def testIsConfigDataLoaded(self):
-		
-		logging.info('Running testIsConfigDataLoaded()')
 		
 		#when config file is correctly loaded 
 		self.assertEqual(True, self.configUtil.configFileLoaded)

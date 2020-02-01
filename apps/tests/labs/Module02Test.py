@@ -1,10 +1,10 @@
-#import the libraries
+#import the libraries and modules
 import unittest
 import logging
 from labs.common.SensorData 				import SensorData
 from labs.module02.SmtpClientConnector 		import SmtpClientConnector
 from labs.module02.TempSensorEmulatorTask  	import TempSensorEmulatorTask
-from labs.module02.TempEmulatorAdaptor 							import TempEmulatorAdaptor
+from labs.module02.TempEmulatorAdaptor 		import TempEmulatorAdaptor
 
 
 """
@@ -35,7 +35,7 @@ class Module02Test(unittest.TestCase):
 	"""
 	def setUp(self):
 		
-		#initialize the variables required
+		#instantiate the variables required
 		self.smtpClientConnector = SmtpClientConnector()
 		self.tempSensorEmulatorTask = TempSensorEmulatorTask()
 		self.tempEmulatorAdaptor = TempEmulatorAdaptor()
@@ -57,8 +57,6 @@ class Module02Test(unittest.TestCase):
 	 in configurations, connection failure
 	"""
 	def testPublishMessage(self):
-		
-		logging.info("Running testPublishMessage()")
 		
 		#when testing on the pipeline on cloud, the config file has been ignored. hence, load sample config file
 		if self.smtpClientConnector.config.configFileLoaded == False:
@@ -89,16 +87,14 @@ class Module02Test(unittest.TestCase):
 		
 	def testGenerateRandomTemperature(self):
 		
-		logging.info("Running testGenerateRandomTemperature()")
-		
 		#enable the emulator
 		self.tempSensorEmulatorTask.enableEmulator = True
 		
 		#change numReadings to a small finite value to check
-		self.tempSensorEmulatorTask.numReadings = 3
+		self.tempSensorEmulatorTask.numReadings = 1
 		
 		#change sleep time (rateInSec) to a small amount
-		self.tempSensorEmulatorTask.rateInSec = 3
+		self.tempSensorEmulatorTask.rateInSec = 1
 		
 		#run when numReadings > 0 and adaptor is enabled
 		self.assertEqual(True, self.tempSensorEmulatorTask.generateRandomTemperature())
@@ -113,7 +109,7 @@ class Module02Test(unittest.TestCase):
 		self.tempSensorEmulatorTask.enableEmulator = False
 		
 		#change readings to > 0
-		self.tempSensorEmulatorTask.numReadings = 3
+		self.tempSensorEmulatorTask.numReadings = 1
 		
 		#run when numReadings > 0 and emulator is disabled, should return false because generator didn't run
 		self.assertEqual(False, self.tempSensorEmulatorTask.generateRandomTemperature())
@@ -123,8 +119,6 @@ class Module02Test(unittest.TestCase):
 	whether the reference to the sensorData of tempSensorEmulatorTask is valid or not
 	"""	
 	def testGetSensorData(self):
-		
-		logging.info("Running testGetSensorData()")
 		
 		#check type of the return of the method, should be of type SensorData
 		self.assertEqual(type(self.tempSensorEmulatorTask.getSensorData()), SensorData)
@@ -141,8 +135,6 @@ class Module02Test(unittest.TestCase):
 	"""	
 	def testSendNotification(self):
 		
-		logging.info("Running testSendNotification()")
-		
 		#if the config file is loaded: while testing on system
 		if self.tempSensorEmulatorTask.smtpConnector.config.configFileLoaded == True:
 			
@@ -154,13 +146,11 @@ class Module02Test(unittest.TestCase):
 	"""		
 	def testTempEmulatorAdaptor(self):
 		
-		logging.info("Running testTempEmulatorAdaptor()")
-		
 		#get the reference to the tempSensorEmulatorTask
 		tempSensTask = self.tempEmulatorAdaptor.tempSensorEmulator
 		
 		#change numReadings to a small finite value to check
-		tempSensTask.numReadings = 3
+		tempSensTask.numReadings = 1
 		
 		#change sleep time (rateInSec) to a small amount
 		tempSensTask.rateInSec = 1

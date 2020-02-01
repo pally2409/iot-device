@@ -63,7 +63,7 @@ class Module02Test(unittest.TestCase):
 		#when testing on the pipeline on cloud, the config file has been ignored. hence, load sample config file
 		if self.smtpClientConnector.config.configFileLoaded == False:
 			
-			self.smtpClientConnector.config.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			self.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 		
 		#when default config file is loaded properly (testing on the computer)
 		else: 
@@ -76,7 +76,7 @@ class Module02Test(unittest.TestCase):
 			
 		
 		#load the sample config file where the fromAddr and toAddr, authToken are not valid
-		self.smtpClientConnector.config.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+		self.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 		
 		#test false on success of mail
 		success = self.smtpClientConnector.publishMessage("Testing Message", "This is a test")

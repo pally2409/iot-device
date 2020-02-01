@@ -14,3 +14,8 @@ pipelines:
           - pip install -r requirements.txt
           - cd apps
           - python -m unittest tests/labs/Module01Test.py
+          - python -m unittest tests/common/ConfigUtilTest.py
+          - python -m unittest tests/common/SensorDataTest.py
+          - python -m unittest tests/labs/Module02Test.py
+          
+          

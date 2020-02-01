@@ -149,6 +149,8 @@ class ConfigUtil(object):
         #check if the fileName is valid and exists
         if os.path.exists(fileName):
             
+            print(fileName + "exists yay!!")
+            
             #read the configuration file
             self.config.read(fileName)
             

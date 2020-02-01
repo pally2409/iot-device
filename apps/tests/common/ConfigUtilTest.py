@@ -39,7 +39,6 @@ class ConfigUtilTest(unittest.TestCase):
 			#load the sample config directory
 			self.configUtil.__init__('sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
-			
 		pass
 	
 	

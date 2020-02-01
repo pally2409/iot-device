@@ -146,8 +146,10 @@ class ConfigUtil(object):
     #this method loads the configuration file from the fileName
     def loadConfig(self, fileName)->bool:
         
+        relative_path = os.path.relpath(fileName)
+        
         #check if the fileName is valid and exists
-        if os.path.exists(fileName):
+        if os.path.exists(relative_path):
             
             print(fileName + "exists yay!!")
             
@@ -162,6 +164,7 @@ class ConfigUtil(object):
         
         else:
             print(fileName + "does not exist")
+            
             #set the config file loaded to false
             self.configFileLoaded = False
             

@@ -159,7 +159,7 @@ class ConfigUtil(object):
             return True
         
         else:
-            
+            print(fileName + "does not exist")
             #set the config file loaded to false
             self.configFileLoaded = False
             

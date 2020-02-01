@@ -59,15 +59,21 @@ class ConfigUtilTest(unittest.TestCase):
 		
 		logging.info('Testing getBooleanValue()')
 		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+			
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+		
 		#check boolean value for ubidots.cloud section's useWebAccess key which is correctly stored as a boolean property
 		self.assertEqual(True, self.configUtil.getBooleanValue('ubidots.cloud', 'useWebAccess'))
-		
+			
 		#check boolean value for ubidots.cloud section's host key which is invalid boolean
 		self.assertEqual(0, self.configUtil.getBooleanValue('ubidots.cloud', 'host'))
-		
+			
 		#check boolean value for ubidots.cloud section's 'hostt' key which is a typo and should return a 0
 		self.assertEqual(0, self.configUtil.getBooleanValue('ubidots.cloud', 'hostt'))
-		
+			
 		#check boolean value for ubidots.cloudd section which is a typo
 		self.assertEqual(0, self.configUtil.getBooleanValue('ubidots.cloudd', 'host'))
 		
@@ -82,15 +88,21 @@ class ConfigUtilTest(unittest.TestCase):
 		
 		logging.info('Running testGetIntegerProperty()')
 		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+			
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
 		#check integer value for smtp.cloud section's port key which is correctly stored as an integer property
 		self.assertEqual(465, self.configUtil.getIntegerValue('smtp.cloud', 'port'))
-		
+			
 		#check integer value for ubidots.cloud section's host key which is not an integer and should return a false
 		self.assertEqual(False, self.configUtil.getIntegerValue('ubidots.cloud', 'host'))
-		
+			
 		#check integer value for ubidots.cloud section's 'hostt' key which is an error in typing and should return a false
 		self.assertEqual(False, self.configUtil.getIntegerValue('ubidots.cloud', 'hostt'))
-		
+			
 		#check integer value for ubidots.cloudd section which is an error in typing and should return a false
 		self.assertEqual(False, self.configUtil.getIntegerValue('ubidots.cloudd', 'host'))
 		
@@ -105,12 +117,19 @@ class ConfigUtilTest(unittest.TestCase):
 		
 		logging.info('Running testGetProperty()')
 		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+		
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
+			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
-		
+			
 		#check value for ubidots.cloud section's 'hostt' key which is an error in typing and should return a false
 		self.assertEqual(False, self.configUtil.getValue('ubidots.cloud', 'hostt'))
-		
+			
 		#check value for ubidots.cloudd section which is an error in typing and should return a false
 		self.assertEqual(False, self.configUtil.getValue('ubidots.cloudd', 'host'))
 		
@@ -124,10 +143,16 @@ class ConfigUtilTest(unittest.TestCase):
 		
 		logging.info('Running testHasProperty()')
 		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+		
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
-		
-		
+			
+			
 		#check value for ubidots.cloud section's 'hostess' key and should return a false because hostess key doesn't exist
 		self.assertEqual(False, self.configUtil.getValue('ubidots.cloud', 'hostess'))
 		
@@ -141,9 +166,15 @@ class ConfigUtilTest(unittest.TestCase):
 		
 		logging.info('Running testHasSection()')
 		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+		
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
 		#check value for smtp.cloud section's port key which is correctly stored
 		self.assertEqual('smtp.gmail.com', self.configUtil.getValue('smtp.cloud', 'host'))
-		
+			
 		#check value for ubidots.sky section's 'host' and should return a false because ubidots.sky is not a section
 		self.assertEqual(False, self.configUtil.getValue('ubidots.cloud', 'hostt'))
 		
@@ -155,6 +186,13 @@ class ConfigUtilTest(unittest.TestCase):
 	def testIsConfigDataLoaded(self):
 		
 		logging.info('Running testIsConfigDataLoaded()')
+		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+		
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+		
 		
 		#when config file is correctly loaded 
 		self.assertEqual(True, self.configUtil.configFileLoaded)

@@ -40,6 +40,8 @@ class ConfigUtilTest(unittest.TestCase):
 			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
 		pass
+	
+	
 
 	"""
 	Use this to tear down any allocated resources after your tests are complete. This

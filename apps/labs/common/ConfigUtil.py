@@ -146,7 +146,7 @@ class ConfigUtil(object):
     #this method loads the configuration file from the fileName
     def loadConfig(self, fileName)->bool:
         
-        relative_path = os.path.relpath(fileName)
+        relative_path = os.path.abspath(fileName)
         
         #check if the fileName is valid and exists
         if os.path.exists(relative_path):

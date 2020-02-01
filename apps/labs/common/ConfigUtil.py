@@ -154,7 +154,7 @@ class ConfigUtil(object):
             print(fileName + "exists yay!!")
             
             #read the configuration file
-            self.config.read(fileName)
+            self.config.read(relative_path)
             
             #set the config file loaded to true
             self.configFileLoaded = True
@@ -163,7 +163,7 @@ class ConfigUtil(object):
             return True
         
         else:
-            print(fileName + "does not exist")
+            print(relative_path + "does not exist")
             
             #set the config file loaded to false
             self.configFileLoaded = False

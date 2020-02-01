@@ -29,7 +29,16 @@ class ConfigUtilTest(unittest.TestCase):
 	instances of complex objects, initialize any requisite connections, etc.
 	"""
 	def setUp(self):
+		
+		#instantiate configUtil
 		self.configUtil = ConfigUtil.ConfigUtil()
+		
+		#if the default config file is not loaded: while testing the pipeline on the cloud
+		if self.configUtil.configFileLoaded == False:
+			
+			#load the sample config directory
+			self.configUtil.loadConfig('../../../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
+			
 		pass
 
 	"""

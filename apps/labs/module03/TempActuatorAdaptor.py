@@ -67,6 +67,8 @@ class TempActuatorAdaptor(object):
             self.sense.set_pixel(self.arrowRedInc);
             
             sleep(3)
+            
+            self.sense.clear()
            
         #if the actuator should decrease the temperature 
         else:
@@ -75,6 +77,8 @@ class TempActuatorAdaptor(object):
             self.sense.set_pixel(self.arrowBlueDec);
             
             sleep(3)
+            
+            self.sense.clear()
                
         return 
     

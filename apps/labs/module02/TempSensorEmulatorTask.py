@@ -36,7 +36,7 @@ class TempSensorEmulatorTask(object):
     how often it should generate temp and the threshold for max difference between 
     average and current temp
     '''
-    def __init__(self, minTemp = 0.0, maxTemp = 30.0, rateInSec = 10, threshold = 5.0, numReadings = 10):
+    def __init__(self, minTemp = 0.0, maxTemp = 30.0, rateInSec = 3, threshold = 5.0, numReadings = 10):
         '''
         Constructor
         '''

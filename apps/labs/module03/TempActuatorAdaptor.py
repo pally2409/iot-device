@@ -61,7 +61,7 @@ class TempActuatorAdaptor(object):
     def updateActuator(self, actuatorData) -> bool:
         
         #if the actuator should increase the temperature
-        if actuatorData.getCommand().equals("INCREASE TEMP"):
+        if actuatorData.getCommand() == "INCREASE TEMP":
             
             #display a red arrow
             self.sense.set_pixel(self.arrowRedInc);

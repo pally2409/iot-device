@@ -15,6 +15,8 @@ class ActuatorData(object):
     #define the variables
     name = 'Not Set'
     
+    command = 'Not set'
+    
     #current value is zero
     value = 0
     
@@ -27,24 +29,23 @@ class ActuatorData(object):
     
     #this method returns the command as a string
     def getCommand(self) -> str:
-        return 
+        return self.command
     
     #returns the most recently added value
     def getValue(self) -> float:
-        
         return self.value
     
     #returns the name of the sensor
     def getName(self) -> str:
-        pass
+        return self.name
     
     #set the command
     def setCommand(self, command):
-        pass
+        self.command = command
     
     #set the name of the sensor
     def setName(self, name):
-        pass
+        self.name = name
         
     
         

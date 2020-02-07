@@ -102,7 +102,7 @@ class SensorDataManager(object):
             logging.info('\n Current temperature exceeds the nominal temperature, decreasing the temperature')
             
             #send email with topic indicating excessive temperature
-            self.smtpConnector.publishMessage("High Temperature", data)
+            self.smtpClientConnector.publishMessage("High Temperature", data)
         
         #if current value is less than the average by more than the threshold
         elif topic == "Low Temperature": 
@@ -111,7 +111,7 @@ class SensorDataManager(object):
             logging.info('\n Nominal temperature exceeds the current temperature, increasing the temperature')
             
             #send email with topic indicating excessive temperature
-            self.smtpConnector.publishMessage("Too low temperature", data)
+            self.smtpClientConnector.publishMessage("Too low temperature", data)
         
         #return true for running successfully
         return True

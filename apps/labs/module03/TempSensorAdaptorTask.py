@@ -58,6 +58,8 @@ class TempSensorAdaptorTask(object):
 
                 #clear the sense hat
                 self.sense.clear()
+                
+                print("Getting temp")
 
                 #get the temperature from the sense hat
                 temp = self.sense.get_temperature()

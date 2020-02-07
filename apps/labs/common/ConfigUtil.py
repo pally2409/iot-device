@@ -152,6 +152,7 @@ class ConfigUtil(object):
         #get absolute path
         abs_path = os.path.abspath(fileName)
         
+        logging.info(abs_path)
         #check if the fileName is valid and exists
         if os.path.exists(abs_path):
             

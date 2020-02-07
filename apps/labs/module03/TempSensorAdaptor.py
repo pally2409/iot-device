@@ -22,9 +22,12 @@ class TempSensorAdaptor(object):
         
     def run(self):
         
+        self.tempSensorAdaptorTask.enableFetcher = True
+        
         threadTempSensorAdaptor = threading.Thread(target = self.tempSensorAdaptorTask.getTemperature())
         
         threadTempSensorAdaptor.daemon = True
+        
         
         threadTempSensorAdaptor.start()
         

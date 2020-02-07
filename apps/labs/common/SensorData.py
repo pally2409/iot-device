@@ -29,6 +29,7 @@ class SensorData(object):
         self.minValue = None
         self.sensorName = 'Not Set'
         self.timeStamp = str(datetime.now())
+        self.loggingData = ""
         pass
     
     #add value to the sensor data

@@ -30,7 +30,7 @@ class Module02Test(unittest.TestCase):
 
 	"""
 	Use this to setup your tests. This is where you may want to load configuration
-	information (if needed), initialize class-scoped variables, create class-scoped
+	information (if needed), initialize class-scoped variables, create class-scopedsou
 	instances of complex objects, initialize any requisite connections, etc.
 	"""
 	def setUp(self):

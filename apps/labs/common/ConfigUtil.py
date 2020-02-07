@@ -61,6 +61,7 @@ class ConfigUtil(object):
             
             #log the error and return a non string val
             logging.info('Config file not loaded')
+            
             return False    
     
     #this method returns the int value for the given section and the key
@@ -150,6 +151,8 @@ class ConfigUtil(object):
         
         #get absolute path
         abs_path = os.path.abspath(fileName)
+        
+        logging.info(abs_path)
         
         #check if the fileName is valid and exists
         if os.path.exists(abs_path):

@@ -64,7 +64,7 @@ class TempActuatorAdaptor(object):
         if actuatorData.getCommand() == "INCREASE TEMP":
             
             #display a red arrow
-            self.sense.set_pixel(self.arrowRedInc);
+            self.sense.set_pixels(self.arrowRedInc);
             
             sleep(3)
             
@@ -74,7 +74,7 @@ class TempActuatorAdaptor(object):
         else:
             
             #display a blue arrow
-            self.sense.set_pixel(self.arrowBlueDec);
+            self.sense.set_pixels(self.arrowBlueDec);
             
             sleep(3)
             

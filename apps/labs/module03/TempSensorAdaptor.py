@@ -15,7 +15,7 @@ class TempSensorAdaptor(object):
     #initialize TempSensorAdaptorTask
     tempSensorAdaptorTask = TempSensorAdaptorTask()
 
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''

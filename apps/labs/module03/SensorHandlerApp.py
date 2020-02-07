@@ -12,7 +12,7 @@ if __name__ == '__main__':
     Module 3: Using SenseHat to read temperature and trigger an event
     """
     tempSensorAdaptor = TempSensorAdaptor()
-    TempSensorAdaptor.run()
+    tempSensorAdaptor.run()
     
     
     

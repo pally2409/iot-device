@@ -12,13 +12,14 @@ class ActuatorData(object):
     classdocs
     '''
     
-    #define the variables
-    name = 'Not Set'
+    #initialize name to 'Not Set
+    name = 'Not set'
     
+    #initialize command to 'Not Set
     command = 'Not set'
     
-    #current value is zero
-    value = 0
+    #current value is an invalid value of -100
+    value = -100
     
     
     def __init__(self):
@@ -41,11 +42,33 @@ class ActuatorData(object):
     
     #set the command
     def setCommand(self, command):
-        self.command = command
+        
+        #if the parameter sent is None
+        if command == None:
+            
+            #set the command to 'Not Set
+            self.command = 'Not set'
+        
+        #if parameter is not none    
+        else: 
+            
+            #set the command
+            self.command = command
     
     #set the name of the sensor
     def setName(self, name):
-        self.name = name
+        
+        #if the parameter sent is None
+        if name == None:
+            
+            #set the name to 'Not Set
+            self.name = 'Not set'
+        
+        #if parameter is not none        
+        else:
+            
+            #set the command
+            self.name  = name
         
     
         

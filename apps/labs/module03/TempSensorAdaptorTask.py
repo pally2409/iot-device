@@ -92,13 +92,13 @@ class TempSensorAdaptorTask(object):
                 #sleep for time indicated in rateInSec
                 sleep(self.rateInSec)
             
-            #if emulator is not enabled
+            #if fetcher is not enabled
             else:
                 
-                #generator didn't run
+                #fetch didn't run
                 return False
             
-        #the generator is done running
+        #the fetcher is done running
         return True
         
         

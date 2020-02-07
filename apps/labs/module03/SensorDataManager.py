@@ -32,7 +32,8 @@ class SensorDataManager(object):
         '''
         #get the nominal temp from ConfigUtil
         self.nominalTemp = self.configUtil.getIntegerValue("device", "nominalTemp")
-        
+     
+    #this method takes in sensorData as a parameter and checks it against the nominal temp and takes appropriate action   
     def handleSensorData(self, sensorData):
         
         #get the current sensor value
@@ -59,7 +60,7 @@ class SensorDataManager(object):
             #send the reference to the Actuator Adaptor
             self.tempActuatorAdaptor.updateActuator(actuatorData)
             
-            
+            #return the actuator data reference
             return actuatorData
             
         #check if temperature less than the nominal temp
@@ -83,6 +84,7 @@ class SensorDataManager(object):
             #send the reference to the Actuator Adaptor
             self.tempActuatorAdaptor.updateActuator(actuatorData)
             
+            #return the actuator data reference
             return actuatorData
         
         #if temperature is equal to nominal temperature, do nothing and simply return a none    

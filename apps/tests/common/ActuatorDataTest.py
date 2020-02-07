@@ -1,4 +1,5 @@
 import unittest
+from labs.common.ActuatorData import ActuatorData
 
 
 """
@@ -21,6 +22,10 @@ class ActuatorDataTest(unittest.TestCase):
 	instances of complex objects, initialize any requisite connections, etc.
 	"""
 	def setUp(self):
+		
+		#instantiate ActuatorData
+		self.actuatorData = ActuatorData()
+		
 		pass
 
 	"""
@@ -28,13 +33,48 @@ class ActuatorDataTest(unittest.TestCase):
 	is where you may want to release connections, zero out any long-term data, etc.
 	"""
 	def tearDown(self):
+		
+		#set the reference to the variables to none to release any resources
+		self.actuatorData = None
+		
 		pass
 	
 	"""
-	Place your comments describing the test here.
+	Tests the getCommand() method of ActuatorData module. Checks whether the command is updating appropriately, and doesn't break if the command is set to None
 	"""
-	def testSomething(self):
+	def testGetCommand(self):
+		
+		#test the command when nothing has been set
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		
+		#test the command when set to 'INCREASE TEMP'
+		self.actuatorData.setCommand('INCREASE TEMP')
+		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Value was set to INCREASE TEMP")
+		
+		#test the command is set to 'Not Set' when set to None
+		self.actuatorData.setCommand(None)
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		
 		pass
+	
+	def testSetCommand(self):
+		
+		#test the command when set to None
+		self.actuatorData.setCommand(None)
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		
+		#test the command when set to 'INCREASE TEMP'
+		self.actuatorData.setCommand('INCREASE TEMP')
+		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Value was set to INCREASE TEMP")
+		
+		pass
+	
+	def testGetValue(self):
+		
+		pass
+	
+	def testS
+		
 
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']

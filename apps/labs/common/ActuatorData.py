@@ -19,7 +19,7 @@ class ActuatorData(object):
     value = 0
     
     
-    def __init__(self, params):
+    def __init__(self):
         '''
         Constructor
         '''

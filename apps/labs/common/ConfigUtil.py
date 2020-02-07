@@ -9,7 +9,7 @@ import os
 import logging
 
 #set the default configuration file in case no config file provided
-DEFAULT_CONFIG_FILE = 'config/ConnectedDevicesConfig.props'
+DEFAULT_CONFIG_FILE = '../../../config/ConnectedDevicesConfig.props'
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature emulator logger")
@@ -150,7 +150,7 @@ class ConfigUtil(object):
     def loadConfig(self, fileName)->bool:
         
         #get absolute path
-        abs_path = os.path.abspath(fileName)
+        abs_path = os.path.realpath(fileName)
         
         logging.info(abs_path)
         #check if the fileName is valid and exists

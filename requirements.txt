@@ -1,3 +1,3 @@
 psutil
 sense_hat
-RTIMU
+python3-rtimulib

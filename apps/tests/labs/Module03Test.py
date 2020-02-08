@@ -120,6 +120,11 @@ class Module03Test(unittest.TestCase):
 			
 		pass
 	
+	"""
+	This tests the sendNotification() method of the SensorDataManager, it simply whether
+	 the notification is being sent or not. This has been shown in documentation using screenshot of the
+	 email
+	"""
 	def testSendNotification(self):
 		
 		#if the config file is loaded: while testing on system
@@ -130,7 +135,11 @@ class Module03Test(unittest.TestCase):
 			
 		pass
 	
-	
+	"""
+	This tests the updateActuator() method of the TempActuatorAdaptor, it checks whether the actuator is updated 
+	(by returning an actuatorData reference) when the trigger is valid (INCREASE TEMP) and when the trigger is invalid 
+	(NOT A VALID TRIGGER)
+	"""
 	def testUpdateActuator(self):
 		
 		#create an invalid actuator trigger
@@ -152,6 +161,10 @@ class Module03Test(unittest.TestCase):
 		
 		pass
 	
+	
+	"""
+	This tests the run() method of the TempSensorAdaptor, it checks whether it runs successfully.
+	"""
 	def testTempSensorAdaptor(self):
 		
 		#get the reference to the tempSensorEmulatorTask
@@ -169,6 +182,10 @@ class Module03Test(unittest.TestCase):
 		#run the run function of tempEmulatorAdaptor and get the value of success of the adaptor
 		self.assertEqual(True, self.tempSensorAdaptor.run())
 	
+	"""
+	This tests the getTemperature() method of the TempSensorAdaptorTask, it checks whether the fetcher runs when enabled,
+	disabled, number of readings to get has been set to 0.
+	"""
 	def testGetTemperature(self):
 		
 		#enable the fetcher

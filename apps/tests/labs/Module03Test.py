@@ -111,6 +111,8 @@ class Module03Test(unittest.TestCase):
 		#check if actuatorData is of type ActuatorData
 		self.assertIsInstance(actuatorData, ActuatorData)
 		
+		print(sensorData.getCurrentValue())
+		
 		#actuatorData command should be increase temp
 		self.assertEqual(actuatorData.getCommand(), "INCREASE TEMP")
 		
@@ -167,25 +169,7 @@ class Module03Test(unittest.TestCase):
 		pass
 	
 	
-	"""
-	This tests the run() method of the TempSensorAdaptor, it checks whether it runs successfully.
-	"""
-	def testTempSensorAdaptor(self):
-		
-		#get the reference to the tempSensorEmulatorTask
-		tempSensTask = self.tempSensorAdaptor.tempSensorAdaptorTask
-		
-		#change numReadings to a small finite value to check
-		tempSensTask.numReadings = 1
-		
-		#change sleep time (rateInSec) to a small amount
-		tempSensTask.rateInSec = 1
-		
-		#enable the tempEmulatorTask's emulator
-		tempSensTask.enableFetcher = True
-		
-		#run the run function of tempEmulatorAdaptor and get the value of success of the adaptor
-		self.assertEqual(True, self.tempSensorAdaptor.run())
+	
 	
 	"""
 	This tests the getTemperature() method of the TempSensorAdaptorTask, it checks whether the fetcher runs when enabled,
@@ -219,6 +203,26 @@ class Module03Test(unittest.TestCase):
 		
 		#run when numReadings > 0 and emulator is disabled, should return false because generator didn't run
 		self.assertEqual(False, self.tempSensorAdaptorTask.getTemperature())
+		
+	"""
+	This tests the run() method of the TempSensorAdaptor, it checks whether it runs successfully.
+	"""
+	def testTempSensorAdaptor(self):
+		
+		#get the reference to the tempSensorEmulatorTask
+		tempSensTask = self.tempSensorAdaptor.tempSensorAdaptorTask
+		
+		#change numReadings to a small finite value to check
+		tempSensTask.numReadings = 1
+		
+		#change sleep time (rateInSec) to a small amount
+		tempSensTask.rateInSec = 1
+		
+		#enable the tempEmulatorTask's emulator
+		tempSensTask.enableFetcher = True
+		
+		#run the run function of tempEmulatorAdaptor and get the value of success of the adaptor
+		self.assertEqual(True, self.tempSensorAdaptor.run())
 
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']

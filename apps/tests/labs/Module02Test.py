@@ -64,7 +64,7 @@ class Module02Test(unittest.TestCase):
 			self.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 		
 		#when default config file is loaded properly (testing on the computer)
-		else: 
+		if self.smtpClientConnector.config.configFileLoaded == '../../../config/ConnectedDevicesConfig.props': 
 			
 			#when configurations are correct
 			success = self.smtpClientConnector.publishMessage("Testing Message", "This is a test")
@@ -136,7 +136,7 @@ class Module02Test(unittest.TestCase):
 	def testSendNotification(self):
 		
 		#if the config file is loaded: while testing on system
-		if self.tempSensorEmulatorTask.smtpConnector.config.configFileLoaded == True:
+		if self.tempSensorEmulatorTask.smtpConnector.config.fileName == '../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props':
 			
 			#returns true, notification is being sent
 			self.assertEqual(True, self.tempSensorEmulatorTask.sendNotification("Hello"))

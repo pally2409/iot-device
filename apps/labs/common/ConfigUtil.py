@@ -167,6 +167,8 @@ class ConfigUtil(object):
             #set the config file loaded to true
             self.configFileLoaded = True
             
+            self.fileName = fileName
+            
             #return true as config file has been loaded
             return True
         

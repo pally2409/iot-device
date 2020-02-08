@@ -28,7 +28,7 @@ class TempSensorAdaptor(object):
             self.tempSensorAdaptorTask.enableFetcher = True
             
             #create the thread that calls the getTemperature() method of the tempSensorAdaptorTask
-            threadTempSensorAdaptor = threading.Thread(target = self.tempSensorAdaptorTask.getTemperature)
+            threadTempSensorAdaptor = threading.Thread(target = self.tempSensorAdaptorTask.getTemperature())
             
             #set the temp sensor adaptor daemon to true (enable main thread to exit when done)
             threadTempSensorAdaptor.daemon = True

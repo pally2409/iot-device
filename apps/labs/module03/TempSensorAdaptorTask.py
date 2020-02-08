@@ -85,7 +85,6 @@ class TempSensorAdaptorTask(object):
                 #send it to the SensorDataManager who will check if it needs actuation
                 self.sensorDataManager.handleSensorData(self.sensorData)
                 
-                
                 #decrement as the number of readings by 1 to keep count of how many readings left
                 self.numReadings -= 1
                     

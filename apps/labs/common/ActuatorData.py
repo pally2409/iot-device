@@ -21,7 +21,6 @@ class ActuatorData(object):
     #current value is an invalid value of -100
     value = -100
     
-    
     def __init__(self):
         '''
         Constructor
@@ -32,9 +31,14 @@ class ActuatorData(object):
     def getCommand(self) -> str:
         return self.command
     
-    #returns the most recently added value
+    #get the actuator value
     def getValue(self) -> float:
         return self.value
+    
+    #set the actuator value
+    def setValue(self, value):
+        self.value = value
+    
     
     #returns the name of the sensor
     def getName(self) -> str:

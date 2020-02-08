@@ -24,6 +24,40 @@ class SensorDataManager(object):
     #instantiate smtp client connector
     smtpClientConnector = SmtpClientConnector()
     
+    #set the rgb values
+    #no color
+    e = [0, 0, 0]
+    
+    #red color
+    r = [255, 0, 0]
+    
+    #blue color
+    b = [0, 0, 255]
+    
+    #initialize upward red arrow to indicate actuator increasing my temperature
+    arrowRedInc = [
+                e,e,e,r,r,e,e,e,
+                e,e,r,r,r,r,e,e,
+                e,r,e,r,r,e,r,e,
+                r,e,e,r,r,e,e,r,
+                e,e,e,r,r,e,e,e,
+                e,e,e,r,r,e,e,e,
+                e,e,e,r,r,e,e,e,
+                e,e,e,r,r,e,e,e
+        ]
+    
+    #initialize downward blue arrow to indicate actuator increasing my temperature
+    arrowBlueDec = [
+                e,e,e,b,b,e,e,e,
+                e,e,e,b,b,e,e,e,
+                e,e,e,b,b,e,e,e,
+                e,e,e,b,b,e,e,e,
+                b,e,e,b,b,e,e,b,
+                e,b,e,b,b,e,b,e,
+                e,e,b,b,b,b,e,e,
+                e,e,e,b,b,e,e,e
+        ]
+    
 
 
     def __init__(self):
@@ -51,11 +85,11 @@ class SensorDataManager(object):
             #the thermostat should decrease the temp as the temperature is too hot!
             actuatorData.setCommand("DECREASE TEMP")
             
-            #set the value that triggered the actuator
-            actuatorData.value = sensorData.getCurrentValue()
-            
             #set the name of the actuator 
             actuatorData.setName("Temperature")
+            
+            #set the value to pixel matrix
+            actuatorData.setValue(self.arrowBlueDec)
             
             #send the reference to the Actuator Adaptor
             self.tempActuatorAdaptor.updateActuator(actuatorData)
@@ -75,11 +109,11 @@ class SensorDataManager(object):
             #the thermostat should increase the temp as the temperature is too cold!
             actuatorData.setCommand("INCREASE TEMP")
             
-            #set the value that triggered the actuator
-            actuatorData.value = sensorData.getCurrentValue()
-            
             #set the name of the actuator 
             actuatorData.setName("Temperature")
+            
+            #set the value to pixel matrix
+            actuatorData.setValue(self.arrowRedInc)
             
             #send the reference to the Actuator Adaptor
             self.tempActuatorAdaptor.updateActuator(actuatorData)

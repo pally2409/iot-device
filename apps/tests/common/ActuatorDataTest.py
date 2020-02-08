@@ -45,15 +45,15 @@ class ActuatorDataTest(unittest.TestCase):
 	def testGetCommand(self):
 		
 		#test the command when nothing has been set
-		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Command was not set")
 		
 		#test the command when set to 'INCREASE TEMP'
 		self.actuatorData.setCommand('INCREASE TEMP')
-		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Value was set to INCREASE TEMP")
+		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Command was set to INCREASE TEMP")
 		
 		#test the command is set to 'Not Set' when set to None
 		self.actuatorData.setCommand(None)
-		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Command was not set")
 		
 		pass
 	
@@ -61,11 +61,11 @@ class ActuatorDataTest(unittest.TestCase):
 		
 		#test the command when set to None
 		self.actuatorData.setCommand(None)
-		self.assertEqual('Not set', self.actuatorData.getCommand(), "Value was not set")
+		self.assertEqual('Not set', self.actuatorData.getCommand(), "Command was not set")
 		
 		#test the command when set to 'INCREASE TEMP'
 		self.actuatorData.setCommand('INCREASE TEMP')
-		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Value was set to INCREASE TEMP")
+		self.assertEqual('INCREASE TEMP', self.actuatorData.getCommand(), "Command was set to INCREASE TEMP")
 		
 		pass
 	
@@ -73,7 +73,36 @@ class ActuatorDataTest(unittest.TestCase):
 		
 		pass
 	
-	def testS
+	"""
+	Tests the getName() method of ActuatorData module. Checks whether the name is updating appropriately, and doesn't break if the name is set to None
+	"""
+	def testGetName(self):
+		
+		#test the name when nothing has been set
+		self.assertEqual('Not set', self.actuatorData.getName(), "Name was not set")
+		
+		#test the name when set to None
+		self.actuatorData.setName(None)
+		self.assertEqual('Not set', self.actuatorData.getName(), "Name was not set")
+		
+		#test the name when set to 'Temperature'
+		self.actuatorData.setName('Temperature')
+		self.assertEqual('Temperature', self.actuatorData.getName(), "Name was set to Temperature")
+		
+	
+	def testSetName(self):
+		
+		#test the name when set to None
+		self.actuatorData.setName(None)
+		self.assertEqual('Not set', self.actuatorData.getName(), "Name was not set")
+		
+		#test the command when set to 'INCREASE TEMP'
+		self.actuatorData.setName('Temperature')
+		self.assertEqual('Temperature', self.actuatorData.getName(), "Name was set to Temperature")
+		
+		pass
+	
+	
 		
 
 if __name__ == "__main__":

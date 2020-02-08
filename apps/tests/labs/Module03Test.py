@@ -134,7 +134,7 @@ class Module03Test(unittest.TestCase):
 			self.assertEqual(True, self.sensorDataManager.sendNotification("Hello", "This is a test"))
 			
 		pass
-	
+
 	"""
 	This tests the updateActuator() method of the TempActuatorAdaptor, it checks whether the actuator is updated 
 	(by returning an actuatorData reference) when the trigger is valid (INCREASE TEMP) and when the trigger is invalid 

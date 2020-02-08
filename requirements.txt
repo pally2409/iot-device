@@ -1,3 +1,1 @@
 psutil
-sense_hat
-python-rtimulib

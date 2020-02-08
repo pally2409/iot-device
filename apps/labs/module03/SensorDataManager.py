@@ -76,6 +76,10 @@ class SensorDataManager(object):
         #check if temperature greater than the nominal temp
         if sensorVal > self.nominalTemp:
             
+            print(sensorVal)
+            print(self.nominalTemp)
+            print("high Temp")
+            
             #send email notification
             self.sendNotification(sensorData.loggingData, "High Temperature")
             
@@ -99,6 +103,10 @@ class SensorDataManager(object):
             
         #check if temperature less than the nominal temp
         elif sensorVal < self.nominalTemp:
+            
+            print(sensorVal)
+            print(self.nominalTemp)
+            print("Low Temp")
             
             #send email notification
             self.sendNotification(sensorData.loggingData, "Low Temperature")

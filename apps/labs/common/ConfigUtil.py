@@ -34,6 +34,11 @@ class ConfigUtil(object):
         #load the config file
         self.loadConfig(configFileName)
         
+        if self.configFileLoaded == False:
+            
+            '../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props'
+            
+        
     #this method returns the string value for the given section and the key    
     def getValue(self, section: str, key: str) -> str:
         

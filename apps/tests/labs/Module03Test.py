@@ -83,6 +83,9 @@ class Module03Test(unittest.TestCase):
 			
 			self.sensorDataManager.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
 			
+		if self.sensorDataManager.configUtil.configFileLoaded == False:
+			
+			self.sensorDataManager.configUtil.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')	
 			
 		#test when there the value of sensor data is greater than the nominal temp
 		sensorData = SensorData()

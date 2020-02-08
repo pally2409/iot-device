@@ -63,7 +63,7 @@ class SensorDataManager(object):
     def __init__(self):
         '''
         Constructor
-        '''
+        '''   
         #get the nominal temp from ConfigUtil
         self.nominalTemp = self.configUtil.getIntegerValue("device", "nominalTemp")
      

@@ -34,8 +34,10 @@ class ConfigUtil(object):
         #load the config file
         self.loadConfig(configFileName)
         
+        #if running on pipeline
         if self.configFileLoaded == False:
             
+            #load the sample config
             self.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')    
         
         
@@ -157,7 +159,6 @@ class ConfigUtil(object):
         #get absolute path
         abs_path = os.path.realpath(fileName)
         
-        logging.info(abs_path)
         #check if the fileName is valid and exists
         if os.path.exists(abs_path):
             

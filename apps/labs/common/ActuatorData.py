@@ -19,7 +19,7 @@ class ActuatorData(object):
     command = 'Not set'
     
     #current value is an invalid value of -100
-    value = -100
+    value = 'Not set'
     
     def __init__(self):
         '''
@@ -37,7 +37,18 @@ class ActuatorData(object):
     
     #set the actuator value
     def setValue(self, value):
-        self.value = value
+        
+        #if the parameter sent is none
+        if value == None:
+            
+            #set the value to not none
+            self.value = 'Not set'
+        
+        #if not none    
+        else:
+            
+            #set the value passed
+            self.value = value
     
     
     #returns the name of the sensor

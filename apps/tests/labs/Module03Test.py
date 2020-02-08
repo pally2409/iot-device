@@ -1,4 +1,11 @@
+#import libraries and modules
 import unittest
+from labs.module03.SensorDataManager 		import SensorDataManager
+from labs.module03.TempActuatorAdaptor 		import TempActuatorAdaptor
+from labs.module03.TempSensorAdaptor 		import TempSensorAdaptor
+from labs.module03.TempSensorAdaptorTask 	import TempSensorAdaptorTask
+from labs.common.SensorData 				import SensorData
+from labs.common.ActuatorData 				import ActuatorData
 
 
 """
@@ -13,13 +20,6 @@ Instructions:
 
 Please note: While some example test cases may be provided, you must write your own for the class.
 """
-from labs.module03.SensorDataManager 		import SensorDataManager
-from labs.module03.TempActuatorAdaptor 		import TempActuatorAdaptor
-from labs.module03.TempSensorAdaptor 		import TempSensorAdaptor
-from labs.module03.TempSensorAdaptorTask 	import TempSensorAdaptorTask
-from labs.common.SensorData 				import SensorData
-from labs.common.ActuatorData 				import ActuatorData
-
 
 class Module03Test(unittest.TestCase):
 
@@ -28,10 +28,18 @@ class Module03Test(unittest.TestCase):
 	information (if needed), initialize class-scoped variables, create class-scoped
 	instances of complex objects, initialize any requisite connections, etc.
 	"""
+	#initialize the rgb values for the led colors
 	
+	#no color
 	e = [0, 0, 0]
+	
+	#red
 	r = [255, 0, 0]
+	
+	#blue
 	b = [0, 0, 255]
+	
+	#initialize the red arrow when increasing the temperature on sense hat led matrix
 	arrowRedInc = [
                 e,e,e,r,r,e,e,e,
                 e,e,r,r,r,r,e,e,
@@ -42,6 +50,8 @@ class Module03Test(unittest.TestCase):
                 e,e,e,r,r,e,e,e,
                 e,e,e,r,r,e,e,e
         ]
+	
+	#initialize the blue arrow when decreasing the temperature on sense hat led matrix
 	arrowBlueDec = [
                 e,e,e,b,b,e,e,e,
                 e,e,e,b,b,e,e,e,
@@ -52,8 +62,11 @@ class Module03Test(unittest.TestCase):
                 e,e,b,b,b,b,e,e,
                 e,e,e,b,b,e,e,e
         ]
+	
+	
 	def setUp(self):
 		
+		#instantiate the variables required
 		self.sensorDataManager = SensorDataManager()
 		self.tempActuatorAdaptor = TempActuatorAdaptor()
 		self.tempSensorAdaptor = TempSensorAdaptor()
@@ -68,6 +81,7 @@ class Module03Test(unittest.TestCase):
 	"""
 	def tearDown(self):
 		
+		#set the reference to the variables as none to release the resources they're holding
 		self.sensorDataManager = None
 		self.tempActuatorAdaptor = None
 		self.tempSensorAdaptor = None
@@ -75,19 +89,12 @@ class Module03Test(unittest.TestCase):
 		pass
 
 	"""
-	Place your comments describing the test here.
+	This method tests the handleSensorData() of SensorDataManager module. It tests whether the sensor data passed to the method triggers the correct
+	actuator command.
 	"""
-	def testGetHandleSensorData(self):
-		
-# 		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == False:
-# 			
-# 			self.sensorDataManager.smtpClientConnector.config.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')
-# 			
-# 		if self.sensorDataManager.configUtil.configFileLoaded == False:
-# 			
-# 			self.sensorDataManager.configUtil.loadConfig('../sample/ConnectedDevicesConfig_NO_EDIT_TEMPLATE_ONLY.props')	
+	def testGetHandleSensorData(self):	
 			
-		#test when there the value of sensor data is greater than the nominal temp
+		#initialize sensor data
 		sensorData = SensorData()
 		
 		#when current value is greater than nominal temp
@@ -145,6 +152,7 @@ class Module03Test(unittest.TestCase):
 			
 		pass
 
+
 	"""
 	This tests the updateActuator() method of the TempActuatorAdaptor, it checks whether the actuator is updated 
 	(by returning an actuatorData reference) when the trigger is valid (INCREASE TEMP) and when the trigger is invalid 
@@ -170,8 +178,6 @@ class Module03Test(unittest.TestCase):
 		self.assertEqual(False, self.tempActuatorAdaptor.updateActuator(None))
 		
 		pass
-	
-	
 	
 	
 	"""
@@ -206,6 +212,7 @@ class Module03Test(unittest.TestCase):
 		
 		#run when numReadings > 0 and emulator is disabled, should return false because generator didn't run
 		self.assertEqual(False, self.tempSensorAdaptorTask.getTemperature())
+	
 		
 	"""
 	This tests the run() method of the TempSensorAdaptor, it checks whether it runs successfully.

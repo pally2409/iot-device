@@ -10,6 +10,10 @@ from labs.module02.SmtpClientConnector              import SmtpClientConnector
 from labs.common                                    import ActuatorData
 import logging
 
+#set the basic configuration to display time, level and the message
+logging.getLogger("temperature sensor data manager logger")
+logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+
 class SensorDataManager(object):
     '''
     classdocs

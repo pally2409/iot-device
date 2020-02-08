@@ -22,6 +22,7 @@ class TempSensorAdaptor(object):
         
     def run(self):
         
+        #try the running thread
         try:
         
             #enable the temperature fetcher
@@ -35,10 +36,13 @@ class TempSensorAdaptor(object):
             
             #start the thread
             threadTempSensorAdaptor.start()
-            
+          
+        #if found error  
         except:
             
-            pass
+            #return false
+            return False
         
+        #return true for running successfully
         return True
         

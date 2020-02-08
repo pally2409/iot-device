@@ -1,3 +1,4 @@
+#import libraries and modules
 import unittest
 from labs.common.ActuatorData import ActuatorData
 
@@ -57,6 +58,9 @@ class ActuatorDataTest(unittest.TestCase):
 		
 		pass
 	
+	"""
+	Tests the setCommand() method of ActuatorData module. Checks whether the command is updating appropriately, and doesn't break if the name is set to None
+	"""
 	def testSetCommand(self):
 		
 		#test the command when set to None
@@ -69,7 +73,39 @@ class ActuatorDataTest(unittest.TestCase):
 		
 		pass
 	
+	"""
+	Tests the getValue() method of ActuatorData module. Checks whether the value is updating appropriately, and doesn't break if the name is set to None
+	"""
 	def testGetValue(self):
+		
+		#test the name when nothing has been set
+		self.assertEqual('Not set', self.actuatorData.getValue(), "Name was not set")
+		
+		#test the name when set to None
+		self.actuatorData.setValue(None)
+		self.assertEqual('Not set', self.actuatorData.getValue(), "Name was not set")
+		
+		#test the name when set to redArrowInc
+		self.actuatorData.setValue('My Pixel')
+		self.assertEqual('My Pixel', self.actuatorData.getValue(), "Name was set to My Pixel")
+		
+		pass
+	
+	"""
+	Tests the setValue() method of ActuatorData module. Checks whether the value is updating appropriately, and doesn't break if the name is set to None
+	"""
+	def testSetValue(self):
+		
+		#test the name when nothing has been set
+		self.assertEqual('Not set', self.actuatorData.getValue(), "Name was not set")
+		
+		#test the name when set to None
+		self.actuatorData.setValue(None)
+		self.assertEqual('Not set', self.actuatorData.getValue(), "Name was not set")
+		
+		#test the name when set to redArrowInc
+		self.actuatorData.setValue('My Pixel')
+		self.assertEqual('My Pixel', self.actuatorData.getValue(), "Name was set to My Pixel")
 		
 		pass
 	
@@ -90,6 +126,9 @@ class ActuatorDataTest(unittest.TestCase):
 		self.assertEqual('Temperature', self.actuatorData.getName(), "Name was set to Temperature")
 		
 	
+	"""
+	Tests the setName() method of ActuatorData module. Checks whether the name is updating appropriately, and doesn't break if the name is set to None
+	"""
 	def testSetName(self):
 		
 		#test the name when set to None

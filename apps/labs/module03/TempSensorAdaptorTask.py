@@ -11,7 +11,7 @@ from labs.module03.SensorDataManager        import SensorDataManager
 import logging
 
 #set the basic configuration to display time, level and the message
-logging.getLogger("temperature emulator logger")
+logging.getLogger("temperature fetcher logger")
 logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
 #this is a threaded class
@@ -56,10 +56,8 @@ class TempSensorAdaptorTask(object):
             #if the fetcher is enabled
             if self.enableFetcher:
 
-                #clear the sense hat
+                #clear the sense hat 
                 self.sense.clear()
-                
-                print("Getting temp")
 
                 #get the temperature from the sense hat
                 temp = self.sense.get_temperature()

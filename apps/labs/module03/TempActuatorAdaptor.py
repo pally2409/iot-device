@@ -4,23 +4,18 @@ Created on Feb 6, 2020
 @author: pallaksingh
 '''
 #import libraries and modules
-from sense_hat import SenseHat
-from time import sleep
+from sense_hat              import SenseHat
+from time                   import sleep
+import logging
+
+#set the basic configuration to display time, level and the message
+logging.getLogger("temperature actuator adaptor")
+logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
 class TempActuatorAdaptor(object):
     '''
     classdocs
     '''
-    
-    #set the rgb values
-    #no color
-    e = [0, 0, 0]
-    
-    #red color
-    r = [255, 0, 0]
-    
-    #blue color
-    b = [0, 0, 255]
     
     #initialize the sense hat
     sense = SenseHat()
@@ -45,15 +40,20 @@ class TempActuatorAdaptor(object):
                     #display a red arrow
                     self.sense.set_pixels(actuatorData.getValue());
                     
+                    #logging actuator command
+                    logging.info('Triggering actuator to increase temp')
+                    
                     #keep it displayed
                     sleep(3)
                     
-                    #clear            
+                    #clear the matrix           
                     self.sense.clear()
         
                 except Exception as e:
                     
                     print(e)
+                    
+                    print("increase temp cannot")
                     
                     #if error found, return a false
                     return False
@@ -70,13 +70,18 @@ class TempActuatorAdaptor(object):
                     #display a blue arrow
                     self.sense.set_pixels(actuatorData.getValue());
                     
+                    #logging actuator command
+                    logging.info('Triggering actuator to decrease temp')
+                    
                     #keep it displayed
                     sleep(3)
                     
-                    #clear 
+                    #clear the matrix
                     self.sense.clear()
                  
                 except:
+                    
+                    print("decrease temp cannot")
                     
                     #if error found, return a false  
                     return False
@@ -86,11 +91,14 @@ class TempActuatorAdaptor(object):
             
             else:
                 
+                print("not valid trigger cannot")
                 #not valid temperature actuator trigger hence, return false
                 return False 
         
         #if passed value is NoneType
         else:
+            
+            print("nonetype cannot")
             
             #return false coz invalid actuator 
             return False

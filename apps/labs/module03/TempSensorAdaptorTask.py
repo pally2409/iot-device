@@ -12,7 +12,7 @@ import logging
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature fetcher logger")
-logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 #this is a threaded class
 class TempSensorAdaptorTask(object):
@@ -32,6 +32,7 @@ class TempSensorAdaptorTask(object):
     #instantiate the SensorDataManager
     sensorDataManager = SensorDataManager()
 
+    #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
     def __init__(self, numReadings = 10, rateInSec = 5):
         '''
         Constructor
@@ -43,7 +44,7 @@ class TempSensorAdaptorTask(object):
         #set the rate at which you want to get the readings
         self.rateInSec = rateInSec
         
-    #get the temperature
+    #get the temperature from SenseHAT
     def getTemperature(self):
         
         #data is not f doesn't run if 0 readings set:
@@ -67,12 +68,12 @@ class TempSensorAdaptorTask(object):
                 
                 
                 #store the updated values from sensorData object
-                time = '                    Time: ' + self.sensorData.timeStamp
-                current = '                    Current: ' + str(self.sensorData.getCurrentValue())
-                average = '                    Average: ' + str(self.sensorData.getAverageValue())
-                samples = '                    Samples: ' + str(self.sensorData.getCount())
-                min_temp = '                    Min: ' + str(self.sensorData.getMinValue())
-                max_temp = '                    Max: ' + str(self.sensorData.getMaxValue())
+                time = '            Time: ' + self.sensorData.timeStamp
+                current = '            Current: ' + str(self.sensorData.getCurrentValue())
+                average = '            Average: ' + str(self.sensorData.getAverageValue())
+                samples = '            Samples: ' + str(self.sensorData.getCount())
+                min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+                max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #log the current sensorData values 

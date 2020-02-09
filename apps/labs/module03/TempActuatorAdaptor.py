@@ -10,7 +10,7 @@ import logging
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature actuator adaptor")
-logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class TempActuatorAdaptor(object):
     '''
@@ -35,13 +35,14 @@ class TempActuatorAdaptor(object):
             #if the actuator should increase the temperature
             if actuatorData.getCommand() == "INCREASE TEMP":
                 
+                #try printing the corresponding arrow on the led matrix
                 try:
                 
                     #display a red arrow
                     self.sense.set_pixels(actuatorData.getValue());
                     
                     #logging actuator command
-                    logging.info('Triggering actuator to increase temp')
+                    logging.info('Triggering actuator to increase temperature')
                     
                     #keep it displayed
                     sleep(3)
@@ -50,10 +51,6 @@ class TempActuatorAdaptor(object):
                     self.sense.clear()
         
                 except Exception as e:
-                    
-                    print(e)
-                    
-                    print("increase temp cannot")
                     
                     #if error found, return a false
                     return False
@@ -65,13 +62,14 @@ class TempActuatorAdaptor(object):
             #if the actuator should decrease the temperature 
             elif actuatorData.getCommand() == "DECREASE TEMP":
                 
+                #try printing the corresponding arrow on the led matrix
                 try:
                 
                     #display a blue arrow
                     self.sense.set_pixels(actuatorData.getValue());
                     
                     #logging actuator command
-                    logging.info('Triggering actuator to decrease temp')
+                    logging.info('Triggering actuator to decrease temperature')
                     
                     #keep it displayed
                     sleep(3)
@@ -81,8 +79,6 @@ class TempActuatorAdaptor(object):
                  
                 except:
                     
-                    print("decrease temp cannot")
-                    
                     #if error found, return a false  
                     return False
                 
@@ -90,15 +86,12 @@ class TempActuatorAdaptor(object):
                 return True
             
             else:
-                
-                print("not valid trigger cannot")
+
                 #not valid temperature actuator trigger hence, return false
                 return False 
         
         #if passed value is NoneType
         else:
-            
-            print("nonetype cannot")
             
             #return false coz invalid actuator 
             return False

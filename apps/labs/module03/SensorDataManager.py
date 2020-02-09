@@ -12,7 +12,7 @@ import logging
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature sensor data manager logger")
-logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class SensorDataManager(object):
     '''
@@ -62,8 +62,6 @@ class SensorDataManager(object):
                 e,e,e,b,b,e,e,e
         ]
     
-
-
     def __init__(self):
         '''
         Constructor
@@ -79,10 +77,6 @@ class SensorDataManager(object):
         
         #check if temperature greater than the nominal temp
         if sensorVal > self.nominalTemp:
-            
-            print(sensorVal)
-            print(self.nominalTemp)
-            print("high Temp")
             
             #send email notification
             self.sendNotification(sensorData.loggingData, "High Temperature")
@@ -107,10 +101,6 @@ class SensorDataManager(object):
             
         #check if temperature less than the nominal temp
         elif sensorVal < self.nominalTemp:
-            
-            print(sensorVal)
-            print(self.nominalTemp)
-            print("Low Temp")
             
             #send email notification
             self.sendNotification(sensorData.loggingData, "Low Temperature")

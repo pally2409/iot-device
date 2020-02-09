@@ -4,9 +4,6 @@ Created on Feb 6, 2020
 @author: pallaksingh
 '''
 
-
-#import libraries and modules
-
 class ActuatorData(object):
     '''
     classdocs

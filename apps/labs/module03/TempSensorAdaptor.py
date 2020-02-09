@@ -6,6 +6,11 @@ Created on Feb 6, 2020
 #import libraries and modules
 from labs.module03.TempSensorAdaptorTask import TempSensorAdaptorTask
 import threading
+import logging
+
+#set the basic configuration to display time, level and the message
+logging.getLogger("temperature sensor adaptor")
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class TempSensorAdaptor(object):
     '''
@@ -20,7 +25,11 @@ class TempSensorAdaptor(object):
         Constructor
         '''
         
+    #method for creating and running the thread    
     def run(self):
+        
+        #log the initial message
+        logging.info("Starting getTemperature thread()")
         
         #try the running thread
         try:
@@ -33,9 +42,6 @@ class TempSensorAdaptor(object):
             
             #set the temp sensor adaptor daemon to true (enable main thread to exit when done)
             threadTempSensorAdaptor.daemon = True
-            
-            #start the thread
-            threadTempSensorAdaptor.start()
           
         #if found error  
         except:

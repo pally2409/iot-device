@@ -164,12 +164,16 @@ class Module03Test(unittest.TestCase):
 		actuatorData = ActuatorData()
 		actuatorData.setCommand("NOT A VALID TRIGGER")
 		
+		#add a valid value
+		actuatorData.setValue(self.arrowBlueDec)
+		
 		#updateActuator should return a false
 		self.assertEqual(False, self.tempActuatorAdaptor.updateActuator(actuatorData))
 		
 		#create a valid actuator trigger
 		actuatorData = ActuatorData()
 		actuatorData.setCommand("INCREASE TEMP")
+		actuatorData.setValue(self.arrowRedInc)
 		
 		#updateActuator should return a True
 		self.assertEqual(True, self.tempActuatorAdaptor.updateActuator(actuatorData))

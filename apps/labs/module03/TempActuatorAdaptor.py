@@ -53,6 +53,7 @@ class TempActuatorAdaptor(object):
                 except Exception as e:
                     
                     #if error found, return a false
+                    print("error in displaying red inc")
                     return False
                 
                 #if successful, return true
@@ -79,7 +80,8 @@ class TempActuatorAdaptor(object):
                  
                 except:
                     
-                    #if error found, return a false  
+                    #if error found, return a false 
+                    print("error in displaying blue inc") 
                     return False
                 
                 #if successful, return true
@@ -87,12 +89,14 @@ class TempActuatorAdaptor(object):
             
             else:
 
+                print("invalid actuator")
                 #not valid temperature actuator trigger hence, return false
                 return False 
         
         #if passed value is NoneType
         else:
             
+            print("nonetype actuator")
             #return false coz invalid actuator 
             return False
                 

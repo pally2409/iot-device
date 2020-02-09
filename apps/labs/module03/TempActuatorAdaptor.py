@@ -52,7 +52,7 @@ class TempActuatorAdaptor(object):
         
                 except Exception as e:
                     
-                    #if error found, return a false
+                    #if error found during updating actuator, return a false
                     return False
                 
                 #if successful, return true
@@ -79,12 +79,13 @@ class TempActuatorAdaptor(object):
                  
                 except:
                     
-                    #if error found, return a false  
+                    #if error found during updating actuator, return a false  
                     return False
                 
-                #if successful, return true
+                #if actuator successful, return true
                 return True
             
+            #if invalid command to actuator 
             else:
 
                 #not valid temperature actuator trigger hence, return false

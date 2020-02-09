@@ -66,7 +66,7 @@ class Module03Test(unittest.TestCase):
 	
 	def setUp(self):
 		
-		#instantiate the variables required
+		#instantiate the classes required
 		self.sensorDataManager = SensorDataManager()
 		self.tempActuatorAdaptor = TempActuatorAdaptor()
 		self.tempSensorAdaptor = TempSensorAdaptor()
@@ -120,8 +120,6 @@ class Module03Test(unittest.TestCase):
 		
 		#check if actuatorData is of type ActuatorData
 		self.assertIsInstance(actuatorData, ActuatorData)
-		
-		print(actuatorData.getCommand())
 		
 		#actuatorData command should be increase temp
 		self.assertEqual(actuatorData.getCommand(), "INCREASE TEMP")

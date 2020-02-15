@@ -119,9 +119,6 @@ class SensorDataManager(object):
     #method for sending the notification via e-mail
     def sendNotification(self, data, topic):
             
-        #log the difference
-        logging.info('\n Sending humidity data via email')
-            
         #send email with topic indicating excessive temperature
         self.smtpClientConnector.publishMessage(data, topic)
         

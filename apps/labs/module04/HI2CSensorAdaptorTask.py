@@ -15,8 +15,8 @@ from smbus2.smbus2                                  import SMBus
                                 
 
 #set the basic configuration to display time, level and the message
-logging.getLogger("humidity i2c fetcher logger")
-logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.getLogger("humidity_i2c_fetcher_logger")
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.INFO)
 
 
 class HI2CSensorAdaptorTask(threading.Thread):
@@ -121,7 +121,7 @@ class HI2CSensorAdaptorTask(threading.Thread):
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #create the concatenation for logging
-                logData = "I2C Direct Humidity" + str(self.sensorData.getCurrentValue())
+                logData = "I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
                 
                 #log the current sensorData values 
                 logging.info(logData)

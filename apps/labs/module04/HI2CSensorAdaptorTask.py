@@ -68,7 +68,7 @@ class HI2CSensorAdaptorTask(object):
             logging.info("Initializing I2C bus and enabling I2C addresses")
             
             #if the fetcher is enabled
-            if self.enableFetcher:
+            if True:
 
                 #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
                 coeffH0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x30))

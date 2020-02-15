@@ -7,6 +7,7 @@ Created on Feb 14, 2020
 #import libraries and modules
 import logging
 import numpy as np
+import threading
 from time                                           import sleep
 from labs.common.SensorData                         import SensorData
 from labs.module04.SensorDataManager                import SensorDataManager
@@ -18,7 +19,7 @@ logging.getLogger("humidity i2c fetcher logger")
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 
-class HI2CSensorAdaptorTask(object):
+class HI2CSensorAdaptorTask(threading.Thread):
     '''
     classdocs
     '''
@@ -48,12 +49,17 @@ class HI2CSensorAdaptorTask(object):
         '''
         Constructor
         '''
+        threading.Thread.__init__(self)
         
         #set the number of readings you want to get
         self.numReadings = numReadings
         
         #set the rate at which you want to get the readings
         self.rateInSec = rateInSec
+        
+    def run(self):
+        
+        self.getHumidityData()
         
         
     def getHumidityData(self):

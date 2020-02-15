@@ -6,6 +6,7 @@ Created on Feb 14, 2020
 #import libraries and modules
 import sense_hat 
 import logging
+import threading
 from time                                           import sleep
 from labs.common.SensorData                         import SensorData
 from labs.module04.SensorDataManager                import SensorDataManager
@@ -14,7 +15,7 @@ from labs.module04.SensorDataManager                import SensorDataManager
 logging.getLogger("humidity api fetcher logger")
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
-class HumiditySensorAdaptorTask(object):
+class HumiditySensorAdaptorTask(threading.Thread):
     '''
     classdocs
     '''
@@ -39,12 +40,18 @@ class HumiditySensorAdaptorTask(object):
         '''
         Constructor
         '''
+        threading.Thread.__init__(self)
         
         #set the number of readings you want to get
         self.numReadings = numReadings
         
         #set the rate at which you want to get the readings
         self.rateInSec = rateInSec
+        
+        
+    def run(self):
+        
+        self.getHumidityData()
         
     #get the humidity data using the sense hat library
     def getHumidityData(self):

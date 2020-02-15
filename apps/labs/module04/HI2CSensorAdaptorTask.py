@@ -105,21 +105,21 @@ class HI2CSensorAdaptorTask(object):
                 #add to sensor data
                 self.sensorData.addValue(rel_hum)
                 
-                #store the updated values from sensorData object
-                time = '            Time: ' + self.sensorData.timeStamp
-                current = '            Current: ' + str(self.sensorData.getCurrentValue())
-                average = '            Average: ' + str(self.sensorData.getAverageValue())
-                samples = '            Samples: ' + str(self.sensorData.getCount())
-                min_temp = '            Min: ' + str(self.sensorData.getMinValue())
-                max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
-                data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+#                 #store the updated values from sensorData object
+#                 time = '            Time: ' + self.sensorData.timeStamp
+#                 current = '            Current: ' + str(self.sensorData.getCurrentValue())
+#                 average = '            Average: ' + str(self.sensorData.getAverageValue())
+#                 samples = '            Samples: ' + str(self.sensorData.getCount())
+#                 min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+#                 max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
+#                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #create the concatenation for logging
                 logData = "I2C Direct Humidity" + self.sensorData.getCurrentValue()
                 
                 #log the current sensorData values 
                 logging.info(logData)
-                self.sensorData.loggingData = data
+#                 self.sensorData.loggingData = data
                 
                 #send it to the SensorDataManager who will check if it needs actuation
                 self.sensorDataManager.handleSensorData(self.sensorData)

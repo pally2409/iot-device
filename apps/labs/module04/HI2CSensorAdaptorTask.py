@@ -63,13 +63,13 @@ class HI2CSensorAdaptorTask(object):
             return False
         
         #run the loop as many times as indicated in the numReadings variable
-        while self.numReadings > 0:
+        while True:
             
             logging.info("Initializing I2C bus and enabling I2C addresses")
             
             #if the fetcher is enabled
             if True:
-
+                logging.info("Inside if")
                 #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
                 coeffH0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x30))
                 coeffH1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x31))
@@ -132,10 +132,10 @@ class HI2CSensorAdaptorTask(object):
             
             #if fetcher is not enabled
             else:
-                
+                logging.info("false")
                 #fetch didn't run
                 return False
-            
+        logging.info("Did not run")    
         #the fetcher is done running
         return True
     

@@ -56,8 +56,10 @@ class MultiSensorAdaptor(object):
         #run the loop as many times as indicated in the numReadings variable
         while self.numReadings > 0:
             
+            #initialize their sensor data as none
             sensorDataHumidity = None
             sensorDataI2C = None
+            
             
             if self.hI2CSensorAdaptorTask.enableFetcher:
                 
@@ -69,7 +71,13 @@ class MultiSensorAdaptor(object):
                 
             if sensorDataHumidity:
                 
-                sensorDataManager.handleSensorData(sensorDataHumidity)
+                self.sensorDataManager.handleSensorData(sensorDataHumidity)
+                
+            if sensorDataI2C:
+                
+                self.sensorDataManager.handleSensorData(sensorDataI2C)
+                
+            
             
                 
             

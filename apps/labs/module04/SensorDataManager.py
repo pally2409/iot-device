@@ -29,30 +29,7 @@ class SensorDataManager(object):
     
     #instantiate smtp client connector
     smtpClientConnector = SmtpClientConnector()
-    
-#     #initialize upward red arrow to indicate actuator increasing my temperature
-#     arrowRedInc = [
-#                 e,e,e,r,r,e,e,e,
-#                 e,e,r,r,r,r,e,e,
-#                 e,r,e,r,r,e,r,e,
-#                 r,e,e,r,r,e,e,r,
-#                 e,e,e,r,r,e,e,e,
-#                 e,e,e,r,r,e,e,e,
-#                 e,e,e,r,r,e,e,e,
-#                 e,e,e,r,r,e,e,e
-#         ]
-#     
-#     #initialize downward blue arrow to indicate actuator increasing my temperature
-#     arrowBlueDec = [
-#                 e,e,e,b,b,e,e,e,
-#                 e,e,e,b,b,e,e,e,
-#                 e,e,e,b,b,e,e,e,
-#                 e,e,e,b,b,e,e,e,
-#                 b,e,e,b,b,e,e,b,
-#                 e,b,e,b,b,e,b,e,
-#                 e,e,b,b,b,b,e,e,
-#                 e,e,e,b,b,e,e,e
-#         ]
+
     
     def __init__(self):
         '''

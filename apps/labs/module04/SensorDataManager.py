@@ -10,6 +10,7 @@ from labs.common.ActuatorData                       import ActuatorData
 from labs.module04.MultiActuatorAdaptor             import MultiActuatorAdaptor
 from labs.module02.SmtpClientConnector              import SmtpClientConnector
 import logging
+from time import sleep
 
 
 #set the basic configuration to display time, level and the message
@@ -107,6 +108,8 @@ class SensorDataManager(object):
             
         #send email with topic indicating excessive temperature
         self.smtpClientConnector.publishMessage(data, topic)
+        
+        sleep(2)
         
         #return true for running successfully
         return True

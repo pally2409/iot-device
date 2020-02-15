@@ -58,14 +58,14 @@ class HI2CSensorAdaptorTask(object):
         
     def getHumidityData(self):
         
-        logging.info("Initializing I2C bus and enabling I2C addresses")
-        
         #data is not f doesn't run if 0 readings set:
         if self.numReadings == 0:
             return False
         
         #run the loop as many times as indicated in the numReadings variable
         while self.numReadings > 0:
+            
+            logging.info("Initializing I2C bus and enabling I2C addresses")
             
             #if the fetcher is enabled
             if self.enableFetcher:

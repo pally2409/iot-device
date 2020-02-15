@@ -9,6 +9,7 @@ import logging
 import threading 
 from labs.module04.HI2CSensorAdaptorTask                    import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask                import HumiditySensorAdaptorTask
+from labs.module03.SensorDataManager import SensorDataManager
 
 
 #set the basic configuration to display time, level and the message
@@ -23,11 +24,20 @@ class MultiSensorAdaptor(object):
     #initialize H12CAdaptorTask and HumiditySensorAdaptorTask  
     hI2CSensorAdaptorTask = HI2CSensorAdaptorTask()
     humiditySensorAdaptorTask = HumiditySensorAdaptorTask()
+    sensorDataManager = SensorDataManager()
 
-    def __init__(self):
+    #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
+    def __init__(self, numReadings = 10, rateInSec = 3):
         '''
         Constructor
         '''
+        threading.Thread.__init__(self)
+        
+        #set the number of readings you want to get
+        self.numReadings = numReadings
+        
+        #set the rate at which you want to get the readings
+        self.rateInSec = rateInSec
         
     #method for creating and running the thread    
     def run(self):
@@ -35,26 +45,37 @@ class MultiSensorAdaptor(object):
         #log the initial message
         logging.info("Starting sensor reading daemon threads")
         
-    
-        #try the running thread
-        try:
-           
-            #enable the fetchers
-            self.hI2CSensorAdaptorTask.enableFetcher = True
-            self.humiditySensorAdaptorTask.enableFetcher = True
-               
-            #set the humidity sensor adaptors daemon to true (enable main thread to exit when done)
-            self.hI2CSensorAdaptorTask.start()
-            self.humiditySensorAdaptorTask.start()
-               
-             
-        #if found error  
-        except Exception as e:
-               
-            logging.info(e)
-            
+        #enable the fetchers
+        self.hI2CSensorAdaptorTask.enableFetcher = True
+        self.humiditySensorAdaptorTask.enableFetcher = True
+        
+        #data is not f doesn't run if 0 readings set:
+        if self.numReadings == 0:
             return False
-           
-        #return true for running successfully
-        return True
+        
+        #run the loop as many times as indicated in the numReadings variable
+        while self.numReadings > 0:
+            
+            sensorDataHumidity = None
+            sensorDataI2C = None
+            
+            if self.hI2CSensorAdaptorTask.enableFetcher:
+                
+                sensorDataI2C = self.hI2CSensorAdaptorTask.getHumidityData()
+                
+            if self.humiditySensorAdaptorTask.enableFetcher:
+                
+                sensorDataHumidity = self.humiditySensorAdaptorTask.getHumidityData()
+                
+            if sensorDataHumidity:
+                
+                sensorDataManager.handleSensorData(sensorDataHumidity)
+            
+                
+            
+            
+               
+        
+               
+
            

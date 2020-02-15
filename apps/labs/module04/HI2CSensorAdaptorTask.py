@@ -14,18 +14,14 @@ from labs.module04.SensorDataManager                import SensorDataManager
 from smbus2.smbus2                                  import SMBus
                                 
 
-
-
+#set the basic configuration to display time, level and the message
+logging.getLogger("humidity_i2c_fetcher_logger")
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
 class HI2CSensorAdaptorTask(threading.Thread):
     '''
     classdocs
-    '''
-    
-    #set the basic configuration to display time, level and the message
-    logging.getLogger("humidity_i2c_fetcher_logger")
-    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
-    
+    '''    
     #initialize the bus no.1 of i2c bus of raspberrypi
     i2cBus = SMBus(1)
     

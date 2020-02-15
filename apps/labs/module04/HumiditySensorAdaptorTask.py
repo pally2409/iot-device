@@ -11,13 +11,14 @@ from time                                           import sleep
 from labs.common.SensorData                         import SensorData
 from labs.module04.SensorDataManager                import SensorDataManager
 
+#set the basic configuration to display time, level and the message
+logging.getLogger("humidity_api_fetcher_logger")
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
+
 class HumiditySensorAdaptorTask(threading.Thread):
     '''
     classdocs
     '''
-    #set the basic configuration to display time, level and the message
-    logging.getLogger("humidity_api_fetcher_logger")
-    logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
     #initialize the sense hat class from the library
     sense = sense_hat.SenseHat()

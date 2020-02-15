@@ -109,7 +109,7 @@ class Module04Test(unittest.TestCase):
 		actuatorData = self.sensorDataManager.handleSensorData(sensorData)
 		
 		#check if actuatorData is of type None
-		self.assertEqual(actuatorData == None)
+		self.assertEqual(actuatorData, None)
 			
 		pass
 	

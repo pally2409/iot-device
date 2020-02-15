@@ -13,7 +13,7 @@ from labs.module04.SensorDataManager                import SensorDataManager
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("humidity_api_fetcher_logger")
-logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
 
 class HumiditySensorAdaptorTask(threading.Thread):
     '''

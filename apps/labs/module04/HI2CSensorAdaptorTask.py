@@ -16,7 +16,7 @@ from smbus2.smbus2                                  import SMBus
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("humidity_i2c_fetcher_logger")
-logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
+logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG, datefmt='%Y-%m-%d %H:%M:%S')
 
 class HI2CSensorAdaptorTask(threading.Thread):
     '''

@@ -143,7 +143,7 @@ class Module04Test(unittest.TestCase):
 		actuatorData.setValue(90)
 		
 		#updateActuator should return a false
-		self.assertEqual(False, self.tempActuatorAdaptor.updateActuator(actuatorData))
+		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(actuatorData))
 		
 		#create a valid actuator trigger
 		actuatorData = ActuatorData()
@@ -151,10 +151,10 @@ class Module04Test(unittest.TestCase):
 		actuatorData.setValue(12)
 		
 		#updateActuator should return a True
-		self.assertEqual(True, self.tempActuatorAdaptor.updateActuator(actuatorData))
+		self.assertEqual(True, self.multiActuatorAdaptor.updateActuator(actuatorData))
 		
 		#sending a none should throw an exception, where when caught, returns a false
-		self.assertEqual(False, self.tempActuatorAdaptor.updateActuator(None))
+		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(None))
 		
 		pass
 	

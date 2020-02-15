@@ -67,6 +67,9 @@ class HumiditySensorAdaptorTask():
                 
         #log the current sensorData values 
         logging.info(logData)
+        
+        #return the sensor data
+        return self.sensorData
                 
     #method to return the current instance of the sensor data
     def getSensorData(self):

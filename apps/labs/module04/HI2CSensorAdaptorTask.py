@@ -52,58 +52,61 @@ class HI2CSensorAdaptorTask():
         
     def getHumidityData(self):
                 
-            #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
-            coeffH0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x30))
-            coeffH1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x31))
+        #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
+        coeffH0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x30))
+        coeffH1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x31))
                 
-            #dividing by 2 by shifting right to obtain H0_rh and H1_rh
-            h0_rh = float(coeffH0/2.0)
-            h1_rh = float(coeffH1/2.0)
+        #dividing by 2 by shifting right to obtain H0_rh and H1_rh
+        h0_rh = float(coeffH0/2.0)
+        h1_rh = float(coeffH1/2.0)
                 
-            #reading the value from h0_t0_out from 0x36 and 0x37
-            h0_t0_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x36))
-            h0_t0_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x37))
+        #reading the value from h0_t0_out from 0x36 and 0x37
+        h0_t0_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x36))
+        h0_t0_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x37))
                 
-            #concatenate them
-            h0_t0_out = np.int16((h0_t0_out_1 << self.bits) | h0_t0_out_0)
+        #concatenate them
+        h0_t0_out = np.int16((h0_t0_out_1 << self.bits) | h0_t0_out_0)
                 
-            #reading the value from h1_t0_out from 0x3A and 0x3B 
-            h1_t0_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x3A))
-            h1_t0_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x3B))
+        #reading the value from h1_t0_out from 0x3A and 0x3B 
+        h1_t0_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x3A))
+        h1_t0_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x3B))
                 
-            #concatenate them
-            h1_t0_out = np.int16((h1_t0_out_1 << self.bits) | h1_t0_out_0)
+        #concatenate them
+        h1_t0_out = np.int16((h1_t0_out_1 << self.bits) | h1_t0_out_0)
                 
-            #read humidity value in raw counts from 0x28 and 0x29
-            h_t_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x28))
-            h_t_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x29))
+        #read humidity value in raw counts from 0x28 and 0x29
+        h_t_out_0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x28))
+        h_t_out_1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x29))
                 
-            #concatenate them
-            h_t_out = np.int16((h_t_out_1 << self.bits) | h_t_out_0)
+        #concatenate them
+        h_t_out = np.int16((h_t_out_1 << self.bits) | h_t_out_0)
                 
-            #find the relative humidity
-            rel_hum = float(((h1_rh - h0_rh) * (h_t_out - h0_t0_out)/(h1_t0_out - h0_t0_out)) + h0_rh)
+        #find the relative humidity
+        rel_hum = float(((h1_rh - h0_rh) * (h_t_out - h0_t0_out)/(h1_t0_out - h0_t0_out)) + h0_rh)
                 
-            #add to sensor data
-            self.sensorData.addValue(rel_hum)
+        #add to sensor data
+        self.sensorData.addValue(rel_hum)
             
-            #store the updated values from sensorData object
-            time = '            Time: ' + self.sensorData.timeStamp
-            current = '            Current: ' + str(self.sensorData.getCurrentValue())
-            average = '            Average: ' + str(self.sensorData.getAverageValue())
-            samples = '            Samples: ' + str(self.sensorData.getCount())
-            min_temp = '            Min: ' + str(self.sensorData.getMinValue())
-            max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
-            data = 'Humidity' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+        #store the updated values from sensorData object
+        time = '            Time: ' + self.sensorData.timeStamp
+        current = '            Current: ' + str(self.sensorData.getCurrentValue())
+        average = '            Average: ' + str(self.sensorData.getAverageValue())
+        samples = '            Samples: ' + str(self.sensorData.getCount())
+        min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+        max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
+        data = 'Humidity' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
              
-            #add to data section of sensorData
-            self.sensorData.loggingData = data
+        #add to data section of sensorData
+        self.sensorData.loggingData = data
                
-            #create the concatenation for logging
-            logData = self.sensorData.timeStamp + ",INFO:I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
+        #create the concatenation for logging
+        logData = self.sensorData.timeStamp + ",INFO:I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
                 
-            #log the current sensorData values 
-            logging.info(logData)
+        #log the current sensorData values 
+        logging.info(logData)
+        
+        #return sensor data
+        return self.sensorData
                 
     
     #method to return the current instance of the sensor data

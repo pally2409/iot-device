@@ -41,10 +41,6 @@ class HumiditySensorAdaptorTask():
         Constructor
         '''
         
-    def run(self):
-        
-        self.getHumidityData()
-        
     #get the humidity data using the sense hat library
     def getHumidityData(self):
 
@@ -53,6 +49,18 @@ class HumiditySensorAdaptorTask():
                 
         #add it to the sensorData
         self.sensorData.addValue(humidity)
+        
+        #store the updated values from sensorData object
+        time = '            Time: ' + self.sensorData.timeStamp
+        current = '            Current: ' + str(self.sensorData.getCurrentValue())
+        average = '            Average: ' + str(self.sensorData.getAverageValue())
+        samples = '            Samples: ' + str(self.sensorData.getCount())
+        min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+        max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
+        data = 'Humidity' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+             
+        #add to data section of sensorData
+        self.sensorData.loggingData = data
                 
         #create the concatenation for logging
         logData = self.sensorData.timeStamp + ",INFO:SenseHAT API Humidity: " + str(self.sensorData.getCurrentValue())

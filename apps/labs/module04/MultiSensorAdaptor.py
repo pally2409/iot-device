@@ -61,23 +61,31 @@ class MultiSensorAdaptor(object):
             sensorDataHumidity = None
             sensorDataI2C = None
             
-            
+            #check if fetcher is enabled for hi2cSensorAdaptorTask
             if self.hI2CSensorAdaptorTask.enableFetcher:
                 
+                #store the sensorData value from the current reading 
                 sensorDataI2C = self.hI2CSensorAdaptorTask.getHumidityData()
-                
+             
+            #sleep for few seconds between getting these two values  
             sleep(self.rateInSec)
                 
+            #check if fetcher is enabled for humiditySensorAdaptorTask
             if self.humiditySensorAdaptorTask.enableFetcher:
                 
+                #store the sensor data value from the current reading
                 sensorDataHumidity = self.humiditySensorAdaptorTask.getHumidityData()
             
+            #if there was valid sensorDataHumidity
             if sensorDataHumidity:
                 
+                #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataHumidity)
-                
+              
+            #if there was valid sensorDataI2C  
             if sensorDataI2C:
                 
+                #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataI2C)
                 
             

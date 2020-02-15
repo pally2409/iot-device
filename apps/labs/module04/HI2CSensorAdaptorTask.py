@@ -50,11 +50,6 @@ class HI2CSensorAdaptorTask():
         '''
         logging.info("Initializing I2C bus and enabling I2C addresses")
         
-        
-    def run(self):
-        
-        self.getHumidityData()
-        
     def getHumidityData(self):
                 
             #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
@@ -91,7 +86,19 @@ class HI2CSensorAdaptorTask():
                 
             #add to sensor data
             self.sensorData.addValue(rel_hum)
-                
+            
+            #store the updated values from sensorData object
+            time = '            Time: ' + self.sensorData.timeStamp
+            current = '            Current: ' + str(self.sensorData.getCurrentValue())
+            average = '            Average: ' + str(self.sensorData.getAverageValue())
+            samples = '            Samples: ' + str(self.sensorData.getCount())
+            min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+            max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
+            data = 'Humidity' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+             
+            #add to data section of sensorData
+            self.sensorData.loggingData = data
+               
             #create the concatenation for logging
             logData = self.sensorData.timeStamp + ",INFO:I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
                 

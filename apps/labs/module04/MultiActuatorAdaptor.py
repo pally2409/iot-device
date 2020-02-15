@@ -52,7 +52,7 @@ class MultiActuatorAdaptor(object):
 #                     self.sense.show_message(actuatorData.getValue(), text_color = self.r);
                     
                     #logging actuator command
-#                     logging.info('Displaying Humidity from I2C Bus on actuator')
+                    logging.info('Displaying Humidity from I2C Bus on actuator')
                     
                     #keep it displayed
                     sleep(3)
@@ -79,7 +79,7 @@ class MultiActuatorAdaptor(object):
 #                     self.sense.show_message(actuatorData.getValue(), text_color = self.b);
                     
                     #logging actuator command
-#                     logging.info('Displaying Humidity from SenseHAT API on actuator')
+                    logging.info('Displaying Humidity from SenseHAT API on actuator')
                     
                     #keep it displayed
                     sleep(3)

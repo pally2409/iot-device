@@ -46,7 +46,7 @@ class SensorDataManager(object):
             sensorVal = sensorData.getCurrentValue()
                 
             #send email notification
-            self.sendNotification(sensorData.loggingData, "")
+            self.sendNotification(sensorData.loggingData, "Humidity reading from I2C Direct")
                 
             #instantiate ActuatorData
             actuatorData = ActuatorData()
@@ -72,7 +72,7 @@ class SensorDataManager(object):
             sensorVal = sensorData.getCurrentValue()
                 
             #send email notification
-            self.sendNotification(sensorData.loggingData, "")
+            self.sendNotification(sensorData.loggingData, "Humidity reading from SenseHAT API")
                 
             #instantiate ActuatorData
             actuatorData = ActuatorData()
@@ -101,7 +101,7 @@ class SensorDataManager(object):
     def sendNotification(self, data, topic):
             
         #send email with topic indicating excessive temperature
-#         self.smtpClientConnector.publishMessage(data, topic)
+        self.smtpClientConnector.publishMessage(data, topic)
         
         #return true for running successfully
         return True

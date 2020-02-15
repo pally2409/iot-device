@@ -58,18 +58,18 @@ class HI2CSensorAdaptorTask(object):
         
     def getHumidityData(self):
         
+        logging.info("Initializing I2C bus and enabling I2C addresses")
+        
         #data is not f doesn't run if 0 readings set:
         if self.numReadings == 0:
             return False
         
         #run the loop as many times as indicated in the numReadings variable
-        while True:
-            
-            logging.info("Initializing I2C bus and enabling I2C addresses")
+        while self.numReadings > 0:
             
             #if the fetcher is enabled
-            if True:
-                logging.info("Inside if")
+            if self.enableFetcher:
+                
                 #reading the value of coefficients H0_rh_x2 and H1_rh_x2 from 0x30 and 0x31
                 coeffH0 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x30))
                 coeffH1 = np.uint8(self.i2cBus.read_byte_data(self.humidAddr, 0x31))
@@ -101,10 +101,9 @@ class HI2CSensorAdaptorTask(object):
                 
                 #find the relative humidity
                 rel_hum = float(((h1_rh - h0_rh) * (h_t_out - h0_t0_out)/(h1_t0_out - h0_t0_out)) + h0_rh)
-                logging.info(rel_hum)
+                
                 #add to sensor data
                 self.sensorData.addValue(rel_hum)
-                logging.info(self.sensorData.getCurrentValue())
                 
                 #store the updated values from sensorData object
                 time = '            Time: ' + self.sensorData.timeStamp

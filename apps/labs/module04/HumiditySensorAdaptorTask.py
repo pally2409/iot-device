@@ -54,10 +54,10 @@ class HumiditySensorAdaptorTask(object):
             return False
         
         #run the loop as many times as indicated in the numReadings variable
-        while True:
+        while self.numReadings > 0:
             
             #if the fetcher is enabled
-            if True:
+            if self.enableFetcher:
 
                 #clear the sense hat 
                 self.sense.clear()
@@ -67,8 +67,6 @@ class HumiditySensorAdaptorTask(object):
                 
                 #add it to the sensorData
                 self.sensorData.addValue(temp)
-                
-                logging.info(temp)
                 
                 #store the updated values from sensorData object
                 time = '            Time: ' + self.sensorData.timeStamp
@@ -84,7 +82,7 @@ class HumiditySensorAdaptorTask(object):
                 
                 #log the current sensorData values 
                 logging.info(logData)
-                self.sensorData.loggingData = data
+#                 self.sensorData.loggingData = data
                 
                 #send it to the SensorDataManager who will check if it needs actuation
                 self.sensorDataManager.handleSensorData(self.sensorData)

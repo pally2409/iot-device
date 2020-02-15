@@ -68,6 +68,8 @@ class HumiditySensorAdaptorTask(object):
                 #add it to the sensorData
                 self.sensorData.addValue(temp)
                 
+                logging.info(temp)
+                
                 #store the updated values from sensorData object
                 time = '            Time: ' + self.sensorData.timeStamp
                 current = '            Current: ' + str(self.sensorData.getCurrentValue())

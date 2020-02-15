@@ -35,32 +35,34 @@ class MultiSensorAdaptor(object):
         #log the initial message
         logging.info("Starting sensor reading daemon threads")
         
-#       #try the running thread
-        try:
-         
-            #enable the fetchers
-            self.hI2CSensorAdaptorTask.enableFetcher = True
-            self.humiditySensorAdaptorTask.enableFetcher = True
-             
-            #create the thread that calls the getHumidityData() method of the tempSensorAdaptorTask
-            threadHI2CSensorAdaptor = threading.Thread(target = self.hI2CSensorAdaptorTask.getHumidityData())
-            threadHumiditySensorAdaptor = threading.Thread(target = self.humiditySensorAdaptorTask.getHumidityData())
-             
-            #set the humidity sensor adaptors daemon to true (enable main thread to exit when done)
-            threadHI2CSensorAdaptor.daemon = True
-            threadHumiditySensorAdaptor.daemon = True
-             
-            threadHI2CSensorAdaptor.start()
-            threadHumiditySensorAdaptor.start()
-             
-           
-        #if found error  
-        except Exception as e:
-             
-            logging.info(e)
-            #return false
-            return False
-         
-        #return true for running successfully
-        return True
+        self.humiditySensorAdaptorTask.getHumidityData()
+        
+# #       #try the running thread
+#         try:
+#          
+#             #enable the fetchers
+#             self.hI2CSensorAdaptorTask.enableFetcher = True
+#             self.humiditySensorAdaptorTask.enableFetcher = True
+#              
+#             #create the thread that calls the getHumidityData() method of the tempSensorAdaptorTask
+#             threadHI2CSensorAdaptor = threading.Thread(target = self.hI2CSensorAdaptorTask.getHumidityData())
+#             threadHumiditySensorAdaptor = threading.Thread(target = self.humiditySensorAdaptorTask.getHumidityData())
+#              
+#             #set the humidity sensor adaptors daemon to true (enable main thread to exit when done)
+#             threadHI2CSensorAdaptor.daemon = True
+#             threadHumiditySensorAdaptor.daemon = True
+#              
+#             threadHI2CSensorAdaptor.start()
+#             threadHumiditySensorAdaptor.start()
+#              
+#            
+#         #if found error  
+#         except Exception as e:
+#              
+#             logging.info(e)
+#             #return false
+#             return False
+#          
+#         #return true for running successfully
+#         return True
         

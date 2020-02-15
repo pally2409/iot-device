@@ -112,7 +112,7 @@ class HumiditySensorAdaptorTask(threading.Thread):
         pass
     
     #method to return the current instance of the sensor data
-    def getSensorDara(self):
+    def getSensorData(self):
         
         #return the reference to the sensor data
         return self.sensorData

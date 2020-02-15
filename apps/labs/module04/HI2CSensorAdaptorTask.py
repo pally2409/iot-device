@@ -146,7 +146,7 @@ class HI2CSensorAdaptorTask(threading.Thread):
     
     
     #method to return the current instance of the sensor data
-    def getSensorDara(self):
+    def getSensorData(self):
         
         #return the reference to the sensor data
         return self.sensorData

@@ -114,6 +114,10 @@ class SensorDataManager(object):
                 
             #return the actuator data reference
             return actuatorData
+        
+        else:
+            
+            return None
             
         
     #method for sending the notification via e-mail

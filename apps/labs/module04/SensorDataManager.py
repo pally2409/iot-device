@@ -39,6 +39,7 @@ class SensorDataManager(object):
     #this method takes in sensorData as a parameter and checks it against the nominal temp and takes appropriate action   
     def handleSensorData(self, sensorData):
         
+        logging.info(sensorData.getName())
         
         if sensorData.getName() == "i2c humidity":
             

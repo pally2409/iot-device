@@ -51,15 +51,12 @@ class MultiSensorAdaptor(object):
             threadHI2CSensorAdaptor.daemon = True
             threadHumiditySensorAdaptor.daemon = True
                
-            threadHI2CSensorAdaptor.start()
-            threadHumiditySensorAdaptor.start()
-               
              
         #if found error  
         except Exception as e:
                
             logging.info(e)
-            #return false
+            
             return False
            
         #return true for running successfully

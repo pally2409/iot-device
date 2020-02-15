@@ -5,6 +5,7 @@ Created on Feb 14, 2020
 '''
 
 from labs.module04.MultiSensorAdaptor   import MultiSensorAdaptor
+import logging
 
 if __name__ == '__main__':
     

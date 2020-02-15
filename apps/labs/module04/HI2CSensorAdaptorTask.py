@@ -44,7 +44,7 @@ class HI2CSensorAdaptorTask(object):
     bits = 8
 
     #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
-    def __init__(self, numReadings = 10, rateInSec = 3):
+    def __init__(self, numReadings = 10, rateInSec = 5):
         '''
         Constructor
         '''

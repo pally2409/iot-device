@@ -23,7 +23,7 @@ class HumiditySensorAdaptorTask(object):
     sense = sense_hat.SenseHat()
     
     #initialize the fetcher 
-    enableFetcher = False
+    enableFetcher = True
     
     #instantiate the SensorData class
     sensorData = SensorData()

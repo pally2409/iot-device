@@ -104,6 +104,7 @@ class HI2CSensorAdaptorTask(object):
                 logging.info(rel_hum)
                 #add to sensor data
                 self.sensorData.addValue(rel_hum)
+                print(self.sensorData.getCurrentValue())
                 
 #                 #store the updated values from sensorData object
 #                 time = '            Time: ' + self.sensorData.timeStamp

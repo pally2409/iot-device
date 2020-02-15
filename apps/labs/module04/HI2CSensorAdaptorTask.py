@@ -101,7 +101,7 @@ class HI2CSensorAdaptorTask(object):
                 
                 #find the relative humidity
                 rel_hum = float(((h1_rh - h0_rh) * (h_t_out - h0_t0_out)/(h1_t0_out - h0_t0_out)) + h0_rh)
-                
+                logging.info(rel_hum)
                 #add to sensor data
                 self.sensorData.addValue(rel_hum)
                 

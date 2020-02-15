@@ -45,7 +45,7 @@ class MultiSensorAdaptor(object):
                
             #set the humidity sensor adaptors daemon to true (enable main thread to exit when done)
             self.hI2CSensorAdaptorTask.start()
-            self.humiditySensorAdaptorTaskthreadHumiditySensorAdaptor.start()
+            self.humiditySensorAdaptorTask.start()
                
              
         #if found error  

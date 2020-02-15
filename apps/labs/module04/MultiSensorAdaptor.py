@@ -79,11 +79,15 @@ class MultiSensorAdaptor(object):
             #if there was valid sensorDataHumidity
             if sensorDataHumidity:
                 
+                logging.info("there is sensordata")
+                
                 #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataHumidity)
               
             #if there was valid sensorDataI2C  
             if sensorDataI2C:
+                
+                logging.info("there is sensordata")
                 
                 #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataI2C)

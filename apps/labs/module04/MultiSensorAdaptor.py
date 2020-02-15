@@ -66,9 +66,12 @@ class MultiSensorAdaptor(object):
                 
                 sensorDataI2C = self.hI2CSensorAdaptorTask.getHumidityData()
                 
+            sleep(self.rateInSec)
+                
             if self.humiditySensorAdaptorTask.enableFetcher:
                 
                 sensorDataHumidity = self.humiditySensorAdaptorTask.getHumidityData()
+            
                 
             if sensorDataHumidity:
                 
@@ -78,7 +81,7 @@ class MultiSensorAdaptor(object):
                 
                 self.sensorDataManager.handleSensorData(sensorDataI2C)
                 
-            sleep(self.rateInSec)
+            
                 
             
             

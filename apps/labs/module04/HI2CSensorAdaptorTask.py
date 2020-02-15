@@ -120,7 +120,7 @@ class HI2CSensorAdaptorTask(threading.Thread):
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #create the concatenation for logging
-                logData = time + ",INFO:I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
+                logData = self.sensorData.timeStamp + ",INFO:I2C Direct Humidity: " + str(self.sensorData.getCurrentValue())
                 
                 #log the current sensorData values 
                 logging.info(logData)

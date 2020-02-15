@@ -118,15 +118,15 @@ class Module04Test(unittest.TestCase):
 	 the notification is being sent or not. This has been shown in documentation using screenshot of the
 	 email
 	"""
-	def testSendNotification(self):
-		
-		#if the config file is loaded: while testing on system
-		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == True:
-			
-			#returns true, notification is being sent
-			self.assertEqual(True, self.sensorDataManager.sendNotification("Hello", "This is a test"))
-			
-		pass
+# 	def testSendNotification(self):
+# 		
+# 		#if the config file is loaded: while testing on system
+# 		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == True:
+# 			
+# 			#returns true, notification is being sent
+# 			self.assertEqual(True, self.sensorDataManager.sendNotification("Hello", "This is a test"))
+# 			
+# 		pass
 	
 	"""
 	This tests the updateActuator() method of the MultiActuatorAdaptor, it checks whether the actuator is updated 

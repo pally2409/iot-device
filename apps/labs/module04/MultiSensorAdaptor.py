@@ -7,6 +7,7 @@ Created on Feb 14, 2020
 #import modules and libraries
 import logging
 import threading 
+from time import sleep
 from labs.module04.HI2CSensorAdaptorTask                    import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask                import HumiditySensorAdaptorTask
 from labs.module03.SensorDataManager import SensorDataManager
@@ -76,6 +77,8 @@ class MultiSensorAdaptor(object):
             if sensorDataI2C:
                 
                 self.sensorDataManager.handleSensorData(sensorDataI2C)
+                
+            sleep(self.rateInSec)
                 
             
             

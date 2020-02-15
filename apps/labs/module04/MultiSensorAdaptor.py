@@ -28,7 +28,7 @@ class MultiSensorAdaptor(object):
     sensorDataManager = SensorDataManager()
 
     #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
-    def __init__(self, numReadings = 10, rateInSec = 0.1):
+    def __init__(self, numReadings = 10, rateInSec = 0.09):
         '''
         Constructor
         '''

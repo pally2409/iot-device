@@ -120,7 +120,7 @@ class SensorDataManager(object):
     def sendNotification(self, data, topic):
             
         #send email with topic indicating excessive temperature
-        self.smtpClientConnector.publishMessage(data, topic)
+#         self.smtpClientConnector.publishMessage(data, topic)
         
         #return true for running successfully
         return True

@@ -29,7 +29,7 @@ class HI2CSensorAdaptorTask(object):
     humidAddr = 0x5F 
     
     #initialize the fetcher 
-    enableFetcher = False
+    enableFetcher = True
     
     #instantiate the SensorData class
     sensorData = SensorData()

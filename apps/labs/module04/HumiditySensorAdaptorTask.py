@@ -80,7 +80,7 @@ class HumiditySensorAdaptorTask(object):
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #create the concatenation for logging
-                logData = "SenseHAT API Humidity" + self.sensorData.getCurrentValue()
+                logData = "SenseHAT API Humidity" + str(self.sensorData.getCurrentValue())
                 
                 #log the current sensorData values 
                 logging.info(logData)

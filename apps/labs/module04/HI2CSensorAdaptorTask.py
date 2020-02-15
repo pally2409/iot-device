@@ -106,17 +106,17 @@ class HI2CSensorAdaptorTask(object):
                 self.sensorData.addValue(rel_hum)
                 logging.info(self.sensorData.getCurrentValue())
                 
-#                 #store the updated values from sensorData object
-#                 time = '            Time: ' + self.sensorData.timeStamp
-#                 current = '            Current: ' + str(self.sensorData.getCurrentValue())
-#                 average = '            Average: ' + str(self.sensorData.getAverageValue())
-#                 samples = '            Samples: ' + str(self.sensorData.getCount())
-#                 min_temp = '            Min: ' + str(self.sensorData.getMinValue())
-#                 max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
-#                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+                #store the updated values from sensorData object
+                time = '            Time: ' + self.sensorData.timeStamp
+                current = '            Current: ' + str(self.sensorData.getCurrentValue())
+                average = '            Average: ' + str(self.sensorData.getAverageValue())
+                samples = '            Samples: ' + str(self.sensorData.getCount())
+                min_temp = '            Min: ' + str(self.sensorData.getMinValue())
+                max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
+                data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #create the concatenation for logging
-                logData = "I2C Direct Humidity" + self.sensorData.getCurrentValue()
+                logData = "I2C Direct Humidity" + str(self.sensorData.getCurrentValue())
                 
                 #log the current sensorData values 
                 logging.info(logData)

@@ -174,13 +174,13 @@ class Module04Test(unittest.TestCase):
 		self.hI2CSensorAdaptorTask.rateInSec = 1
 		
 		#run when numReadings > 0 and adaptor is enabled
-		self.assertEqual(True, self.tempSensorAdaptorTask.getHumidityData())
+		self.assertEqual(True, self.hI2CSensorAdaptorTask.getHumidityData())
 		
 		#change numReadings to 0
 		self.hI2CSensorAdaptorTask.numReadings = 0
 		
 		#run when numReadings = 0 and emulator is enabled, should return false because generator didn't run
-		self.assertEqual(False, self.tempSensorAdaptorTask.getHumidityData())
+		self.assertEqual(False, self.hI2CSensorAdaptorTask.getHumidityData())
 		
 		#disable the emulator 
 		self.hI2CSensorAdaptorTask.enableFetcher = False

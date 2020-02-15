@@ -55,8 +55,9 @@ class MultiSensorAdaptor(object):
              
            
         #if found error  
-        except:
+        except Exception as e:
              
+            logging.info(e)
             #return false
             return False
          

@@ -92,7 +92,7 @@ class MultiSensorAdaptor(object):
                 #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataI2C)
               
-            sleep(3)  
+            sleep(1)  
             
                 
             

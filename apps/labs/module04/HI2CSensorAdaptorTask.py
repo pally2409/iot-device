@@ -140,6 +140,7 @@ class HI2CSensorAdaptorTask(object):
         #the fetcher is done running
         return True
     
+    
     #method to return the current instance of the sensor data
     def getSensorDara(self):
         

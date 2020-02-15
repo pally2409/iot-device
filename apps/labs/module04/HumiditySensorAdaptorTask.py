@@ -54,10 +54,10 @@ class HumiditySensorAdaptorTask(object):
             return False
         
         #run the loop as many times as indicated in the numReadings variable
-        while self.numReadings > 0:
+        while True:
             
             #if the fetcher is enabled
-            if self.enableFetcher:
+            if True:
 
                 #clear the sense hat 
                 self.sense.clear()

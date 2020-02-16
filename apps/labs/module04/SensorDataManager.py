@@ -38,69 +38,67 @@ class SensorDataManager(object):
         '''   
      
     #this method takes in sensorData as a parameter and checks it against the nominal temp and takes appropriate action   
-    def handleSensorData(self, sensorData):
+    def handleSensorData(self, sensorDatas):
         
-        logging.info(sensorData.getName())
+        actuatorDataList = None
+        emailString = None
         
-        if sensorData.getName() == "i2c humidity":
-            
-            logging.info("hello im in handle sensor data")
-            
-            #get the current sensor value
-            sensorVal = sensorData.getCurrentValue()
-                
-            #send email notification
-            self.sendNotification(sensorData.loggingData, "Humidity reading from I2C Direct")
-                
-            #instantiate ActuatorData
-            actuatorData = ActuatorData()
-                
-            #the thermostat should decrease the temp as the temperature is too hot!
-            actuatorData.setCommand("DISPLAY I2C Humidity")
-                
-            #set the name of the actuator 
-            actuatorData.setName("I2C Humidity")
-                
-            #set the value to pixel matrix
-            actuatorData.setValue(sensorVal)
-                
-            #send the reference to the Actuator Adaptor
-            self.multiActuatorAdaptor.updateActuator(actuatorData)
-                
-            #return the actuator data reference
-            return actuatorData
+        for sensorData in sensorDatas:
         
-        elif sensorData.getName() == "sense_hat API humidity":
+            if sensorData.getName() == "i2c humidity":
+                
+                logging.info("hello im in handle sensor data")
+                
+                #get the current sensor value
+                sensorVal = sensorData.getCurrentValue()
+                    
+                #instantiate ActuatorData
+                actuatorData = ActuatorData()
+                    
+                #the thermostat should decrease the temp as the temperature is too hot!
+                actuatorData.setCommand("DISPLAY I2C Humidity")
+                    
+                #set the name of the actuator 
+                actuatorData.setName("I2C Humidity")
+                    
+                #set the value to pixel matrix
+                actuatorData.setValue(sensorVal)
+                
+                emailString += sensorData.loggingData
+                
+                actuatorDataList.append(actuatorData)
             
-            logging.info("hello im in sense hat api")
+            elif sensorData.getName() == "sense_hat API humidity":
+                
+                logging.info("hello im in sense hat api")
+                
+                #get the current sensor value
+                sensorVal = sensorData.getCurrentValue()
+                    
+                #instantiate ActuatorData
+                actuatorData = ActuatorData()
+                    
+                #the thermostat should decrease the temp as the temperature is too hot!
+                actuatorData.setCommand("DISPLAY SENSE HAT API Humidity")
+                    
+                #set the name of the actuator 
+                actuatorData.setName("SENSE HAT API Humidity")
+                    
+                #set the value to pixel matrix
+                actuatorData.setValue(sensorVal)
+                
+                emailString += sensorData.loggingData
+                             
+                actuatorDataList.append(actuatorData)
             
-            #get the current sensor value
-            sensorVal = sensorData.getCurrentValue()
+            else:
                 
-            #send email notification
-            self.sendNotification(sensorData.loggingData, "Humidity reading from SenseHAT API")
-                
-            #instantiate ActuatorData
-            actuatorData = ActuatorData()
-                
-            #the thermostat should decrease the temp as the temperature is too hot!
-            actuatorData.setCommand("DISPLAY SENSE HAT API Humidity")
-                
-            #set the name of the actuator 
-            actuatorData.setName("SENSE HAT API Humidity")
-                
-            #set the value to pixel matrix
-            actuatorData.setValue(sensorVal)
-                
-            #send the reference to the Actuator Adaptor
-            self.multiActuatorAdaptor.updateActuator(actuatorData)
-                
-            #return the actuator data reference
-            return actuatorData
+                return None
         
-        else:
-            
-            return None
+        self.multiActuatorAdaptor.updateActuator(actuatorData)
+        self.sendNotification(emailString, "Humidity Readings")
+           
+        return actuatorDataList
             
         
     #method for sending the notification via e-mail

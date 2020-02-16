@@ -94,7 +94,7 @@ class HI2CSensorAdaptorTask():
         samples = '            Samples: ' + str(self.sensorData.getCount())
         min_temp = '            Min: ' + str(self.sensorData.getMinValue())
         max_temp = '            Max: ' + str(self.sensorData.getMaxValue())
-        data = 'Humidity' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
+        data = 'Humidity readings from I2C Bus' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp + '\n'
              
         #add to data section of sensorData
         self.sensorData.loggingData = data

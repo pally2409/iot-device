@@ -25,7 +25,7 @@ class SmtpClientConnector(object):
         pass
     
     #method for sending email 
-    def publishMessage(self, topic, data):
+    def publishMessage(self, data, topic):
         
         '''
             Setting up attributes for sending e-mail notification

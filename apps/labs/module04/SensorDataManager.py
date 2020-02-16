@@ -93,12 +93,13 @@ class SensorDataManager(object):
                  
                 #append the actuator data to the list             
                 actuatorDataList.append(actuatorData)
-            
-            #if not valid sensor data reading
-            else:
+        
+        
+        #if no valid sensor data reading
+        if len(actuatorDataList) == 0:
                 
-                #return none
-                return None
+            #return none
+            return None
         
         #send the list to the updateActuator method of the multiActuatorAdaptor
         self.multiActuatorAdaptor.updateActuator(actuatorDataList)

@@ -128,7 +128,7 @@ class Module04Test(unittest.TestCase):
 		actuatorDataList = self.sensorDataManager.handleSensorData(sensorDataTest)
 		
 		#check if it is none
-		self.assertEqual(None, 2)
+		self.assertEqual(actuatorDataList, None)
 		
 		
 	

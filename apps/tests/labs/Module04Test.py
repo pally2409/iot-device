@@ -198,7 +198,7 @@ class Module04Test(unittest.TestCase):
 		sensorData = self.hI2CSensorAdaptorTask.getHumidityData()
 		
 		#get the absolute difference between sensorData from i2c and the sense hat api
-		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity() <= 1.0))
+		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity()) <= 1.0)
 		
 	"""
 	This tests the getHumidityData() method of the HI2CSensorAdaptorTask, it checks whether the returned value and the sense_hat api value

@@ -7,6 +7,7 @@ Created on Feb 14, 2020
 #import modules and libraries
 import logging
 import threading 
+from datetime                                               import datetime
 from time                                                   import sleep
 from labs.module04.HI2CSensorAdaptorTask                    import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask                import HumiditySensorAdaptorTask
@@ -45,6 +46,7 @@ class MultiSensorAdaptor(threading.Thread):
         
         #log the initial message
         logging.info("Starting sensor reading daemon threads")
+        logging.info("Initializing I2C bus and enabling I2C addresses")
         
         #enable the fetchers for both the tasks
         self.hI2CSensorAdaptorTask.enableFetcher = True
@@ -52,6 +54,7 @@ class MultiSensorAdaptor(threading.Thread):
         
         #data is not false doesn't run if 0 readings set:
         if self.numReadings == 0:
+            
             return False
         
         #this try-except block checks whether a keyboard interrupt exception occurs and clears the sensehat if yes
@@ -79,11 +82,20 @@ class MultiSensorAdaptor(threading.Thread):
                     sensorDataHumidity.append(self.humiditySensorAdaptorTask.getHumidityData())
                 
                 #if there was valid sensorData in sensorDataHumidity
-                if len(sensorDataHumidity)!=0:
+                if len(sensorDataHumidity) != 0:
                     
                     #handle the sensor data using the manager
                     self.sensorDataManager.handleSensorData(sensorDataHumidity)
-
+                    
+                else:
+                    
+                    #return false
+                    return False
+                
+                #log the difference
+                logData = str(datetime.now()) + ",INFO:Difference: " + str(abs(sensorDataHumidity[0] - sensorDataHumidity[1]))
+                logging.info(logData)    
+    
                 #sleep for few seconds
                 sleep(self.rateInSec)  
         
@@ -93,7 +105,7 @@ class MultiSensorAdaptor(threading.Thread):
             #clear the sensorData    
             self.sensorDataManager.multiActuatorAdaptor.sense.clear()
             
-                
+        return True        
             
             
                 

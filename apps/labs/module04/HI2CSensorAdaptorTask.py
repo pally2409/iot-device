@@ -48,7 +48,6 @@ class HI2CSensorAdaptorTask():
         '''
         Constructor
         '''
-        logging.info("Initializing I2C bus and enabling I2C addresses")
         
     def getHumidityData(self):
                 

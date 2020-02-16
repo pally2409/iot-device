@@ -1,5 +1,6 @@
 import unittest
 import sense_hat
+import logging
 from time										import sleep
 from labs.module04.SensorDataManager 			import SensorDataManager
 from labs.module04.HI2CSensorAdaptorTask 		import HI2CSensorAdaptorTask
@@ -24,6 +25,11 @@ Instructions:
 
 Please note: While some example test cases may be provided, you must write your own for the class.
 """
+
+#set the basic configuration to display time, level and the message
+logging.getLogger("module 2 test logger")
+logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+
 class Module04Test(unittest.TestCase):
 
 	"""
@@ -60,7 +66,10 @@ class Module04Test(unittest.TestCase):
 	This method tests the handleSensorData() of SensorDataManager module. It tests whether the sensor data list passed to the method triggers the correct
 	actuator command.
 	"""
-	def testGetHandleSensorData(self):	
+	def testGetHandleSensorData(self):
+		
+		#log the test
+		logging.info("\nTesting the handleSensorData() method of SensorDataManager")	
 			
 		#initialize sensor data to represent reading from I2C 
 		sensorDataI2C = SensorData()
@@ -143,6 +152,9 @@ class Module04Test(unittest.TestCase):
 	"""
 	def testSendNotification(self):
 		
+		#log the test
+		logging.info("\nTesting the sendNotification() method of SensorDataManager")	
+		
 		#if the config file is loaded: while testing on system
 		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == True:
 			
@@ -157,6 +169,9 @@ class Module04Test(unittest.TestCase):
 	(NOT A VALID TRIGGER)
 	"""
 	def testUpdateActuator(self):
+		
+		#log the test
+		logging.info("\nTesting the updateActuator() method of MultiActuatorAdaptor")	
  		
 		#create an invalid actuator trigger
 		actuatorData = ActuatorData()
@@ -194,6 +209,9 @@ class Module04Test(unittest.TestCase):
 	"""
 	def testGetHumidityDataHI12C(self):
 		
+		#log the test
+		logging.info("\nTesting the getHumidityData() method of HI2CSensorAdaptorTask")
+		
 		#get the humidity data
 		sensorData = self.hI2CSensorAdaptorTask.getHumidityData()
 		
@@ -209,6 +227,9 @@ class Module04Test(unittest.TestCase):
 	"""
 	def testGetHumidityDataAPI(self):
 		
+		#log the test
+		logging.info("\nTesting the getHumidityData() method of HumiditySensorAdaptorTask")
+		
 		#get the humidity data
 		sensorData = self.humiditySensorAdaptorTask.getHumidityData()
 		
@@ -220,10 +241,28 @@ class Module04Test(unittest.TestCase):
 		
 	
 	"""
+	Tests the getSensorData() method of both the HI2CSensorAdaptorTask and HumiditySensorAdaptorTask 
+	"""
+	
+	def testGetSensorData(self):
+		
+		#get the sensor data reference from the getSensorData method
+		sensorDataHI2C = self.hI2CSensorAdaptorTask.getSensorData()
+		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
+		
+		#check if instance of SensorData
+		self.assertIsInstance(sensorDataHI2C, SensorData)
+		self.assertIsInstance(sensorDataHumidity, SensorData)
+		
+		
+	"""
 	This tests the whether the difference between the sensor values detected from , it checks whether the 
 	i2c bus and sense hat API have a difference of <= 1.0 
 	"""	
 	def testComparisonI2CSenseHat(self):
+		
+		#log the test
+		logging.info("\nTesting the comparison between readings of I2C Bus and API")
 		
 		#get the sensor data references from both
 		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
@@ -236,7 +275,44 @@ class Module04Test(unittest.TestCase):
 		#check for difference
 		self.assertTrue(abs(sensorDataHumidity.getCurrentValue() - sensorDataHI2C.getCurrentValue()) <= 1.0, "Value more than 1")
 		
+	"""
+	This test checks the run() method of the MultiSensorAdaptor
+	"""	
+	def testRun(self):
 		
+		#log the test
+		logging.info("\nTesting the run() method of MultiSensorAdaptor()")
+		
+		#enable the fetcher
+		self.multiSensorAdaptor.hI2CSensorAdaptorTask.enableFetcher = True
+		self.multiSensorAdaptor.humiditySensorAdaptorTask.enableFetcher = True
+		
+		#change numReadings to a small finite value to check
+		self.multiSensorAdaptor.numReadings = 1
+		
+		#change sleep time (rateInSec) to a small amount
+		self.multiSensorAdaptor.rateInSec = 1
+		
+		#run when numReadings > 0 and adaptor is enabled
+		self.assertEqual(True, self.multiSensorAdaptor.run())
+		
+		#change numReadings to 0
+		self.tempSensorAdaptorTask.numReadings = 0
+		
+		#run when numReadings = 0 and fetcher is enabled, should return false because run will not fetch
+		self.assertEqual(False, self.multiSensorAdaptor.run())
+		
+		#disable the fetcher 
+		self.multiSensorAdaptor.hI2CSensorAdaptorTask.enableFetcher = False
+		self.multiSensorAdaptor.humiditySensorAdaptorTask.enableFetcher = False
+		
+		#change readings to > 0
+		self.multiSensorAdaptor.numReadings = 1
+		
+		#run when numReadings > 0 and fetcher is disabled, should return false because generator didn't run
+		self.assertEqual(False, self.tempSensorAdaptorTask.run())
+		
+	
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']
 	unittest.main()

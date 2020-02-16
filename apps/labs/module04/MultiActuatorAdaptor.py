@@ -82,8 +82,7 @@ class MultiActuatorAdaptor(object):
                     
                     #try printing the corresponding value on the led matrix
                     try:
-
-                    
+ 
                         #get the value to display
                         val = actuatorData.getValue()
                         
@@ -101,9 +100,6 @@ class MultiActuatorAdaptor(object):
                             
                             #display a blue scroll message indicating the reading from sense hat api
                             self.sense.show_message(str(int(floor(val))), text_colour = self.b)
-                        
-                        #logging actuator command
-                        logging.info('Displaying Humidity from SenseHAT API on actuator')
 
                     #if unable to print on sensehat 
                     except:

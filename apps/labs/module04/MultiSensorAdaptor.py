@@ -93,7 +93,7 @@ class MultiSensorAdaptor(threading.Thread):
                     return False
                 
                 #log the difference
-                logData = str(datetime.now()) + ",INFO:Difference: " + str(abs(sensorDataHumidity[0] - sensorDataHumidity[1]))
+                logData = str(datetime.now()) + ",INFO:Difference: " + str(abs(sensorDataHumidity[0].getCurrentValue() - sensorDataHumidity[1].getCurrentValue()))
                 logging.info(logData)    
     
                 #sleep for few seconds

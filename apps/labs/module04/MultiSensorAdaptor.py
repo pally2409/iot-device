@@ -10,7 +10,7 @@ import threading
 from time import sleep
 from labs.module04.HI2CSensorAdaptorTask                    import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask                import HumiditySensorAdaptorTask
-from labs.module03.SensorDataManager import SensorDataManager
+from labs.module04.SensorDataManager import SensorDataManager
 
 
 #set the basic configuration to display time, level and the message

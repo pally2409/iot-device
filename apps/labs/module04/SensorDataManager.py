@@ -48,7 +48,7 @@ class SensorDataManager(object):
             if sensorData.getName() == "i2c humidity":
                 
                 logging.info("hello im in handle sensor data")
-                
+                print(sensorData)
                 #get the current sensor value
                 sensorVal = sensorData.getCurrentValue()
                     
@@ -72,6 +72,7 @@ class SensorDataManager(object):
                 
                 logging.info("hello im in sense hat api")
                 
+                print(sensorData)
                 #get the current sensor value
                 sensorVal = sensorData.getCurrentValue()
                     

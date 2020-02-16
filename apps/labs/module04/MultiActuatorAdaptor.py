@@ -51,15 +51,21 @@ class MultiActuatorAdaptor(object):
                     #try printing the corresponding arrow on the led matrix
                     try:
                     
+                        
+                    
                         val = actuatorData.getValue()
                         
                         if val < 10:
                             
+                            logging.log("value less than 10")
+                            
                             #display a red text indicating reading from i2c
                             self.sense.show_letter(floor(val), text_color = self.r);
                             
+                            
                         else:
                             
+                            logging.log("value more than 10")
                             
                             self.sense.show_message(floor(val), text_color = self.r)
                         
@@ -73,6 +79,8 @@ class MultiActuatorAdaptor(object):
                         self.sense.clear()
             
                     except Exception as e:
+                        
+                        logging.info(e)
                         
                         #if error found during updating actuator, return a false
                         return False
@@ -92,11 +100,14 @@ class MultiActuatorAdaptor(object):
                         
                         if val < 10:
                             
+                            logging.log("value less than 10")
+                            
                             #display a red text indicating reading from i2c
                             self.sense.show_letter(floor(val), text_color = self.b);
                             
                         else:
                             
+                            logging.log("value more than 10")
                             
                             self.sense.show_message(floor(val), text_color = self.b)
                         

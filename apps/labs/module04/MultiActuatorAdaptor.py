@@ -93,12 +93,12 @@ class MultiActuatorAdaptor(object):
                         if val < 10:
                             
                             #display a red text indicating reading from i2c
-                            self.sense.show_letter(floor(val), text_color = self.r);
+                            self.sense.show_letter(floor(val), text_color = self.b);
                             
                         else:
                             
                             
-                            self.sense.show_message(floor(val), text_color = self.r)
+                            self.sense.show_message(floor(val), text_color = self.b)
                         
                         #logging actuator command
                         logging.info('Displaying Humidity from SenseHAT API on actuator')

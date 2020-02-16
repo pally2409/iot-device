@@ -121,10 +121,7 @@ class MultiActuatorAdaptor(object):
                         
                         #logging actuator command
                         logging.info('Displaying Humidity from SenseHAT API on actuator')
-                        
 
-                        
-                        
                      
                     except:
                         

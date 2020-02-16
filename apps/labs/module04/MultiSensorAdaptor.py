@@ -94,10 +94,13 @@ class MultiSensorAdaptor(threading.Thread):
                 
                 #log the difference
                 logData = str(datetime.now()) + ",INFO:Difference: " + str(abs(sensorDataHumidity[0].getCurrentValue() - sensorDataHumidity[1].getCurrentValue()))
-                logging.info(logData)    
+                logging.info(logData) 
+                
+                #decrement the number of readings
+                self.numReadings -= 1   
     
                 #sleep for few seconds
-                sleep(self.rateInSec)  
+                sleep(self.rateInSec)        
         
         #if keyboard interrupt occurs        
         except (KeyboardInterrupt):

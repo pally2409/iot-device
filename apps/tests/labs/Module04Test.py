@@ -1,5 +1,6 @@
 import unittest
 import sense_hat
+from time										import sleep
 from labs.module04.SensorDataManager 			import SensorDataManager
 from labs.module04.HI2CSensorAdaptorTask 		import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask 	import HumiditySensorAdaptorTask
@@ -209,7 +210,7 @@ class Module04Test(unittest.TestCase):
 		sensorData = self.humiditySensorAdaptorTask.getHumidityData()
 		
 		#get the absolute difference between sensorData from i2c and the sense hat api
-		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity() <= 1.0))
+		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity()) <= 1.0)
 		
 	
 	"""
@@ -220,6 +221,7 @@ class Module04Test(unittest.TestCase):
 		
 		#get the sensor data references from both
 		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
+		sleep(0.05)
 		sensorDataHI2C = self.hI2CSensorAdaptorTask.getSensorData()
 		
 		#check for difference

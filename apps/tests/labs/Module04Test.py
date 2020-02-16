@@ -197,6 +197,9 @@ class Module04Test(unittest.TestCase):
 		#get the humidity data
 		sensorData = self.hI2CSensorAdaptorTask.getHumidityData()
 		
+		#sleep for little time
+		sleep(0.5)
+		
 		#get the absolute difference between sensorData from i2c and the sense hat api
 		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity()) <= 1.0)
 		
@@ -208,6 +211,9 @@ class Module04Test(unittest.TestCase):
 		
 		#get the humidity data
 		sensorData = self.humiditySensorAdaptorTask.getHumidityData()
+		
+		#sleep for little time
+		sleep(0.5)
 		
 		#get the absolute difference between sensorData from i2c and the sense hat api
 		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity()) <= 1.0)
@@ -221,7 +227,10 @@ class Module04Test(unittest.TestCase):
 		
 		#get the sensor data references from both
 		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
-		sleep(0.05)
+		
+		#sleep for little time
+		sleep(0.5)
+		
 		sensorDataHI2C = self.hI2CSensorAdaptorTask.getSensorData()
 		
 		#check for difference

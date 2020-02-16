@@ -82,12 +82,6 @@ class MultiActuatorAdaptor(object):
                         print(e)
                         
                         logging.info("exception occured in actuator")
-                        
-                        #if error found during updating actuator, return a false
-                        return False
-                    
-                    #if successful, return true
-                    return True
                     
                    
                 #if the actuator should decrease the temperature 
@@ -129,11 +123,6 @@ class MultiActuatorAdaptor(object):
                         
                         logging.info("exception occured in actuator")
                         
-                        #if error found during updating actuator, return a false  
-                        return False
-                    
-                    #if actuator successful, return true
-                    return True
                 
                 #if invalid command to actuator 
                 else:

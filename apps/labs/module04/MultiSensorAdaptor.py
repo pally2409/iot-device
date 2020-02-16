@@ -70,7 +70,7 @@ class MultiSensorAdaptor(threading.Thread):
                     sensorDataHumidity.append(self.hI2CSensorAdaptorTask.getHumidityData())
                  
                 #sleep for few seconds between getting these two values  
-                sleep(0.01)
+                sleep(0.05)
                     
                 #check if fetcher is enabled for humiditySensorAdaptorTask
                 if self.humiditySensorAdaptorTask.enableFetcher:

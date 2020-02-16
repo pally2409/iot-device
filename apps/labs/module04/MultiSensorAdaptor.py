@@ -7,28 +7,28 @@ Created on Feb 14, 2020
 #import modules and libraries
 import logging
 import threading 
-from time import sleep
+from time                                                   import sleep
 from labs.module04.HI2CSensorAdaptorTask                    import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask                import HumiditySensorAdaptorTask
-from labs.module04.SensorDataManager import SensorDataManager
+from labs.module04.SensorDataManager                        import SensorDataManager
 
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature sensor adaptor")
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
-class MultiSensorAdaptor(object):
+class MultiSensorAdaptor(threading.Thread):
     '''
     classdocs
     '''
 
-    #initialize H12CAdaptorTask and HumiditySensorAdaptorTask  
+    #initialize H12CAdaptorTask, HumiditySensorAdaptorTask and SensorDataManager
     hI2CSensorAdaptorTask = HI2CSensorAdaptorTask()
     humiditySensorAdaptorTask = HumiditySensorAdaptorTask()
     sensorDataManager = SensorDataManager()
 
-    #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
-    def __init__(self, numReadings = 10, rateInSec = 0.5):
+    #the constructor used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
+    def __init__(self, numReadings = 10, rateInSec = 4):
         '''
         Constructor
         '''
@@ -40,25 +40,27 @@ class MultiSensorAdaptor(object):
         #set the rate at which you want to get the readings
         self.rateInSec = rateInSec
         
-    #method for creating and running the thread    
+    #method for running the thread    
     def run(self):
         
         #log the initial message
         logging.info("Starting sensor reading daemon threads")
         
-        #enable the fetchers
+        #enable the fetchers for both the tasks
         self.hI2CSensorAdaptorTask.enableFetcher = True
         self.humiditySensorAdaptorTask.enableFetcher = True
         
-        #data is not f doesn't run if 0 readings set:
+        #data is not false doesn't run if 0 readings set:
         if self.numReadings == 0:
             return False
         
+        #this try-except block checks whether a keyboard interrupt exception occurs and clears the sensehat if yes
         try: 
+            
             #run the loop as many times as indicated in the numReadings variable
             while self.numReadings > 0:
                 
-                #initialize their sensor data as none
+                #initialize the sensor data list that will store both sensorData from I2C bus and senseHat API
                 sensorDataHumidity = []
                 
                 #check if fetcher is enabled for hi2cSensorAdaptorTask
@@ -68,24 +70,27 @@ class MultiSensorAdaptor(object):
                     sensorDataHumidity.append(self.hI2CSensorAdaptorTask.getHumidityData())
                  
                 #sleep for few seconds between getting these two values  
-                sleep(self.rateInSec)
+                sleep(0.01)
                     
                 #check if fetcher is enabled for humiditySensorAdaptorTask
                 if self.humiditySensorAdaptorTask.enableFetcher:
                     
-                    #store the sensor data value from the current reading
+                    #store the sensor data value from the current reading to the list
                     sensorDataHumidity.append(self.humiditySensorAdaptorTask.getHumidityData())
                 
-                #if there was valid sensorDataHumidity
-                if sensorDataHumidity:
+                #if there was valid sensorData in sensorDataHumidity
+                if len(sensorDataHumidity)!=0:
                     
                     #handle the sensor data using the manager
                     self.sensorDataManager.handleSensorData(sensorDataHumidity)
-                    
-                sleep(4)  
-                
+
+                #sleep for few seconds
+                sleep(self.rateInSec)  
+        
+        #if keyboard interrupt occurs        
         except (KeyboardInterrupt):
-                
+            
+            #clear the sensorData    
             self.sensorDataManager.multiActuatorAdaptor.sense.clear()
             
                 

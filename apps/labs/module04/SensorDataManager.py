@@ -37,69 +37,73 @@ class SensorDataManager(object):
         Constructor
         '''   
      
-    #this method takes in sensorData as a parameter and checks it against the nominal temp and takes appropriate action   
+    #this method takes in sensorData as a parameter and checks it against the type of readings and takes appropriate action   
     def handleSensorData(self, sensorDatas):
         
+        #initialize the list for actuatorData 
         actuatorDataList = []
-        emailString = ""
         
+        #iterate through the sensorDatas list
         for sensorData in sensorDatas:
         
+            #if the reading is directly from i2c bus
             if sensorData.getName() == "i2c humidity":
                 
-                logging.info("hello im in handle sensor data")
-                print(sensorData)
                 #get the current sensor value
                 sensorVal = sensorData.getCurrentValue()
                     
                 #instantiate ActuatorData
                 actuatorData = ActuatorData()
                     
-                #the thermostat should decrease the temp as the temperature is too hot!
+                #the actuator should display the current humidity
                 actuatorData.setCommand("DISPLAY I2C Humidity")
                     
                 #set the name of the actuator 
                 actuatorData.setName("I2C Humidity")
                     
-                #set the value to pixel matrix
+                #set the value to the current humidity value
                 actuatorData.setValue(sensorVal)
                 
-                emailString += sensorData.loggingData
+                #send email notification consisting of the reading
+                self.sendNotification(sensorData.loggingData, "Humidity Reading from I2C Bus")
                 
+                #append the actuator data to the list 
                 actuatorDataList.append(actuatorData)
             
+            #if the reading is directly from sensehat api
             elif sensorData.getName() == "sense_hat API humidity":
                 
-                logging.info("hello im in sense hat api")
-                
-                print(sensorData)
                 #get the current sensor value
                 sensorVal = sensorData.getCurrentValue()
                     
                 #instantiate ActuatorData
                 actuatorData = ActuatorData()
                     
-                #the thermostat should decrease the temp as the temperature is too hot!
+                #the actuator should display the current humidity
                 actuatorData.setCommand("DISPLAY SENSE HAT API Humidity")
                     
                 #set the name of the actuator 
                 actuatorData.setName("SENSE HAT API Humidity")
                     
-                #set the value to pixel matrix
+                #set the value to the current humidity value
                 actuatorData.setValue(sensorVal)
                 
-                emailString += sensorData.loggingData
-                             
+                #send email notification consisting of the reading
+                self.sendNotification(sensorData.loggingData, "Humidity Reading from SenseHAT API")
+                 
+                #append the actuator data to the list             
                 actuatorDataList.append(actuatorData)
             
+            #if not valid sensor data reading
             else:
                 
+                #return none
                 return None
         
+        #send the list to the updateActuator method of the multiActuatorAdaptor
         self.multiActuatorAdaptor.updateActuator(actuatorDataList)
-        self.sendNotification(emailString, "Humidity Readings")
         
-           
+        #return the list of actuatorData
         return actuatorDataList
             
         
@@ -109,7 +113,8 @@ class SensorDataManager(object):
         #send email with topic indicating excessive temperature
         self.smtpClientConnector.publishMessage(data, topic)
         
-        sleep(3)
+        #create a delay for email to be sent
+        sleep(2)
         
         #return true for running successfully
         return True

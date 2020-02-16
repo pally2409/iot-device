@@ -58,7 +58,7 @@ class MultiSensorAdaptor(object):
         while self.numReadings > 0:
             
             #initialize their sensor data as none
-            sensorDataHumidity = None
+            sensorDataHumidity = []
             
             #check if fetcher is enabled for hi2cSensorAdaptorTask
             if self.hI2CSensorAdaptorTask.enableFetcher:

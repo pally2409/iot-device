@@ -40,8 +40,8 @@ class SensorDataManager(object):
     #this method takes in sensorData as a parameter and checks it against the nominal temp and takes appropriate action   
     def handleSensorData(self, sensorDatas):
         
-        actuatorDataList = None
-        emailString = None
+        actuatorDataList = []
+        emailString = ""
         
         for sensorData in sensorDatas:
         

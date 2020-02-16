@@ -297,7 +297,7 @@ class Module04Test(unittest.TestCase):
 		self.assertEqual(True, self.multiSensorAdaptor.run())
 		
 		#change numReadings to 0
-		self.tempSensorAdaptorTask.numReadings = 0
+		self.multiSensorAdaptor.numReadings = 0
 		
 		#run when numReadings = 0 and fetcher is enabled, should return false because run will not fetch
 		self.assertEqual(False, self.multiSensorAdaptor.run())
@@ -310,7 +310,7 @@ class Module04Test(unittest.TestCase):
 		self.multiSensorAdaptor.numReadings = 1
 		
 		#run when numReadings > 0 and fetcher is disabled, should return false because generator didn't run
-		self.assertEqual(False, self.tempSensorAdaptorTask.run())
+		self.assertEqual(False, self.multiSensorAdaptor.run())
 		
 	
 if __name__ == "__main__":

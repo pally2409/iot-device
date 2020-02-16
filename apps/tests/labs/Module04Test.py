@@ -302,16 +302,6 @@ class Module04Test(unittest.TestCase):
 		#run when numReadings = 0 and fetcher is enabled, should return false because run will not fetch
 		self.assertEqual(False, self.multiSensorAdaptor.run())
 		
-		#disable the fetcher 
-		self.multiSensorAdaptor.hI2CSensorAdaptorTask.enableFetcher = False
-		self.multiSensorAdaptor.humiditySensorAdaptorTask.enableFetcher = False
-		
-		#change readings to > 0
-		self.multiSensorAdaptor.numReadings = 1
-		
-		#run when numReadings > 0 and fetcher is disabled, should return false because generator didn't run
-		self.assertEqual(False, self.multiSensorAdaptor.run())
-		
 	
 if __name__ == "__main__":
 	#import sys;sys.argv = ['', 'Test.testName']

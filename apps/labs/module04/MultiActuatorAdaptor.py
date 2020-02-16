@@ -40,86 +40,83 @@ class MultiActuatorAdaptor(object):
     #this method is responsible for actuation if the trigger is valid (in this case, it is a display on the sense hat led matrix)
     def updateActuator(self, actuatorDatas) -> bool:
         
+        #if passed value is NoneType
+        if actuatorDatas == None:
+                
+            #return false coz invalid actuator 
+            return False
+        
         #iterate through the actuatorData in the list of actuatorData passed
         for actuatorData in actuatorDatas:
-        
-            #if the passed value is not of NoneType
-            if actuatorData != None:
             
-                #if the actuator should display humidity read directly from 12c bus
-                if actuatorData.getCommand() == "DISPLAY I2C Humidity":
+            #if the actuator should display humidity read directly from 12c bus
+            if actuatorData.getCommand() == "DISPLAY I2C Humidity":
                     
-                    #try printing the corresponding value on the led matrix
-                    try:
+                #try printing the corresponding value on the led matrix
+                try:
                     
-                        #get the value to display
-                        val = actuatorData.getValue()
+                    #get the value to display
+                    val = actuatorData.getValue()
                         
-                        #clear the matrix           
-                        self.sense.clear()
+                    #clear the matrix           
+                    self.sense.clear()
                         
-                        #if value is less than 10 only print a letter
-                        if val < 10:
+                    #if value is less than 10 only print a letter
+                    if val < 10:
                                  
-                            #display a red letter indicating reading from i2c
-                            self.sense.show_letter(str(int(floor(val))), text_colour = self.r);
+                        #display a red letter indicating reading from i2c
+                        self.sense.show_letter(str(int(floor(val))), text_colour = self.r);
                             
-                        #if value 10 or more    
-                        else:
+                    #if value 10 or more    
+                    else:
                             
-                            #display a red scroll message indicating the reading from i2c
-                            self.sense.show_message(str(int(floor(val))), text_colour = self.r)
+                        #display a red scroll message indicating the reading from i2c
+                        self.sense.show_message(str(int(floor(val))), text_colour = self.r)
   
-                    #if unable to print on sensehat
-                    except Exception as e:
+                #if unable to print on sensehat
+                except Exception as e:
                         
-                        #log an error message
-                        logging.info("Exception occured in I2C Actuation")
+                    #log an error message
+                    logging.info("Exception occured in I2C Actuation")
                     
                    
-                #if the actuator should display humidity read from SenseHAT API 
-                elif actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
+            #if the actuator should display humidity read from SenseHAT API 
+            elif actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
                     
-                    #try printing the corresponding value on the led matrix
-                    try:
+                #try printing the corresponding value on the led matrix
+                try:
  
-                        #get the value to display
-                        val = actuatorData.getValue()
+                    #get the value to display
+                    val = actuatorData.getValue()
                         
-                        #clear the matrix
-                        self.sense.clear()
+                    #clear the matrix
+                    self.sense.clear()
                         
-                        #if value is less than 10 only print a letter
-                        if val < 10:
+                    #if value is less than 10 only print a letter
+                    if val < 10:
                             
-                            #display a blue letter indicating reading from sense hat api
-                            self.sense.show_letter(str(int(floor(val))), text_colour = self.b);
+                        #display a blue letter indicating reading from sense hat api
+                        self.sense.show_letter(str(int(floor(val))), text_colour = self.b);
                         
-                        #if value 10 or more       
-                        else:
+                    #if value 10 or more       
+                    else:
                             
-                            #display a blue scroll message indicating the reading from sense hat api
-                            self.sense.show_message(str(int(floor(val))), text_colour = self.b)
+                        #display a blue scroll message indicating the reading from sense hat api
+                        self.sense.show_message(str(int(floor(val))), text_colour = self.b)
 
-                    #if unable to print on sensehat 
-                    except:
+                #if unable to print on sensehat 
+                except:
                         
-                        #log an error message
-                        logging.info("exception occured in SenseHAT API actuator")
+                    #log an error message
+                    logging.info("exception occured in SenseHAT API actuator")
                         
                 
-                #if invalid command to actuator 
-                else:
-    
-                    #not valid actuator command hence, return false
-                    return False 
-            
-            #if passed value is NoneType
+            #if invalid command to actuator 
             else:
-                
-                #return false coz invalid actuator 
-                return False
-        
+    
+                #not valid actuator command hence, return false
+                return False 
+            
         #if everything fine, return true    
         return True
     

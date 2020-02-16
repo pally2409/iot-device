@@ -1,4 +1,5 @@
 import unittest
+import sense_hat
 from labs.module04.SensorDataManager 			import SensorDataManager
 from labs.module04.HI2CSensorAdaptorTask 		import HI2CSensorAdaptorTask
 from labs.module04.HumiditySensorAdaptorTask 	import HumiditySensorAdaptorTask
@@ -6,6 +7,7 @@ from labs.module04.MultiActuatorAdaptor 		import MultiActuatorAdaptor
 from labs.module04.MultiSensorAdaptor 			import MultiSensorAdaptor
 from labs.common.ActuatorData					import ActuatorData
 from labs.common.SensorData						import SensorData
+
 
 
 
@@ -36,6 +38,7 @@ class Module04Test(unittest.TestCase):
 		self.humiditySensorAdaptorTask = HumiditySensorAdaptorTask()
 		self.multiActuatorAdaptor = MultiActuatorAdaptor()
 		self.multiSensorAdaptor = MultiSensorAdaptor()
+		self.sense = sense_hat.SenseHat()
 
 	"""
 	Use this to tear down any allocated resources after your tests are complete. This
@@ -49,6 +52,7 @@ class Module04Test(unittest.TestCase):
 		self.multiActuatorAdaptor = None
 		self.multiSensorAdaptorTask = None
 		self.multiSensorAdaptor = None
+		self.sense = None
 		pass
 
 	"""
@@ -131,138 +135,95 @@ class Module04Test(unittest.TestCase):
 		self.assertEqual(actuatorDataList, None)
 		
 		
+	"""
+	This tests the sendNotification() method of the SensorDataManager, it simply whether
+	 the notification is being sent or not. This has been shown in documentation using screenshot of the
+	 email
+	"""
+	def testSendNotification(self):
+		
+		#if the config file is loaded: while testing on system
+		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == True:
+			
+			#returns true, notification is being sent
+			self.assertEqual(True, self.sensorDataManager.sendNotification("Hello", "This is a test"))
+			
+		pass
 	
-# 	"""
-# 	This tests the sendNotification() method of the SensorDataManager, it simply whether
-# 	 the notification is being sent or not. This has been shown in documentation using screenshot of the
-# 	 email
-# 	"""
-# # 	def testSendNotification(self):
-# # 		
-# # 		#if the config file is loaded: while testing on system
-# # 		if self.sensorDataManager.smtpClientConnector.config.configFileLoaded == True:
-# # 			
-# # 			#returns true, notification is being sent
-# # 			self.assertEqual(True, self.sensorDataManager.sendNotification("Hello", "This is a test"))
-# # 			
-# # 		pass
-# 	
-# 	"""
-# 	This tests the updateActuator() method of the MultiActuatorAdaptor, it checks whether the actuator is updated 
-# 	(by returning an actuatorData reference) when the trigger is valid and when the trigger is invalid 
-# 	(NOT A VALID TRIGGER)
-# 	"""
-# 	def testUpdateActuator(self):
-# 		
-# 		#create an invalid actuator trigger
-# 		actuatorData = ActuatorData()
-# 		actuatorData.setCommand("NOT A VALID TRIGGER")
-# 		
-# 		#add a valid value
-# 		actuatorData.setValue(90)
-# 		
-# 		#updateActuator should return a false
-# 		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(actuatorData))
-# 		
-# 		#create a valid actuator trigger
-# 		actuatorData = ActuatorData()
-# 		actuatorData.setCommand("DISPLAY SENSE HAT API Humidity")
-# 		actuatorData.setValue(12)
-# 		
-# 		#updateActuator should return a True
-# 		self.assertEqual(True, self.multiActuatorAdaptor.updateActuator(actuatorData))
-# 		
-# 		#sending a none should throw an exception, where when caught, returns a false
-# 		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(None))
-# 		
-# 		pass
-# 	
-# 	"""
-# 	This tests the getHumidityData() method of the HI2CSensorAdaptorTask, it checks whether the fetcher runs when enabled,
-# 	disabled, number of readings to get has been set to 0.
-# 	"""
-# 	def testGetHumidityDataHI12C(self):
-# 		
-# 		#enable the fetcher
-# 		self.hI2CSensorAdaptorTask.enableFetcher = True
-# 		
-# 		#change numReadings to a small finite value to check
-# 		self.hI2CSensorAdaptorTask.numReadings = 1
-# 		
-# 		#change sleep time (rateInSec) to a small amount
-# 		self.hI2CSensorAdaptorTask.rateInSec = 1
-# 		
-# 		#run when numReadings > 0 and adaptor is enabled
-# 		self.assertEqual(True, self.hI2CSensorAdaptorTask.getHumidityData())
-# 		
-# 		#change numReadings to 0
-# 		self.hI2CSensorAdaptorTask.numReadings = 0
-# 		
-# 		#run when numReadings = 0 and emulator is enabled, should return false because generator didn't run
-# 		self.assertEqual(False, self.hI2CSensorAdaptorTask.getHumidityData())
-# 		
-# 		#disable the emulator 
-# 		self.hI2CSensorAdaptorTask.enableFetcher = False
-# 		
-# 		#change readings to > 0
-# 		self.hI2CSensorAdaptorTask.numReadings = 1
-# 		
-# 		#run when numReadings > 0 and emulator is disabled, should return false because generator didn't run
-# 		self.assertEqual(False, self.hI2CSensorAdaptorTask.getHumidityData())
-# 		
-# 	"""
-# 	This tests the getHumidityData() method of the HumiditySensorAdaptorTask, it checks whether the fetcher runs when enabled,
-# 	disabled, number of readings to get has been set to 0.
-# 	"""
-# 	def testGetHumidityDataAPI(self):
-# 		
-# 		#enable the fetcher
-# 		self.humiditySensorAdaptorTask.enableFetcher = True
-# 		
-# 		#change numReadings to a small finite value to check
-# 		self.humiditySensorAdaptorTask.numReadings = 1
-# 		
-# 		#change sleep time (rateInSec) to a small amount
-# 		self.humiditySensorAdaptorTask.rateInSec = 1
-# 		
-# 		#run when numReadings > 0 and adaptor is enabled
-# 		self.assertEqual(True, self.humiditySensorAdaptorTask.getHumidityData())
-# 		
-# 		#change numReadings to 0
-# 		self.humiditySensorAdaptorTask.numReadings = 0
-# 		
-# 		#run when numReadings = 0 and emulator is enabled, should return false because generator didn't run
-# 		self.assertEqual(False, self.humiditySensorAdaptorTask.getHumidityData())
-# 		
-# 		#disable the emulator 
-# 		self.humiditySensorAdaptorTask.enableFetcher = False
-# 		
-# 		#change readings to > 0
-# 		self.humiditySensorAdaptorTask.numReadings = 1
-# 		
-# 		#run when numReadings > 0 and emulator is disabled, should return false because generator didn't run
-# 		self.assertEqual(False, self.humiditySensorAdaptorTask.getHumidityData())
-# 	
-# 	"""
-# 	This tests the whether the difference between the sensor values detected from , it checks whether the 
-# 	i2c bus and sense hat API have a difference of <= 1.0 
-# 	"""	
-# 	def testComparisonI2CSenseHat(self):
-# 		
-# 		#change numReadings to a small finite value to check
-# 		self.humiditySensorAdaptorTask.numReadings = 1
-# 		self.hI2CSensorAdaptorTask.numReadings = 1
-# 		
-# 		#get the sensor value from humiditySensorAdaptorTask 
-# 		self.humiditySensorAdaptorTask.getHumidityData()
-# 		self.hI2CSensorAdaptorTask.getHumidityData()
-# 		
-# 		#get the sensor data reference
-# 		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
-# 		sensorDataHI2C = self.hI2CSensorAdaptorTask.getSensorData()
-# 		
-# 		
-# 		self.assertTrue(abs(sensorDataHumidity.getCurrentValue() - sensorDataHI2C.getCurrentValue()) <= 1.0, "Value more than 1")
+	"""
+	This tests the updateActuator() method of the MultiActuatorAdaptor, it checks whether the actuator is updated 
+	(by returning an actuatorData reference) when the trigger is valid and when the trigger is invalid 
+	(NOT A VALID TRIGGER)
+	"""
+	def testUpdateActuator(self):
+ 		
+		#create an invalid actuator trigger
+		actuatorData = ActuatorData()
+		actuatorData.setCommand("NOT A VALID TRIGGER")
+		
+		#add a valid value
+		actuatorData.setValue(90)
+		
+		#add it to list of actuatorDataTest
+		actuatorDataTest = []
+		actuatorDataTest.append(actuatorData)
+		
+		#updateActuator should return a false
+		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(actuatorDataTest))
+		
+		#create a valid actuator trigger
+		actuatorData = ActuatorData()
+		actuatorData.setCommand("DISPLAY SENSE HAT API Humidity")
+		actuatorData.setValue(12)
+		
+		actuatorDataTest = []
+		actuatorDataTest.append(actuatorData)
+		
+		#updateActuator should return a True
+		self.assertEqual(True, self.multiActuatorAdaptor.updateActuator(actuatorDataTest))
+		
+		#sending a none should throw an exception, where when caught, returns a false
+		self.assertEqual(False, self.multiActuatorAdaptor.updateActuator(None))
+		
+		pass
+	
+	"""
+	This tests the getHumidityData() method of the HI2CSensorAdaptorTask, it checks whether the returned value and the sense_hat api value
+	have difference < 1
+	"""
+	def testGetHumidityDataHI12C(self):
+		
+		#get the humidity data
+		sensorData = self.hI2CSensorAdaptorTask.getHumidityData()
+		
+		#get the absolute difference between sensorData from i2c and the sense hat api
+		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity() <= 1.0))
+		
+	"""
+	This tests the getHumidityData() method of the HI2CSensorAdaptorTask, it checks whether the returned value and the sense_hat api value
+	have difference < 1
+	"""
+	def testGetHumidityDataAPI(self):
+		
+		#get the humidity data
+		sensorData = self.humiditySensorAdaptorTask.getHumidityData()
+		
+		#get the absolute difference between sensorData from i2c and the sense hat api
+		self.assertTrue(abs(sensorData.getCurrentValue() - self.sense.get_humidity() <= 1.0))
+		
+	
+	"""
+	This tests the whether the difference between the sensor values detected from , it checks whether the 
+	i2c bus and sense hat API have a difference of <= 1.0 
+	"""	
+	def testComparisonI2CSenseHat(self):
+		
+		#get the sensor data references from both
+		sensorDataHumidity = self.humiditySensorAdaptorTask.getSensorData()
+		sensorDataHI2C = self.hI2CSensorAdaptorTask.getSensorData()
+		
+		#check for difference
+		self.assertTrue(abs(sensorDataHumidity.getCurrentValue() - sensorDataHI2C.getCurrentValue()) <= 1.0, "Value more than 1")
 		
 		
 if __name__ == "__main__":

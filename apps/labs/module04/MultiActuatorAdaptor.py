@@ -55,6 +55,9 @@ class MultiActuatorAdaptor(object):
                     
                         val = actuatorData.getValue()
                         
+                        #clear the matrix           
+                        self.sense.clear()
+                        
                         if val < 10:
                             
                             logging.info("value less than 10")
@@ -72,11 +75,7 @@ class MultiActuatorAdaptor(object):
                         #logging actuator command
                         logging.info('Displaying Humidity from I2C Bus on actuator')
                         
-                        #keep it displayed
-                        sleep(3)
                         
-                        #clear the matrix           
-                        self.sense.clear()
             
                     except Exception as e:
                         
@@ -104,6 +103,9 @@ class MultiActuatorAdaptor(object):
                         #display a blue text indicating reading from sense hat
                         val = actuatorData.getValue()
                         
+                        #clear the matrix
+                        self.sense.clear()
+                        
                         if val < 10:
                             
                             logging.info("value less than 10")
@@ -120,11 +122,9 @@ class MultiActuatorAdaptor(object):
                         #logging actuator command
                         logging.info('Displaying Humidity from SenseHAT API on actuator')
                         
-                        #keep it displayed
-                        sleep(3)
+
                         
-                        #clear the matrix
-                        self.sense.clear()
+                        
                      
                     except:
                         

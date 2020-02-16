@@ -81,7 +81,7 @@ class MultiSensorAdaptor(object):
                 #handle the sensor data using the manager
                 self.sensorDataManager.handleSensorData(sensorDataHumidity)
                 
-            sleep(1)  
+            sleep(4)  
             
                 
             

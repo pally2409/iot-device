@@ -73,7 +73,7 @@ class Module04Test(unittest.TestCase):
 		sensorDataAPI.addValue(9)
 		
 		#set the name for i2c 
-		sensorDataI2C.setName("sense_hat API humidity")
+		sensorDataAPI.setName("sense_hat API humidity")
 		
 		#add them to a list
 		sensorDataTest = []

@@ -54,34 +54,39 @@ class MultiSensorAdaptor(object):
         if self.numReadings == 0:
             return False
         
-        #run the loop as many times as indicated in the numReadings variable
-        while self.numReadings > 0:
-            
-            #initialize their sensor data as none
-            sensorDataHumidity = []
-            
-            #check if fetcher is enabled for hi2cSensorAdaptorTask
-            if self.hI2CSensorAdaptorTask.enableFetcher:
+        try: 
+            #run the loop as many times as indicated in the numReadings variable
+            while self.numReadings > 0:
                 
-                #store the sensorData value from the current reading 
-                sensorDataHumidity.append(self.hI2CSensorAdaptorTask.getHumidityData())
-             
-            #sleep for few seconds between getting these two values  
-            sleep(self.rateInSec)
+                #initialize their sensor data as none
+                sensorDataHumidity = []
                 
-            #check if fetcher is enabled for humiditySensorAdaptorTask
-            if self.humiditySensorAdaptorTask.enableFetcher:
+                #check if fetcher is enabled for hi2cSensorAdaptorTask
+                if self.hI2CSensorAdaptorTask.enableFetcher:
+                    
+                    #store the sensorData value from the current reading 
+                    sensorDataHumidity.append(self.hI2CSensorAdaptorTask.getHumidityData())
+                 
+                #sleep for few seconds between getting these two values  
+                sleep(self.rateInSec)
+                    
+                #check if fetcher is enabled for humiditySensorAdaptorTask
+                if self.humiditySensorAdaptorTask.enableFetcher:
+                    
+                    #store the sensor data value from the current reading
+                    sensorDataHumidity.append(self.humiditySensorAdaptorTask.getHumidityData())
                 
-                #store the sensor data value from the current reading
-                sensorDataHumidity.append(self.humiditySensorAdaptorTask.getHumidityData())
-            
-            #if there was valid sensorDataHumidity
-            if sensorDataHumidity:
+                #if there was valid sensorDataHumidity
+                if sensorDataHumidity:
+                    
+                    #handle the sensor data using the manager
+                    self.sensorDataManager.handleSensorData(sensorDataHumidity)
+                    
+                sleep(4)  
                 
-                #handle the sensor data using the manager
-                self.sensorDataManager.handleSensorData(sensorDataHumidity)
+        except (KeyboardInterrupt):
                 
-            sleep(4)  
+            self.sensorDataManager.multiActuatorAdaptor.sense.clear()
             
                 
             

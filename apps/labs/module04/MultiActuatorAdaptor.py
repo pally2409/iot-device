@@ -80,7 +80,9 @@ class MultiActuatorAdaptor(object):
             
                     except Exception as e:
                         
-                        logging.log("exception occured in actuator")
+                        print(e)
+                        
+                        logging.info("exception occured in actuator")
                         
                         #if error found during updating actuator, return a false
                         return False
@@ -125,6 +127,8 @@ class MultiActuatorAdaptor(object):
                         self.sense.clear()
                      
                     except:
+                        
+                        print(e)
                         
                         logging.info("exception occured in actuator")
                         

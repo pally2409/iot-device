@@ -48,10 +48,10 @@ class MultiActuatorAdaptor(object):
                 #if the actuator should increase the temperature
                 if actuatorData.getCommand() == "DISPLAY I2C Humidity":
                     
+                    logging.log("im in actuator i2c")
+                    
                     #try printing the corresponding arrow on the led matrix
                     try:
-                    
-                        
                     
                         val = actuatorData.getValue()
                         
@@ -80,7 +80,7 @@ class MultiActuatorAdaptor(object):
             
                     except Exception as e:
                         
-                        logging.info(e)
+                        logging.log("exception occured in actuator")
                         
                         #if error found during updating actuator, return a false
                         return False
@@ -92,8 +92,12 @@ class MultiActuatorAdaptor(object):
                 #if the actuator should decrease the temperature 
                 elif actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
                     
+                    logging.log("im in actuator sense hat")
+                    
                     #try printing the corresponding arrow on the led matrix
                     try:
+                        
+                        logging.log("im in actuator sense hat try")
                     
                         #display a blue text indicating reading from sense hat
                         val = actuatorData.getValue()
@@ -121,6 +125,8 @@ class MultiActuatorAdaptor(object):
                         self.sense.clear()
                      
                     except:
+                        
+                        logging.log("exception occured in actuator")
                         
                         #if error found during updating actuator, return a false  
                         return False

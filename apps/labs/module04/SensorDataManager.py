@@ -98,6 +98,7 @@ class SensorDataManager(object):
         
         self.multiActuatorAdaptor.updateActuator(actuatorDataList)
         self.sendNotification(emailString, "Humidity Readings")
+        
            
         return actuatorDataList
             

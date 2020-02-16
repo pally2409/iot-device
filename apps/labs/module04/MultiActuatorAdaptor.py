@@ -85,7 +85,7 @@ class MultiActuatorAdaptor(object):
                     
                    
                 #if the actuator should decrease the temperature 
-                if actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
+                elif actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
                     
                     logging.info("im in actuator sense hat")
                     

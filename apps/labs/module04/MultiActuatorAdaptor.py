@@ -48,7 +48,7 @@ class MultiActuatorAdaptor(object):
                 #if the actuator should increase the temperature
                 if actuatorData.getCommand() == "DISPLAY I2C Humidity":
                     
-                    logging.log("im in actuator i2c")
+                    logging.info("im in actuator i2c")
                     
                     #try printing the corresponding arrow on the led matrix
                     try:
@@ -57,7 +57,7 @@ class MultiActuatorAdaptor(object):
                         
                         if val < 10:
                             
-                            logging.log("value less than 10")
+                            logging.info("value less than 10")
                             
                             #display a red text indicating reading from i2c
                             self.sense.show_letter(floor(val), text_color = self.r);
@@ -65,7 +65,7 @@ class MultiActuatorAdaptor(object):
                             
                         else:
                             
-                            logging.log("value more than 10")
+                            logging.info("value more than 10")
                             
                             self.sense.show_message(floor(val), text_color = self.r)
                         
@@ -92,26 +92,26 @@ class MultiActuatorAdaptor(object):
                 #if the actuator should decrease the temperature 
                 elif actuatorData.getCommand() == "DISPLAY SENSE HAT API Humidity":
                     
-                    logging.log("im in actuator sense hat")
+                    logging.info("im in actuator sense hat")
                     
                     #try printing the corresponding arrow on the led matrix
                     try:
                         
-                        logging.log("im in actuator sense hat try")
+                        logging.info("im in actuator sense hat try")
                     
                         #display a blue text indicating reading from sense hat
                         val = actuatorData.getValue()
                         
                         if val < 10:
                             
-                            logging.log("value less than 10")
+                            logging.info("value less than 10")
                             
                             #display a red text indicating reading from i2c
                             self.sense.show_letter(floor(val), text_color = self.b);
                             
                         else:
                             
-                            logging.log("value more than 10")
+                            logging.info("value more than 10")
                             
                             self.sense.show_message(floor(val), text_color = self.b)
                         
@@ -126,7 +126,7 @@ class MultiActuatorAdaptor(object):
                      
                     except:
                         
-                        logging.log("exception occured in actuator")
+                        logging.info("exception occured in actuator")
                         
                         #if error found during updating actuator, return a false  
                         return False

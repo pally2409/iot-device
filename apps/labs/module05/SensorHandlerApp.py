@@ -14,7 +14,7 @@ if __name__ == '__main__':
     multiSensorAdaptor = MultiSensorAdaptor()
     
     pUtil = PersistenceUtil()
-    pUtil.registerSensorDataDbmsListener()
+    pUtil.registerActuatorDataDbmsListener()
     
     #call the run function of the adaptor runs the sensor threads
     multiSensorAdaptor.run()

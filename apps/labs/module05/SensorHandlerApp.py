@@ -13,7 +13,7 @@ if __name__ == '__main__':
     multiSensorAdaptor = MultiSensorAdaptor()
     
     #call the run function of the adaptor runs the sensor threads
-    multiSensorAdaptor.start()
+    multiSensorAdaptor.run()
     
     
     

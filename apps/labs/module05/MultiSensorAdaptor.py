@@ -16,7 +16,7 @@ from labs.module05.TempSensorAdaptorTask                    import TempSensorAda
 logging.getLogger("temperature sensor adaptor")
 logging.basicConfig(format='%(asctime)s:%(levelname)s:%(message)s', level=logging.DEBUG)
 
-class MultiSensorAdaptor(threading.Thread):
+class MultiSensorAdaptor():
     '''
     classdocs
     '''
@@ -28,6 +28,7 @@ class MultiSensorAdaptor(threading.Thread):
         '''
         Constructor
         '''
+        
         
     #method for creating and running the thread    
     def run(self):

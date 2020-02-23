@@ -28,6 +28,7 @@ class TempSensorAdaptorTask(object):
     
     #instantiate the SensorData class
     sensorData = SensorData()
+    sensorData.setName("Temperature Sensor")
     
     pUtil = PersistenceUtil()
 

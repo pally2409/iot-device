@@ -107,11 +107,15 @@ class PersistenceUtil(object):
     #write sensor data to DBMS 
     def writeSensorDataToDbms(self, sensorData) -> bool:
         
+        
+        
         #convert the actuarData reference to JSON string using DataUtil()
         jsonStr = self.dataUtil.toJsonFromSensorData(sensorData)
         
         #create a unique key by combining device name and uuid
         key = uuid.uuid4()
+        
+        print("i am here to write" + jsonStr)
         
         #add the key-value to redis
         self.r_sensor.set("sensorData" + str(key), jsonStr)

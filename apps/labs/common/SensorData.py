@@ -53,6 +53,9 @@ class SensorData(object):
             #update the timestamp
             self.timeStamp = str(datetime.now())
             
+            #update the average
+            self.average = self.getAverageValue()
+            
             #if the value is the first one, or if greater than previous maxValue, update maxValue
             if self.maxValue == None or val > self.maxValue :
                 self.maxValue = val

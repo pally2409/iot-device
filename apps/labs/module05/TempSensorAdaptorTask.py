@@ -80,7 +80,7 @@ class TempSensorAdaptorTask(object):
                 
                 self.sensorData.loggingData = data
                 
-                self.pUtil.writeSensorDataToDbms(self.sensorData)
+                self.pUtil.writeSensorDataToDbms("henllo")
                 
                 #decrement as the number of readings by 1 to keep count of how many readings left
                 self.numReadings -= 1

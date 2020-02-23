@@ -7,8 +7,8 @@ Created on Feb 6, 2020
 from sense_hat                              import SenseHat
 from labs.common.SensorData                 import SensorData
 from time                                   import sleep
-from labs.module03.SensorDataManager        import SensorDataManager
 import logging
+from labs.common.PersistenceUtil import PersistenceUtil
 
 #set the basic configuration to display time, level and the message
 logging.getLogger("temperature fetcher logger")
@@ -29,8 +29,7 @@ class TempSensorAdaptorTask(object):
     #instantiate the SensorData class
     sensorData = SensorData()
     
-    #instantiate the SensorDataManager
-    sensorDataManager = SensorDataManager()
+    pUtil = PersistenceUtil()
 
     #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
     def __init__(self, numReadings = 10, rateInSec = 5):
@@ -81,8 +80,7 @@ class TempSensorAdaptorTask(object):
                 
                 self.sensorData.loggingData = data
                 
-                #send it to the SensorDataManager who will check if it needs actuation
-                self.sensorDataManager.handleSensorData(self.sensorData)
+                self.pUtil.writeSensorDataToDbms(self.sensorData)
                 
                 #decrement as the number of readings by 1 to keep count of how many readings left
                 self.numReadings -= 1

@@ -4,7 +4,7 @@ Created on Feb 14, 2020
 @author: pallaksingh
 '''
 #import libraries and modules
-from labs.module04.MultiSensorAdaptor   import MultiSensorAdaptor
+from labs.module05.MultiSensorAdaptor   import MultiSensorAdaptor
 import logging
 
 if __name__ == '__main__':

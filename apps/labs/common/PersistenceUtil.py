@@ -118,18 +118,18 @@ class PersistenceUtil(object):
         
         pass
     
-if __name__ == '__main__':
-    
-    i = 0
-    pUtil = PersistenceUtil()
-    pUtil.registerActuatorDataDbmsListener()
-     
-    while i < 3:
-        i = i + 1
-        sensorData = SensorData()
-        sensorData.addValue(i+1)
-        sensorData.setName("Temperature Sensor")
-        pUtil.writeSensorDataToDbms(sensorData)
-        sleep(5)
+# if __name__ == '__main__':
+#     
+#     i = 0
+#     pUtil = PersistenceUtil()
+#     pUtil.registerActuatorDataDbmsListener()
+#      
+#     while i < 3:
+#         i = i + 1
+#         sensorData = SensorData()
+#         sensorData.addValue(i+1)
+#         sensorData.setName("Temperature Sensor")
+#         pUtil.writeSensorDataToDbms(sensorData)
+#         sleep(5)
     
     

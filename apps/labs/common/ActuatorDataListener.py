@@ -89,8 +89,7 @@ class ActuatorDataListener(threading.Thread):
                     self.actuatorData = self.dUtil.toActuatorDataFromJson(actuatorDataJson)
                     
                     #log the data
-                    logging.info("----------------------------------------------")
-                    logging.info("New ActuatorData")
+                    logging.info("---------------------------------------------- \n New ActuatorData")
                     
                     #add it to file
                     self.dUtil.writeActuatorDataToFile(self.actuatorData)

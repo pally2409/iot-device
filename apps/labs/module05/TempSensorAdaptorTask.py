@@ -78,7 +78,7 @@ class TempSensorAdaptorTask(object):
                 data = 'Temperature' + '\n' + time + '\n' + current + '\n' + average + '\n' + samples + '\n' + min_temp + '\n' + max_temp
                 
                 #log the current sensorData values 
-                logging.info(data)
+#                 logging.info(data)
                 
                 self.sensorData.loggingData = data
                 

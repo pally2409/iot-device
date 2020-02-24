@@ -8,6 +8,12 @@ from labs.common.DataUtil import DataUtil
 from labs.common.ActuatorData import ActuatorData
 from labs.module05.MultiActuatorAdaptor import MultiActuatorAdaptor
 import redis
+import logging
+
+#set the basic configuration to display time, level and the message
+logging.getLogger("PersistenceUtil")
+logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+
 class ActuatorDataListener(threading.Thread):
     '''
     classdocs
@@ -81,7 +87,12 @@ class ActuatorDataListener(threading.Thread):
                     
                     #call DataUtil to convert it to actuatorData
                     self.actuatorData = self.dUtil.toActuatorDataFromJson(actuatorDataJson)
-                
+                    
+                    logging.info("New ActuatorData")
+                    
+                    #add it to file
+                    self.dUtil.writeActuatorDataToFile(self.actuatorData)
+                    
                     #send to onMessage
                     self.onMessage(self.actuatorData)
     

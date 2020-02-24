@@ -13,8 +13,11 @@ from labs.common.ActuatorDataListener               import ActuatorDataListener
 from time                                           import sleep
 import redis
 import uuid
+import logging
 
-
+#set the basic configuration to display time, level and the message
+logging.getLogger("PersistenceUtil logger")
+logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
 
 class PersistenceUtil(object):

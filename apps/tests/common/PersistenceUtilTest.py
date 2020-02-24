@@ -1,9 +1,8 @@
 #import libraries and modules
 import unittest
 import logging
-from labs.common import ConfigUtil
-from labs.common import ActuatorData
-from labs.common import SensorData
+from labs.common.ActuatorData import ActuatorData
+from labs.common.SensorData import SensorData
 from labs.common.PersistenceUtil import PersistenceUtil
 from redis.client import Redis
 
@@ -26,7 +25,7 @@ Please note: While some example test cases may be provided, you must write your 
 logging.getLogger("temperature emulator logger")
 logging.basicConfig(format='%(message)s', level=logging.DEBUG)
 
-class ConfigUtilTest(unittest.TestCase):
+class PersistenceUtilTest(unittest.TestCase):
 
 	"""
 	Use this to setup your tests. This is where you may want to load configuration
@@ -57,7 +56,7 @@ class ConfigUtilTest(unittest.TestCase):
 	def testWriteActuatorDataToDbms(self):
 		
 		#Create ActuatorData instance
-		actuatorData = ActuatorData.ActuatorData();
+		actuatorData = ActuatorData();
 		
 		#write to redis and check if it returns true
 		self.assertEqual(True, self.persistenceUtil.writeActuatorDataToDbms(actuatorData));
@@ -78,7 +77,7 @@ class ConfigUtilTest(unittest.TestCase):
 	def testWriteSensorDataToDbms(self):
 		
 		#Create ActuatorData instance
-		sensorData = SensorData.SensorData();
+		sensorData = SensorData();
 		
 		#write to redis and check if it returns true
 		self.assertEqual(True, self.persistenceUtil.writeSensorDataToDbms(sensorData));

@@ -99,14 +99,25 @@ class PersistenceUtil(object):
         #create a unique key by combining device name and uuid
         key = uuid.uuid4()
         
-        #add the key-value to redis
-        self.r_actuator.set("actuatorData" + str(key), jsonStr)
+        #try to add data to redis
+        try:
+        
+            #add the key-value to redis
+            self.r_actuator.set("actuatorData" + str(key), jsonStr)
+        
+        #if error occured   
+        except Exception as e:
+        
+            #return false
+            return False
+        
+        #if runs successfully, return true
+        return True
         
         pass
     
     #write sensor data to DBMS 
     def writeSensorDataToDbms(self, sensorData) -> bool:
-        
         
         
         #convert the actuarData reference to JSON string using DataUtil()
@@ -115,25 +126,21 @@ class PersistenceUtil(object):
         #create a unique key by combining device name and uuid
         key = uuid.uuid4()
         
-        print("i am here to write" + jsonStr)
+        #try to add data to redis
+        try:
         
-        #add the key-value to redis
-        self.r_sensor.set("sensorData" + str(key), jsonStr)
+            #add the key-value to redis
+            self.r_sensor.set("sensorData" + str(key), jsonStr)
+            
+        #if error occured   
+        except Exception as e:
+        
+            #return false
+            return False
+        
+        #if runs successfully, return true
+        return True
         
         pass
-    
-# if __name__ == '__main__':
-#     
-#     i = 0
-#     pUtil = PersistenceUtil()
-#     pUtil.registerActuatorDataDbmsListener()
-#      
-#     while i < 3:
-#         i = i + 1
-#         sensorData = SensorData()
-#         sensorData.addValue(i+1)
-#         sensorData.setName("Temperature Sensor")
-#         pUtil.writeSensorDataToDbms(sensorData)
-#         sleep(5)
     
     

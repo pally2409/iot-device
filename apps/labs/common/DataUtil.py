@@ -7,12 +7,34 @@ Created on Feb 21, 2020
 from labs.common.SensorData             import SensorData
 from labs.common.ActuatorData           import ActuatorData
 import json
+import logging
+
+
 
 class DataUtil(object):
     '''
     classdocs
     '''
 
+    #initialize log files
+    DEFAULT_SENSOR_LOG_FILE = '../../../logfiles/SensorDataLogFile.log'
+    DEFAULT_ACTUATOR_LOG_FILE = '../../../logfiles/ActuatorDataLogFile.log'
+    
+    #initialize loggers
+    sensorDataLog = logging.getLogger("SensorDataLog")
+    actuatorDataLog = logging.getLogger("ActuatorDataLog")
+    
+    #add handlers
+    sensorHandler = logging.FileHandler('../../../logfiles/SensorDataLogFile.log')
+    actuatorHandler = logging.FileHandler('../../../logfiles/ActuatorDataLogFile.log')
+    
+    #set their levels
+    sensorHandler.setLevel(logging.DEBUG)
+    actuatorHandler.setLevel(logging.DEBUG)
+    
+    #add handlers to logger
+    sensorDataLog.addHandler(sensorHandler)
+    actuatorDataLog.addHandler(actuatorHandler)
 
     def __init__(self):
         '''
@@ -64,19 +86,80 @@ class DataUtil(object):
     
     #method to convert SensorData to JSON and write to filesystem
     def writeSensorDataToFile(self, sensorData) -> bool:
+        
+        #if the type of ActuatorData passed is not of type actuatorData
+        if(type(sensorData) != SensorData):
+            
+            #create json string with everything not set
+            jsonStr = {
+                
+                    "currentValue"      : 0.0,
+                    "average"           : 0.0,
+                    "totalCount"        : 0.0,
+                    "totalValue"        : 0.0,
+                    "maxValue"          : 0.0,
+                    "minValue"          : 0.0,
+                    "sensorName"        : "Not Set",
+                    "timestamp"         : "No Timestamp" 
+                
+            }
+        
+        #create json string from sensorData
+        jsonStr = {
+            
+            "currentValue"      : sensorData.currentValue,
+            "average"           : sensorData.average,
+            "totalCount"        : sensorData.totalCount,
+            "totalValue"        : sensorData.totalValue,
+            "maxValue"          : sensorData.maxValue,
+            "minValue"          : sensorData.minValue,
+            "sensorName"        : sensorData.sensorName,
+            "timestamp"         : sensorData.timeStamp 
+            
+        }
+        
+        #get the JSONstr
+        jsonStr = json.dumps(jsonStr)
+        
+        #format it to pretty printed JSON string
+        jsonFormatted = json.loads(jsonStr)
+        prettyJson = json.dumps(jsonFormatted, indent = 2)
+        
+        #log it 
+        self.sensorDataLog.info(prettyJson)
+        
+        return True
+        
         pass
     
     #method to convert ActuatorData to JSON string
     def toJsonFromActuatorData(self, actuatorData) -> str:
         
-        #create json string from actuatorData
-        jsonStr = {
+        #if the type of ActuatorData passed is not of type actuatorData
+        if(type(actuatorData) != ActuatorData):
             
-            "name"              : actuatorData.name,
-            "command"           : actuatorData.command,
-            "value"             : actuatorData.value,
-            
-        }
+            #create json string with everything not set
+            jsonStr = {
+                
+                "name"              : "Not Set",
+                "command"           : "Not Set",
+                "value"             : "Not Set",
+                
+            }
+        
+        else:     
+        
+            #create json string from actuatorData
+            jsonStr = {
+                
+                "name"              : actuatorData.name,
+                "command"           : actuatorData.command,
+                "value"             : actuatorData.value,
+                
+            }
+        
+        #get the string from the dict    
+        jsonStr = json.dumps(jsonStr)
         
         #return the string
         return jsonStr
@@ -100,16 +183,39 @@ class DataUtil(object):
     
     #method to convert ActuatorData to JSON and write to filesystem
     def writeActuatorDataToFile(self, actuatorData) -> bool:
-        pass
+        
+        #if the type of ActuatorData passed is not of type actuatorData
+        if(type(actuatorData) != ActuatorData):
+            
+            #create json string with everything not set
+            jsonStr = {
+                
+                "name"              : "Not Set",
+                "command"           : "Not Set",
+                "value"             : "Not Set",
+                
+            }
+        
+        else:     
+        
+            #create json string from actuatorData
+            jsonStr = {
+                
+                "name"              : actuatorData.name,
+                "command"           : actuatorData.command,
+                "value"             : actuatorData.value,
+                
+        }
+        
+        #get the JSONstr
+        jsonStr = json.dumps(jsonStr)
+        
+        #format it to pretty printed JSON string
+        jsonFormatted = json.loads(jsonStr)
+        prettyJson = json.dumps(jsonFormatted, indent = 2)
+        
+        #log it 
+        self.actuatorDataLog.info(prettyJson)
+        
+        return True
     
-# if __name__ == '__main__':
-# #     dUtil = DataUtil()
-# #     sensorData = SensorData()
-# #     sensorData.addValue(9)
-# #     str1 = dUtil.toJsonFromSensorData(sensorData)
-# #     print(str1)
-# #     sData = dUtil.toSensorDataFromJson(str1)
-# #     pUtil = PersistenceUtil()
-# #     pUtil.writeSensorDataToDbms(sData)
-#     pass
-   

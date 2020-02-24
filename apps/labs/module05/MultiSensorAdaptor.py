@@ -10,6 +10,7 @@ import threading
 from datetime                                               import datetime
 from time                                                   import sleep
 from labs.module05.TempSensorAdaptorTask                    import TempSensorAdaptorTask
+from labs.common.PersistenceUtil import PersistenceUtil
 
 
 #set the basic configuration to display time, level and the message
@@ -28,6 +29,9 @@ class MultiSensorAdaptor():
         '''
         Constructor
         '''
+        #start the Dbms listener from PersistenceUtil
+        self.pUtil = PersistenceUtil()
+        self.pUtil.registerActuatorDataDbmsListener()
         
         
     #method for creating and running the thread    

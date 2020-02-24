@@ -13,8 +13,7 @@ if __name__ == '__main__':
     #instantiate the temp sensor adaptor
     multiSensorAdaptor = MultiSensorAdaptor()
     
-    pUtil = PersistenceUtil()
-    pUtil.registerActuatorDataDbmsListener()
+    
     
     #call the run function of the adaptor runs the sensor threads
     multiSensorAdaptor.run()

@@ -7,7 +7,6 @@ Created on Jan 14, 2020
 from time               import sleep
 from labs.module01      import SystemCpuUtilTask, SystemMemUtilTask
 from datetime           import datetime
-from labs.common        import LoggerUtil
 import logging
 
 #set the basic configuration to display time, level and the message

@@ -5,7 +5,9 @@ Created on Feb 21, 2020
 '''
 import threading
 from labs.common.DataUtil import DataUtil
+from labs.common.ActuatorData import ActuatorData
 from labs.module05.MultiActuatorAdaptor import MultiActuatorAdaptor
+import redis
 class ActuatorDataListener(threading.Thread):
     '''
     classdocs
@@ -15,10 +17,13 @@ class ActuatorDataListener(threading.Thread):
     #initialize DataUtil
     dUtil = DataUtil()
     
+    #initialize actuatorData
+    actuatorData = ActuatorData()
+    
     #initialize MultiActuatorAdaptor
     multiActuatorAdaptor = MultiActuatorAdaptor()
     
-    def __init__(self, r_actuator):
+    def __init__(self, r_actuator = redis.Redis(host = "localhost", port = 6379, db = 1)):
         '''
         Constructor
         '''
@@ -39,8 +44,20 @@ class ActuatorDataListener(threading.Thread):
     #callback function for ActuatorData
     def onMessage(self, actuatorData):
         
-        #do something
-        self.multiActuatorAdaptor.updateActuator(actuatorData)
+        #if the type actually is of ActuatorData
+        if(type(actuatorData) == ActuatorData):
+            
+            #do something
+            self.multiActuatorAdaptor.updateActuator(actuatorData)
+            
+            #return true
+            return True
+        
+        #return false if error    
+        else:
+            
+            #return false
+            return False
         
         pass
     
@@ -63,8 +80,8 @@ class ActuatorDataListener(threading.Thread):
                     actuatorDataJson =  self.r_actuator.get(channel[1])
                     
                     #call DataUtil to convert it to actuatorData
-                    actuatorData = self.dUtil.toActuatorDataFromJson(actuatorDataJson)
+                    self.actuatorData = self.dUtil.toActuatorDataFromJson(actuatorDataJson)
                 
                     #send to onMessage
-                    self.onMessage(actuatorData)
+                    self.onMessage(self.actuatorData)
     

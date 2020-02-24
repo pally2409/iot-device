@@ -30,6 +30,7 @@ class TempSensorAdaptorTask(object):
     sensorData = SensorData()
     sensorData.setName("Temperature Sensor")
     
+    #instantiate PersistenceUtil
     pUtil = PersistenceUtil()
 
     #this method is used to set the readings and the frequency of readings if provided, else defaults to 10 and 5 respectively
@@ -81,6 +82,7 @@ class TempSensorAdaptorTask(object):
                 
                 self.sensorData.loggingData = data
                 
+                #write SensorData to redis
                 self.pUtil.writeSensorDataToDbms(self.sensorData)
                 
                 #decrement as the number of readings by 1 to keep count of how many readings left

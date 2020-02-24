@@ -1,4 +1,8 @@
 import unittest
+from labs.module05.MultiActuatorAdaptor import MultiActuatorAdaptor
+from labs.module05.MultiSensorAdaptor import MultiSensorAdaptor
+from labs.module05.TempSensorAdaptorTask import TempSensorAdaptorTask
+from labs.common.ActuatorData import ActuatorData
 
 
 """
@@ -13,10 +17,8 @@ Instructions:
 
 Please note: While some example test cases may be provided, you must write your own for the class.
 """
-from labs.module05.MultiActuatorAdaptor import MultiActuatorAdaptor
-from labs.module05.MultiSensorAdaptor import MultiSensorAdaptor
-from labs.module05.TempSensorAdaptorTask import TempSensorAdaptorTask
-from labs.common.ActuatorData import ActuatorData
+
+
 class Module05Test(unittest.TestCase):
 
 	"""

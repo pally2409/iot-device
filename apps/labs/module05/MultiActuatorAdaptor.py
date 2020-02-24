@@ -76,9 +76,6 @@ class MultiActuatorAdaptor(object):
                     #display a red arrow
                     self.sense.set_pixels(self.arrowRedInc);
                     
-                    #logging actuator command
-                    logging.info('Triggering actuator to increase temperature')
-                    
                     #keep it displayed
                     sleep(3)
                     
@@ -102,9 +99,6 @@ class MultiActuatorAdaptor(object):
                 
                     #display a blue arrow
                     self.sense.set_pixels(self.arrowBlueDec);
-                    
-                    #logging actuator command
-                    logging.info('Triggering actuator to decrease temperature')
                     
                     #keep it displayed
                     sleep(3)

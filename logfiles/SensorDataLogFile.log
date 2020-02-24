@@ -70,3 +70,13 @@
   "sensorName": "Not Set",
   "timestamp": "2020-02-24 00:53:51.619545"
 }
+{
+  "currentValue": 9.0,
+  "average": 9.0,
+  "totalCount": 1,
+  "totalValue": 9.0,
+  "maxValue": 9.0,
+  "minValue": 9.0,
+  "sensorName": "Not Set",
+  "timestamp": "2020-02-24 02:09:25.578935"
+}

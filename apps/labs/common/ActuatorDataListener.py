@@ -88,6 +88,8 @@ class ActuatorDataListener(threading.Thread):
                     #call DataUtil to convert it to actuatorData
                     self.actuatorData = self.dUtil.toActuatorDataFromJson(actuatorDataJson)
                     
+                    #log the data
+                    logging.info("----------------------------------------------")
                     logging.info("New ActuatorData")
                     
                     #add it to file

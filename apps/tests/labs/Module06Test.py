@@ -20,7 +20,7 @@ from labs.module06.DeviceDataManager import DeviceDataManager
 from labs.module06.MultiSensorAdaptor import MultiSensorAdaptor
 from labs.module06.TempSensorAdaptorTask import TempSensorAdaptorTask
 class Module06Test(unittest.TestCase):
-
+	
 	"""
 	Use this to setup your tests. This is where you may want to load configuration
 	information (if needed), initialize class-scoped variables, create class-scoped

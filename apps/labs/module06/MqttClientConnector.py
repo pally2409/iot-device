@@ -160,7 +160,7 @@ class MqttClientConnector(object):
     and subscribes to the topic using the given QoS level. The topic
     defaults to the standard topic for ActuatorData data
     """
-    def subscribeToActuatorCommands(self, topic = "Connected-Devices/Actuator_Data", qos):
+    def subscribeToActuatorCommands(self, qos, topic = "Connected-Devices/Actuator_Data"):
         
         #Subscribe only if the client is connected
         if(self.client.is_connected() == True):
@@ -182,7 +182,7 @@ class MqttClientConnector(object):
     and subscribes to the topic using the given QoS level. The topic
     defaults to the standard topic for SensorData data
     """
-    def subscribeToSensorCommands(self, topic = "Connected-Devices/Sensor_Data", qos):
+    def subscribeToSensorCommands(self, qos, topic = "Connected-Devices/Sensor_Data"):
         
         #Subscribe only if the client is connected
         if(self.client.is_connected() == True):

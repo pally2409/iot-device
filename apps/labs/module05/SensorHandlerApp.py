@@ -12,10 +12,8 @@ if __name__ == '__main__':
     
     #instantiate the temp sensor adaptor
     multiSensorAdaptor = MultiSensorAdaptor()
-    
-    
-    
-    #call the run function of the adaptor runs the sensor threads
+
+    #call the run function of the adaptor that runs the sensor threads
     multiSensorAdaptor.run()
     
     

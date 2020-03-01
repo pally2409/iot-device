@@ -9,17 +9,11 @@ from labs.common.ActuatorData           import ActuatorData
 import json
 import logging
 
-
-
 class DataUtil(object):
     '''
     classdocs
     '''
 
-    #initialize log files
-    DEFAULT_SENSOR_LOG_FILE = '../../../logfiles/SensorDataLogFile.log'
-    DEFAULT_ACTUATOR_LOG_FILE = '../../../logfiles/ActuatorDataLogFile.log'
-    
     #initialize loggers
     sensorDataLog = logging.getLogger("SensorDataLog")
     actuatorDataLog = logging.getLogger("ActuatorDataLog")

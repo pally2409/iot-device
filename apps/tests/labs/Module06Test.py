@@ -12,7 +12,7 @@ Instructions:
 3) Import the relevant modules and classes to support your tests.
 4) Run this class as unit test app.
 5) Include a screen shot of the report when you submit your assignment.
-
+6
 Please note: While some example test cases may be provided, you must write your own for the class.
 """
 from labs.module06.MqttClientConnector import MqttClientConnector

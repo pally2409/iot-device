@@ -150,7 +150,7 @@ class Module06Test(unittest.TestCase):
 		sleep(2)
 		
 		#Subscribe to topic and assert true for successful subscription
-		self.assertEqual(True, self.mqttClientConnector.subscribeToActuatorCommands("TestingTopic", 1))
+		self.assertEqual(True, self.mqttClientConnector.subscribeToActuatorCommands(1, "TestingTopic"))
 
 		#Call the connect method of MqttClientConnector with invalid values
 		self.mqttClientConnector.connect("brosdf235iytksg", 1883)
@@ -159,7 +159,7 @@ class Module06Test(unittest.TestCase):
 		sleep(2)
 		
 		#Publish to topic and assert False for failure to subscribe
-		self.assertEqual(False, self.mqttClientConnector.subscribeToActuatorCommands("TestingTopic", 1))
+		self.assertEqual(False, self.mqttClientConnector.subscribeToActuatorCommands(1, "TestingTopic"))
 		
 	"""
 	This method tests the testSubscribeToActuatorCommands() method of the MqttClientConnector
@@ -175,7 +175,7 @@ class Module06Test(unittest.TestCase):
 		sleep(2)
 		
 		#Subscribe to topic and assert true for successful subscription
-		self.assertEqual(True, self.mqttClientConnector.subscribeToSensorCommands("TestingTopic", 1))
+		self.assertEqual(True, self.mqttClientConnector.subscribeToSensorCommands(1, "TestingTopic"))
 
 		#Call the connect method of MqttClientConnector with invalid values
 		self.mqttClientConnector.connect("brosdf235iytksg", 1883)
@@ -184,7 +184,7 @@ class Module06Test(unittest.TestCase):
 		sleep(2)
 		
 		#Publish to topic and assert False for failure to subscribe
-		self.assertEqual(False, self.mqttClientConnector.subscribeToSensorCommands("TestingTopic", 1))
+		self.assertEqual(False, self.mqttClientConnector.subscribeToSensorCommands(1, "TestingTopic"))
 
 	"""
 	This method tests the setMqttClient() method of the MultiSensorAdaptor

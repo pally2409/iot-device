@@ -230,8 +230,6 @@ class CoapClientConnector(object):
         #Runs successfully, return True indicating success
         return True
 
-
-
     """
         This method sends a DELETE request message to the server
 

@@ -26,7 +26,6 @@ class TempSensorAdaptorTask(object):
         '''
         Constructor
         '''
-   
     """
     Method to return the SensorData reference after getting the temperature from SenseHAT API
 
@@ -39,9 +38,3 @@ class TempSensorAdaptorTask(object):
         
         #Return the SensorData reference
         return self.sensorData
-        
-        
-        
-        
-        
-    

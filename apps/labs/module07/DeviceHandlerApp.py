@@ -4,7 +4,7 @@ Created on Feb 14, 2020
 @author: pallaksingh
 '''
 #import modules and libraries
-from labs.module06.DeviceDataManager import DeviceDataManager
+from labs.module07.DeviceDataManager import DeviceDataManager
 
 """
 The main method that instantiates the DeviceDataManager and calls its run method

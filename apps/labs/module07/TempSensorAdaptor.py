@@ -12,7 +12,7 @@ from labs.module07.CoapClientConnector      import CoapClientConnector
 
 class TempSensorAdaptor(threading.Thread):
     '''
-    The MultiSensorAdaptor gets the temperature from the TempSensorAdaptorTask. It
+    The TempSensorAdaptor gets the temperature from the TempSensorAdaptorTask. It
     gets the amount of reading at a frequency indicated during instantiation
     '''
     #Instantiate TempSensorAdaptorTask
